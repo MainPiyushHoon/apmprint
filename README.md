@@ -94,8 +94,6 @@ apmprint/
 │   ├── business_cards.jpg # Stationery & ID card photography
 │   ├── flex_boards.jpg   # Outdoor signage & glowsign showcase
 │   └── paper_flyers.jpg   # Pamphlets & billbook photography
-├── PRODUCT.md            # Comprehensive product & service specification guide
-├── DESIGN.md             # Documented Minimalist Light Design System tokens
 └── README.md             # Project documentation (this file)
 ```
 
