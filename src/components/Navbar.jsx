@@ -37,11 +37,6 @@ export default function Navbar() {
         <nav aria-label="Main Navigation">
           <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
             <li>
-              <a href="#facility-showcase" className="nav-link" onClick={closeMobileMenu}>
-                Machine Facility
-              </a>
-            </li>
-            <li>
               <a href="#services" className="nav-link" onClick={closeMobileMenu}>
                 Services (32)
               </a>
