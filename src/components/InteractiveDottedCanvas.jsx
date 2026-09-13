@@ -37,7 +37,7 @@ export default function InteractiveDottedCanvas() {
       y: -9999,
       targetX: -9999,
       targetY: -9999,
-      radius: 140,
+      radius: 125,
       isHovering: false,
     };
 
@@ -143,18 +143,18 @@ export default function InteractiveDottedCanvas() {
 
     // Smooth Physics Animation Loop
     let time = 0;
-    const spring = 0.045;
-    const damping = 0.88;
-    const repulsionPower = 3.6;
+    const spring = 0.065;
+    const damping = 0.85;
+    const repulsionPower = 4.4;
 
     const render = () => {
       if (isVisible) {
         time++;
         ctx.clearRect(0, 0, width, height);
 
-        // Smooth fluid mouse lerp
-        mouse.x += (mouse.targetX - mouse.x) * 0.18;
-        mouse.y += (mouse.targetY - mouse.y) * 0.18;
+        // Smooth mouse lerp
+        mouse.x += (mouse.targetX - mouse.x) * 0.25;
+        mouse.y += (mouse.targetY - mouse.y) * 0.25;
 
         // Update and draw dots (clean particle field without connecting lines)
         const len = dots.length;
@@ -166,34 +166,23 @@ export default function InteractiveDottedCanvas() {
             const dx = d.x - mouse.x;
             const dy = d.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const dx0 = d.x0 - mouse.x;
-            const dy0 = d.y0 - mouse.y;
-            const dist0 = Math.sqrt(dx0 * dx0 + dy0 * dy0);
-            const effectiveDist = Math.min(dist, dist0);
 
-            if (effectiveDist < mouse.radius) {
-              const norm = effectiveDist / mouse.radius;
-              // Smooth cubic Hermite smoothstep curve
-              const falloff = 1 - norm * norm * (3 - 2 * norm);
-
-              if (dist < mouse.radius && dist > 0.1) {
-                const force = Math.pow(1 - dist / mouse.radius, 1.2) * repulsionPower;
-                const angle = Math.atan2(dy, dx);
-                d.vx += Math.cos(angle) * force;
-                d.vy += Math.sin(angle) * force;
-              }
-
-              // Smooth responsive swelling
-              d.activeFactor += (falloff - d.activeFactor) * 0.10;
+            if (dist < mouse.radius && dist > 0.1) {
+              const force = (1 - dist / mouse.radius) * repulsionPower;
+              const angle = Math.atan2(dy, dx);
+              d.vx += Math.cos(angle) * force;
+              d.vy += Math.sin(angle) * force;
+              // Smooth easing into active size
+              d.activeFactor += (1 - d.activeFactor) * 0.16;
             } else {
               d.activeFactor += (0 - d.activeFactor) * 0.04;
             }
           } else {
             // Gentle ambient breathing wave
-            const waveX = Math.sin(d.x0 * 0.008 + d.y0 * 0.008 + time * 0.015) * 1.0;
-            const waveY = Math.cos(d.x0 * 0.008 - d.y0 * 0.008 + time * 0.015) * 1.0;
-            d.vx += waveX * 0.035;
-            d.vy += waveY * 0.035;
+            const waveX = Math.sin(d.x0 * 0.01 + d.y0 * 0.01 + time * 0.02) * 1.2;
+            const waveY = Math.cos(d.x0 * 0.01 - d.y0 * 0.01 + time * 0.02) * 1.2;
+            d.vx += waveX * 0.04;
+            d.vy += waveY * 0.04;
             d.activeFactor += (0 - d.activeFactor) * 0.03;
           }
 
@@ -205,14 +194,14 @@ export default function InteractiveDottedCanvas() {
           d.x += d.vx;
           d.y += d.vy;
 
-          // Render dot with prominent smooth radius growth and vibrant brand color
+          // Render dot (exact radius increase as original: + 1.4)
           ctx.beginPath();
-          const currentRadius = d.radius + d.activeFactor * 3.6;
+          const currentRadius = d.radius + d.activeFactor * 1.4;
           ctx.arc(d.x, d.y, currentRadius, 0, Math.PI * 2);
 
           if (d.activeFactor > 0.02) {
             ctx.fillStyle = d.activeColor;
-            ctx.globalAlpha = 0.4 + d.activeFactor * 0.6;
+            ctx.globalAlpha = 0.35 + d.activeFactor * 0.65;
           } else if (d.isBrandNode) {
             ctx.fillStyle = d.baseColor;
             ctx.globalAlpha = 0.45;
