@@ -1,152 +1,197 @@
 # 🖨️ Aggarwal Print Media (APM Print)
 
-> **Official Web Application for Commercial Paper Printing, Stationery Manufacturing & Outdoor Branding.**  
-> *Located in Sector 12, Vijay Nagar, Ghaziabad, UP 201009 — Rated 4.9 ★★★★★ on Google Maps.*
+> **Official Modern Web Application for Commercial Offset Printing, Packaging, Stationery Manufacturing & Outdoor Signage.**  
+> *F-1, Sector-12, Double Tanki Road, Vijay Nagar, Ghaziabad, UP 201009 — Rated 4.9 ★★★★★ on Google Maps.*
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://mainpiyushhoon.github.io/apmprint/)
+[![React 19](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Vite 6](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Google Rating](https://img.shields.io/badge/Google%20Rating-4.9%20%E2%98%85-FFB800?style=for-the-badge&logo=googlemaps)](https://maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6)
 
 ---
 
 ## 🌟 Overview
 
-**Aggarwal Print Media** is a modern, high-performance static web application built for an established printing press and signage manufacturer operating in the Delhi-NCR region. The website showcases 32 distinct commercial service verticals ranging from NCR duplicate bill books and executive letterheads to 3D acrylic LED signboards, sandwich boards, and corporate promotional gifts.
+**Aggarwal Print Media (APM Print)** is a modern, high-performance static web application built for an established commercial printing press, packaging unit, and outdoor signage manufacturer based in Ghaziabad (Delhi-NCR). The platform showcases 32 distinct commercial service verticals—ranging from duplicate/triplicate NCR carbonless bill books and executive corporate stationery to heavy-duty CNC-routed ACP signboards, 3D acrylic LED letters, and promotional gifting.
 
-Designed with a **Minimalist Light Ink & Paper Design System**, the application offers a fast, mobile-optimized experience with live catalog search, instant WhatsApp quote builder, and auto-syncing Google Maps customer reviews.
+Built with a **Clean Paper-White Design System** energized by APM's official **Prismatic 5-Color Brand Palette**, the application delivers a silky-smooth, responsive experience with real-time catalog search, instant WhatsApp quote generation, interactive machine facility spotlights, and verified Google Maps customer testimonials.
 
----
-
-## ✨ Key Features
-
-- **🎨 Minimalist Single-Palette Design**: Built with clean paper white (`#ffffff`), soft slate (`#f8fafc`), and a vibrant **Royal Ink Blue (`#1d4ed8`)** accent palette—avoiding dark mode clutter per design requirements.
-- **📱 Zero-Clutter Mobile Experience**: Fully responsive touch-first layout (`@media (max-width: 768px)` & `480px`) featuring horizontally scrollable category tabs, single-column product grids, and compact touch targets.
-- **📦 32 Complete Service Verticals**: Every item listed by the business is included with starting prices, quick details, and interactive technical spec modals.
-- **🔍 Instant Live Search & Filter**: Real-time JavaScript search bar allowing customers to find any service (e.g., *"Bill Book"*, *"Sandwich Board"*, *"Flex Board"*) instantly.
-- **💬 Direct WhatsApp Quote Desk**: Integrated quote builder that encodes customer names, phone numbers, chosen services, and job specifications directly into a 1-click WhatsApp message sent to the sales desk.
-- **⭐ Live Auto-Syncing Google Reviews**: Integrated Google Maps widget connected to the official business listing ([maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6](https://maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6)) displaying 4.9 ★★★★★ rating and live customer reviews.
+🔗 **Live Production Site:** [https://mainpiyushhoon.github.io/apmprint/](https://mainpiyushhoon.github.io/apmprint/)
 
 ---
 
-## 📁 Full 32 Service Catalog
+## ✨ Key Highlights
 
-The business verticals are organized into 4 primary category tabs:
+- **🎨 Prismatic CMYK Brand Spectrum**: Uses the official 5-stage logo chromatic gradient (`#EF7F1A` Bright Orange $\rightarrow$ `#B0CB1F` Lime Green $\rightarrow$ `#E5097F` Process Magenta $\rightarrow$ `#008DD2` Cyan $\rightarrow$ `#1D5FAB` Royal Blue) across hero typography, button gradients, and active particle highlights.
+- **✨ Interactive Particle Canvas**: Custom HTML5 Canvas background with physical cursor repulsion, spring-damping equilibrium, silky-smooth asymptotic easing, and subtle active node swelling without cluttering connecting lines.
+- **⚡ Cinematic Typewriter Reel**: Hero section with synchronized rotating marquee headlines showcasing core products (*"Bill Book"*, *"Letter Head"*, *"Glowsign Board"*, *"Roll up Standee"*, *"Product Label"*).
+- **📱 2-Column Mobile Catalog**: Tailored touch-first grid displaying 2 cards side-by-side on mobile devices, avoiding endless scrolling while keeping card specs, pricing, and WhatsApp CTAs clearly visible.
+- **📦 32 Complete Commercial Verticals**: Every manufacturing capability clearly detailed with starting pricing, typical turnarounds, paper GSM specs, and interactive specification inquiry modals.
+- **🔍 Instant Live Search & Filter**: Real-time filtering across all 32 services with category tab navigation and zero latency.
+- **💬 1-Click WhatsApp Lead Generator**: Interactive quote desk that pre-fills customer name, phone number, chosen service, and job notes directly into a formatted WhatsApp inquiry to `+91 95820 23022`.
+- **🏭 Facility & Machinery Showcase**: Detailed technical profile of in-house industrial equipment: 4-Color Heidelberg Speedmaster Offset Press, Konica Minolta AccurioPress digital printer, Polar high-speed programmable guillotine, and Roland TruVIS eco-solvent wide-format plotter.
+- **⭐ Auto-Syncing Google Reviews**: Integrated Google Maps widget displaying real 4.9 ★★★★★ customer feedback, reviewer avatars, and direct links to the official Google Business Profile.
+
+---
+
+## 📁 Commercial Service Directory (32 Verticals)
+
+The business catalog is organized into 4 distinct categories:
 
 ### 1. 📒 Stationery & Registers (9 Items)
-1. **Bill Book**: Duplicate (1+1) & Triplicate (1+2) NCR carbonless tax invoices & cash memos.
-2. **Challan Book**: Delivery challan books, transport receipts with red serial numbering.
-3. **Letter Head**: Executive 100 GSM Royal Bond paper letterheads.
-4. **School Office Registers**: Hard-bound student attendance, admission & fee ledgers.
-5. **School Office ID Cards**: Thermal fused PVC plastic ID cards with custom printed satin lanyards.
-6. **Office Files**: Heavy cardboard cobra files & printed plastic document folders.
-7. **Record Registers**: Industrial stock registers & factory maintenance logbooks.
-8. **Envelope**: Standard 9x4 inch, A4 size, and cloth-laminated office envelopes.
-9. **Other Stationery**: Custom notepads, self-inking rubber stamps & specialized office supplies.
+| Service | Key Specifications |
+| :--- | :--- |
+| **Bill Book** | Duplicate (1+1) & Triplicate (1+2) NCR carbonless invoices & cash memos |
+| **Challan Book** | Delivery challans with tamper-proof red sequential numbering |
+| **Letter Head** | Premium 100 GSM Royal Executive Bond paper |
+| **School Office Registers** | Hard-bound student attendance, admission & fee ledgers |
+| **School Office ID Cards** | Fused thermal PVC cards with custom satin printed lanyards |
+| **Office Files** | Heavy-duty cardboard cobra clip files & document folders |
+| **Record Registers** | Industrial stock registers & factory maintenance logbooks |
+| **Envelope** | Standard 9x4 inch, A4 size, and cloth-laminated postal envelopes |
+| **Other Stationery** | Custom notepads, self-inking stamps & specialized supplies |
 
 ### 2. 📄 Paper & Marketing (6 Items)
-10. **Leaflet / Pumplet**: Full-color promotional flyers on 100/130/170 GSM glossy art paper.
-11. **Brochure**: Bi-fold & tri-fold corporate marketing brochures with soft-touch lamination.
-12. **Catalogue**: Multi-page product showcase catalogs with saddle-stitch or perfect spine binding.
-13. **Calenders**: Corporate wall calendars & desktop tent calendars with top wiro wire binding.
-14. **Tant Card**: Tabletop tent cards for restaurant menus and conference table standees.
-15. **Dangler**: Retail store ceiling promotional danglers with punch hole & hanging thread.
+| Service | Key Specifications |
+| :--- | :--- |
+| **Leaflet / Pumplet** | Vibrant promotional flyers on 100/130/170 GSM glossy art paper |
+| **Brochure** | Bi-fold & tri-fold corporate brochures with soft-touch matte lamination |
+| **Catalogue** | Multi-page showcase books with saddle-stitch or perfect spine binding |
+| **Calenders** | Wall calendars & tabletop tent calendars with top wiro wire binding |
+| **Tant Card** | Tabletop tent cards for restaurants, cafes, and event desks |
+| **Dangler** | Retail ceiling danglers with die-cut shapes and punch-hole strings |
 
 ### 3. 🏷️ Labels & Promo Gifts (4 Items)
-16. **Product Label**: Custom packaging labels, bottle stickers & barcodes in sheet or roll form.
-17. **Sticker**: Waterproof white vinyl, paper stickers & transparent die-cut decals.
-18. **Wall Clock Printing**: Custom printed dial wall clocks for corporate gifting & brand promotion.
-19. **Wrist Watch Printing**: Corporate employee award wristwatches with full dial logo printing.
+| Service | Key Specifications |
+| :--- | :--- |
+| **Product Label** | Custom packaging stickers, barcode labels in sheets or rolls |
+| **Sticker** | Waterproof white vinyl stickers, paper stickers & transparent decals |
+| **Wall Clock Printing** | Branded dial wall clocks for corporate gifting campaigns |
+| **Wrist Watch Printing** | Employee recognition watches with custom dial logo branding |
 
 ### 4. 🪧 Outdoor & Signage (13 Items)
-20. **Flex Board**: Heavy duty Star Flex outdoor banners with MS iron frame mounting.
-21. **Back Drop**: Non-reflective stage backdrops & event photo booth structures.
-22. **Glowsign Board**: Backlit flex glow sign boxes & 3D acrylic glowing LED letters.
-23. **Dealers Board**: Brand dealership tin plates, sunpack & retail network signboards.
-24. **Digital Vinyl**: High-resolution self-adhesive vinyl for glass doors, walls & vehicle wraps.
-25. **One Way Vision**: Perforated window film printing for glass shopfronts and car windows.
-26. **Sunpack**: Corrugated plastic sunpack fluted sheets for electric pole advertising.
-27. **Roll up Standee**: Portable retractable aluminum standee with non-tearable matte vinyl media.
-28. **Canopy**: Foldable outdoor promotional tents with full roof & wall brand graphics.
-29. **ACP Sheet Cutting Board**: CNC router cut Aluminum Composite Panel architectural signboards.
-30. **Clip on Board**: Ultra-slim aluminum snap-frame poster boards & LED lightboxes.
-31. **Sandwich Board**: Double-sided A-frame sidewalk sandwich boards & acrylic wall displays.
-32. **Outdoor Branding & Advertising**: Turnkey hoarding banners, building wraps & pole kiosk campaigns.
+| Service | Key Specifications |
+| :--- | :--- |
+| **Flex Board** | Heavy-duty Star Flex banners on welded MS iron box frames |
+| **Back Drop** | Matte non-reflective stage backdrops & event photography booths |
+| **Glowsign Board** | Backlit flex boxes and 3D acrylic LED illumination letters |
+| **Dealers Board** | Retail dealership signboards & branded dealer network boards |
+| **Digital Vinyl** | High-res self-adhesive vinyl for glass partitions, walls & vehicles |
+| **One Way Vision** | Perforated window films for shopfront glass and vehicle windows |
+| **Sunpack** | Fluted corrugated plastic sheets for pole kiosks and street branding |
+| **Roll up Standee** | Retractable aluminum exhibition standees with tear-resistant matte media |
+| **Canopy** | Pop-up promotional tents with full roof and wall branded graphics |
+| **ACP Sheet Cutting Board** | CNC router-cut architectural Aluminum Composite Panel signboards |
+| **Clip on Board** | Ultra-thin aluminum snap-frame LED poster lightboxes |
+| **Sandwich Board** | Double-sided A-frame sidewalk boards & transparent acrylic mounts |
+| **Outdoor Branding & Advertising** | Turnkey building wraps, large hoardings & street campaigns |
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **React 19**: Modern component architecture, state management, and optimized virtual DOM.
-- **Vite 6**: Ultra-fast next-gen build tool and development server with Hot Module Replacement (HMR).
-- **Anime.js**: Fluid cursor pulse and typewriter micro-animations.
-- **HTML5 Canvas**: Custom particle physics mesh background with cursor repulsion and spring damping.
-- **Vanilla CSS3 Design System**: Custom design tokens, CSS variables, responsive typography, and mobile optimizations.
-- **Schema.org JSON-LD**: Rich structured data (`LocalBusiness`, `PrintingService`) for Google search indexing.
-- **Remix Icon**: Vector icon library for intuitive visual affordances.
+- **Frontend Core**: [React 19](https://react.dev/) + Modern JSX architecture
+- **Build & Dev Tooling**: [Vite 6](https://vitejs.dev/) with ultra-fast HMR and optimized production bundling
+- **Physics Canvas**: HTML5 2D Canvas with requestAnimationFrame, vector repulsion physics, and spring-damping easing
+- **Styling Architecture**: Vanilla CSS3 design system with CSS custom properties, fluid typography (`clamp()`), and flex/grid layouts
+- **Animation**: [Anime.js 4](https://animejs.com/) for fluid typewriter transitions and cursor pulses
+- **Icons**: [Remix Icon](https://remixicon.com/)
+- **SEO & Structured Data**: Schema.org `LocalBusiness` & `PrintingService` JSON-LD, OpenGraph meta tags, canonical link headers, `robots.txt`, and XML sitemap
 
 ---
 
-## 📂 Codebase Structure
+## 📂 Project Structure
 
 ```text
 apmprint/
-├── index.html            # Vite HTML entry point with Schema.org JSON-LD & SEO
-├── public/               # Static assets directly served at root
-│   ├── favicon.svg       # Official vector favicon
-│   ├── robots.txt        # Production crawl rules
-│   ├── sitemap.xml       # Full service index sitemap
-│   └── images/           # High-resolution facility & portfolio photography
+├── .github/
+│   └── workflows/
+│       └── deploy.yml         # Automated GitHub Pages CI/CD workflow
+├── public/                    # Static assets served at root
+│   ├── favicon.svg            # Official vector brand favicon
+│   ├── robots.txt             # Search engine crawl rules
+│   ├── sitemap.xml            # XML sitemap for SEO indexing
+│   └── images/                # Facility equipment & production photography
 ├── src/
-│   ├── components/       # Reusable UI components
-│   │   ├── CinematicHero.jsx          # Dynamic typewriter reel & brand gradient
-│   │   ├── InteractiveDottedCanvas.jsx # Cursor repulsion physics particle mesh
-│   │   ├── FacilitySpotlight.jsx      # Production machinery showcase & animated counters
-│   │   ├── ServiceCatalog.jsx         # 32-service filterable catalog
-│   │   ├── ServiceCard.jsx            # Individual service card with action CTAs
-│   │   ├── ServiceModal.jsx           # Technical specification popup dialog
-│   │   ├── ProductionShowcase.jsx     # Factory photo portfolio
-│   │   ├── GoogleReviews.jsx          # Google Maps verified reviews & photos
-│   │   ├── ContactQuoteDesk.jsx       # Instant WhatsApp lead generation quote builder
-│   │   ├── Navbar.jsx                 # Sticky blur header with mobile drawer
-│   │   ├── Footer.jsx                 # SEO footer with business hours & sitemap links
-│   │   ├── Toast.jsx                  # Floating notification feedback
-│   │   └── WhyUs.jsx                  # 4-pillar trust & quality breakdown
+│   ├── components/            # Modular React components
+│   │   ├── Navbar.jsx                 # Sticky glassmorphism header & mobile navigation
+│   │   ├── CinematicHero.jsx          # Typewriter hero with 5-color brand gradient
+│   │   ├── InteractiveDottedCanvas.jsx # Clean particle physics canvas with cursor repulsion
+│   │   ├── FacilitySpotlight.jsx      # Heavy offset & digital press machinery showcase
+│   │   ├── ServiceCatalog.jsx         # 32-service catalog with live search & 2-col mobile grid
+│   │   ├── ServiceCard.jsx            # Product card with specs, tags, and WhatsApp CTA
+│   │   ├── ServiceModal.jsx           # Technical specification dialog modal
+│   │   ├── ProductionShowcase.jsx     # Finished print work gallery
+│   │   ├── WhyUs.jsx                  # 4 pillars of print quality and reliability
+│   │   ├── GoogleReviews.jsx          # Real 4.9★ Google Maps customer reviews
+│   │   ├── ContactQuoteDesk.jsx       # Instant WhatsApp quote builder & contact desk
+│   │   ├── Toast.jsx                  # Non-blocking feedback notification
+│   │   └── Footer.jsx                 # Comprehensive business footer & navigation links
 │   ├── data/
-│   │   ├── businessConfig.js          # Business contact info, phone, address & hours
-│   │   └── servicesData.js            # Comprehensive 32 commercial printing services
+│   │   ├── businessConfig.js          # Verified phone, WhatsApp, address, hours & geo data
+│   │   └── servicesData.js            # Structured 32 commercial printing service records
 │   ├── styles/
-│   │   └── index.css                  # Custom design system tokens & responsive styles
-│   ├── App.jsx                        # Main application layout
-│   └── main.jsx                       # React 19 DOM bootstrap
-├── vite.config.js        # Vite 6 configuration with React plugin
-├── package.json          # Modern dependencies and build scripts
-└── README.md             # Project documentation
+│   │   └── index.css                  # Design system tokens, utilities & responsive breakpoints
+│   ├── App.jsx                        # Application root orchestrator
+│   └── main.jsx                       # React DOM entry point
+├── dist/                      # Production build output (bundled for GitHub Pages)
+├── index.html                 # Vite HTML entry with SEO metadata and JSON-LD
+├── vite.config.js             # Vite configuration with base path for GitHub Pages
+├── package.json               # Project manifest and scripts
+└── README.md                  # Comprehensive project documentation
 ```
 
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Getting Started
 
-1. **Clone or Download** the repository to your local computer.
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-3. **Start Development Server**:
-   ```bash
-   npm run dev
-   ```
-4. Visit `http://localhost:5173` to interact with the application.
-5. **Build for Production**:
-   ```bash
-   npm run build
-   ```
+### Prerequisites
+- Node.js 18+ installed on your machine
+- npm or yarn
+
+### Installation
+```bash
+# 1. Clone the repository
+git clone https://github.com/MainPiyushHoon/apmprint.git
+
+# 2. Navigate to project directory
+cd apmprint
+
+# 3. Install dependencies
+npm install
+
+# 4. Start local development server
+npm run dev
+```
+
+Open [http://localhost:5173/](http://localhost:5173/) in your browser to view the application with Hot Module Replacement.
+
+### Production Build
+```bash
+npm run build
+```
+Builds the production-ready bundle into the `dist/` directory and creates `dist/404.html` for single-page routing compatibility on GitHub Pages.
+
+---
+
+## 🌐 Deployment
+
+The application is deployed on **GitHub Pages**:
+- **Live URL**: [https://mainpiyushhoon.github.io/apmprint/](https://mainpiyushhoon.github.io/apmprint/)
+- **Repository**: [https://github.com/MainPiyushHoon/apmprint](https://github.com/MainPiyushHoon/apmprint)
+- Automatic deployments are triggered via GitHub Actions (`.github/workflows/deploy.yml`) on every push to the `main` branch, as well as mirrored to the `gh-pages` branch.
 
 ---
 
 ## 📞 Business Contact & Location
 
-- **Business Name**: Aggarwal Print Media
-- **Address**: Near Double Tanki Road, Sector 12, Vijay Nagar, Ghaziabad, Uttar Pradesh 201009
-- **Google Maps Link**: [https://maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6](https://maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6)
-- **WhatsApp / Phone**: +91 98765 43210 / +91 (011) 2345 6789
-- **Email**: info@aggarwalprintmedia.com
+- **Business Name**: Aggarwal Print Media (APM Print)
+- **Proprietor / Contact**: Sunil Bansal
+- **Address**: F-1, Sector-12, Double Tanki Road, Vijay Nagar, Ghaziabad (U.P.) - 201009
+- **Phone / WhatsApp**: [+91 95820 23022](tel:+919582023022) / [Chat on WhatsApp](https://wa.me/919582023022)
+- **Emails**: [print.apm@gmail.com](mailto:print.apm@gmail.com) / [print.apmindia@gmail.com](mailto:print.apmindia@gmail.com)
+- **Working Hours**: Monday – Saturday: 9:30 AM – 8:30 PM (Sunday Closed)
+- **Google Maps Listing**: [https://maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6](https://maps.app.goo.gl/Spq1CrgbY3Rd7Q5e6) (Rated 4.9 ★★★★★)
 
 ---
 
