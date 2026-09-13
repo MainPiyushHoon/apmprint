@@ -21,12 +21,12 @@ export default function Navbar() {
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         <a href="#home" className="brand-logo" onClick={closeMobileMenu}>
-          <img 
-            src="images/apm-logo.svg" 
-            alt="Aggarwal Print Media Official Logo" 
-            className="logo-img" 
-            width="46" 
-            height="46" 
+          <img
+            src="images/apm-logo.svg"
+            alt="Aggarwal Print Media Official Logo"
+            className="logo-img"
+            width="50"
+            height="50"
           />
           <div className="logo-text">
             <span className="logo-name">{businessConfig.name}</span>
@@ -36,6 +36,11 @@ export default function Navbar() {
 
         <nav aria-label="Main Navigation">
           <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+            <li>
+              <a href="#facility-showcase" className="nav-link" onClick={closeMobileMenu}>
+                Machine Facility
+              </a>
+            </li>
             <li>
               <a href="#services" className="nav-link" onClick={closeMobileMenu}>
                 Services (32)
@@ -68,8 +73,8 @@ export default function Navbar() {
           <a href="#contact" className="btn btn-primary" style={{ padding: '0.65rem 1.2rem', fontSize: '0.88rem' }}>
             <i className="ri-whatsapp-line"></i> Quote Request
           </a>
-          <button 
-            className="mobile-toggle" 
+          <button
+            className="mobile-toggle"
             aria-label="Toggle Navigation Menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import CinematicHero from './components/CinematicHero';
+import FacilitySpotlight from './components/FacilitySpotlight';
 import ServiceCatalog from './components/ServiceCatalog';
 import ServiceModal from './components/ServiceModal';
 import GoogleReviews from './components/GoogleReviews';
@@ -49,7 +50,8 @@ export default function App() {
       <Navbar />
 
       <main id="main-content">
-        <Hero onSelectQuickTag={handleSelectQuickTag} />
+        <CinematicHero onSelectQuickTag={handleSelectQuickTag} />
+        <FacilitySpotlight onSelectQuickTag={handleSelectQuickTag} />
         <ServiceCatalog
           onOpenModal={handleOpenModal}
           onSelectQuote={handleSelectQuote}

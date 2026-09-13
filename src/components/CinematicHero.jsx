@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import anime from 'animejs';
+import { animate, createTimeline, stagger, set } from 'animejs';
 import { servicesData } from '../data/servicesData';
 import { businessConfig } from '../data/businessConfig';
 import InteractiveDottedCanvas from './InteractiveDottedCanvas';
@@ -24,37 +24,38 @@ export default function CinematicHero({ onSelectQuickTag }) {
     if (!textRef.current) return;
 
     const chars = textRef.current.querySelectorAll('.typing-char');
+    if (!chars || chars.length === 0) return;
 
     // Reset initial state
-    anime.set(chars, { opacity: 0, translateY: 6 });
+    set(chars, { opacity: 0, translateY: 6 });
 
     // Timeline: 1. Type In -> 2. Hold -> 3. Wipe Out
-    const tl = anime.timeline({
-      easing: 'easeOutCubic',
-      complete: () => {
+    const tl = createTimeline({
+      defaults: {
+        ease: 'outCubic',
+      },
+      onComplete: () => {
         if (!isMountedRef.current) return;
         setServiceIndex((prev) => (prev + 1) % servicesData.length);
       }
     });
 
-    tl.add({
-      targets: chars,
+    tl.add(chars, {
       opacity: [0, 1],
       translateY: [6, 0],
-      delay: anime.stagger(30),
-      duration: 350,
+      delay: stagger(30),
+      duration: 380,
     })
-    .add({
-      // Hold duration for reading
-      duration: 2300,
+    .add(chars, {
+      opacity: 1,
+      duration: 2200,
     })
-    .add({
-      targets: chars,
+    .add(chars, {
       opacity: [1, 0],
       translateY: [0, -6],
-      delay: anime.stagger(18, { from: 'last' }),
+      delay: stagger(18, { from: 'last' }),
       duration: 280,
-      easing: 'easeInCubic',
+      ease: 'inCubic',
     });
 
     return () => {
@@ -66,13 +67,12 @@ export default function CinematicHero({ onSelectQuickTag }) {
   // Cursor pulse animation with anime.js
   useEffect(() => {
     if (!cursorRef.current) return;
-    const cursorAnim = anime({
-      targets: cursorRef.current,
+    const cursorAnim = animate(cursorRef.current, {
       opacity: [1, 0.15],
       duration: 650,
-      direction: 'alternate',
+      alternate: true,
       loop: true,
-      easing: 'easeInOutQuad',
+      ease: 'inOutQuad',
     });
 
     return () => cursorAnim.pause();
