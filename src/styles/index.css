@@ -1488,15 +1488,11 @@ textarea.form-input {
 .typing-text {
   background: linear-gradient(90deg, #008DD2 0%, #1D5FAB 25%, #E5097F 50%, #EF7F1A 75%, #B0CB1F 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.typing-char {
+  color: transparent;
   display: inline-block;
-  color: inherit;
+  min-height: 1.2em;
 }
 
 .typing-cursor {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { animate, createTimeline, stagger, set } from 'animejs';
+import { animate } from 'animejs';
 import { servicesData } from '../data/servicesData';
 import { businessConfig } from '../data/businessConfig';
 import InteractiveDottedCanvas from './InteractiveDottedCanvas';
@@ -11,9 +11,9 @@ import InteractiveDottedCanvas from './InteractiveDottedCanvas';
  */
 export default function CinematicHero({ onSelectQuickTag }) {
   const [serviceIndex, setServiceIndex] = useState(0);
-  const textRef = useRef(null);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
   const cursorRef = useRef(null);
-  const isMountedRef = useRef(true);
 
   // Official APM Brand Logo Palette
   const brandColors = [
@@ -38,51 +38,36 @@ export default function CinematicHero({ onSelectQuickTag }) {
   };
   const activeCategoryLabel = categoryLabels[currentService.category] || currentService.category || 'Printing';
 
-  // anime.js character stagger typing & wipe cycle
+  // Smooth Typewriter cycle cycling all 32 services with full brand gradient
   useEffect(() => {
-    isMountedRef.current = true;
-    if (!textRef.current) return;
+    let timer;
+    const fullText = serviceTitle;
 
-    const chars = textRef.current.querySelectorAll('.typing-char');
-    if (!chars || chars.length === 0) return;
-
-    // Reset initial state
-    set(chars, { opacity: 0, translateY: 6 });
-
-    // Timeline: 1. Type In -> 2. Hold -> 3. Wipe Out
-    const tl = createTimeline({
-      defaults: {
-        ease: 'outCubic',
-      },
-      onComplete: () => {
-        if (!isMountedRef.current) return;
+    if (!isDeleting) {
+      if (displayedText.length < fullText.length) {
+        timer = setTimeout(() => {
+          setDisplayedText(fullText.slice(0, displayedText.length + 1));
+        }, 55);
+      } else {
+        // Pause and hold the full word with full brand gradient
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200);
+      }
+    } else {
+      if (displayedText.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayedText(fullText.slice(0, displayedText.length - 1));
+        }, 28);
+      } else {
+        // Transition to next service
+        setIsDeleting(false);
         setServiceIndex((prev) => (prev + 1) % servicesData.length);
       }
-    });
+    }
 
-    tl.add(chars, {
-      opacity: [0, 1],
-      translateY: [6, 0],
-      delay: stagger(30),
-      duration: 380,
-    })
-      .add(chars, {
-        opacity: 1,
-        duration: 2200,
-      })
-      .add(chars, {
-        opacity: [1, 0],
-        translateY: [0, -6],
-        delay: stagger(18, { from: 'last' }),
-        duration: 280,
-        ease: 'inCubic',
-      });
-
-    return () => {
-      isMountedRef.current = false;
-      tl.pause();
-    };
-  }, [serviceIndex, serviceTitle]);
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, serviceTitle]);
 
   // Cursor pulse animation with anime.js
   useEffect(() => {
@@ -129,24 +114,19 @@ export default function CinematicHero({ onSelectQuickTag }) {
           {/* Primary Single <h1> Tag with Pure Dynamic Typing Headline */}
           <h1
             className="cinematic-typing-headline"
-            onClick={handleServiceClick}
-            title="Click to view full specs &amp; get instant quote"
           >
             <span
               className="typing-text"
-              ref={textRef}
               key={currentService.id || serviceIndex}
-              style={{ backgroundImage: brandGradient }}
+              style={{
+                backgroundImage: brandGradient,
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+              }}
             >
-              {serviceTitle.split('').map((char, index) => (
-                <span
-                  key={`${currentService.id || serviceIndex}-${index}`}
-                  className="typing-char"
-                  style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
+              {displayedText || '\u00A0'}
             </span>
             <span className="typing-cursor" ref={cursorRef} aria-hidden="true">|</span>
           </h1>
@@ -159,7 +139,7 @@ export default function CinematicHero({ onSelectQuickTag }) {
             <a href="#services" className="btn btn-secondary">
               <i className="ri-grid-fill"></i> Browse All 32 Services
             </a>
-            <a href="#facility-showcase" className="btn btn-outline">
+            <a href="#facility-showcase" className="btn btn-secondary">
               <i className="ri-building-line"></i> Machine Facility
             </a>
           </div>
