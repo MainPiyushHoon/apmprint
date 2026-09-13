@@ -9,13 +9,14 @@ export default function InteractiveDottedCanvas() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
 
-  // APM Brand Logo Palette (extracted from apm-logo.svg)
+  // APM Brand Logo Palette
   const brandColors = [
+    '#f07101', // Bright Orange
+    '#ce5205', // Sunset Orange
+    '#3ffb00', // Neon Lime Green
+    '#E5097F', // Process Magenta / Pink
     '#008DD2', // Cyan / Process Blue
     '#1D5FAB', // Royal Blue
-    '#E5097F', // Process Magenta / Pink
-    '#EF7F1A', // Bright Orange
-    '#B0CB1F', // Lime Offset Green
   ];
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function InteractiveDottedCanvas() {
       y: -9999,
       targetX: -9999,
       targetY: -9999,
-      radius: 125,
+      radius: 140,
       isHovering: false,
     };
 
@@ -140,54 +141,55 @@ export default function InteractiveDottedCanvas() {
     );
     observer.observe(interactionTarget);
 
-    // Physics Animation Loop
+    // Smooth Physics Animation Loop
     let time = 0;
-    const spring = 0.08;
-    const damping = 0.84;
-    const repulsionPower = 4.8;
+    const spring = 0.045;
+    const damping = 0.88;
+    const repulsionPower = 3.6;
 
     const render = () => {
       if (isVisible) {
         time++;
         ctx.clearRect(0, 0, width, height);
 
-        // Smooth mouse lerp
-        mouse.x += (mouse.targetX - mouse.x) * 0.35;
-        mouse.y += (mouse.targetY - mouse.y) * 0.35;
+        // Smooth fluid mouse lerp
+        mouse.x += (mouse.targetX - mouse.x) * 0.18;
+        mouse.y += (mouse.targetY - mouse.y) * 0.18;
 
-        // Draw connections for energized dots
-        ctx.lineWidth = 1;
-
-        // Update and draw dots
+        // Update and draw dots (clean particle field without connecting lines)
         const len = dots.length;
         for (let i = 0; i < len; i++) {
           const d = dots[i];
 
-          // Cursor repulsion
+          // Cursor repulsion with smoothstep falloff
           if (mouse.isHovering) {
             const dx = d.x - mouse.x;
             const dy = d.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < mouse.radius && dist > 0.1) {
-              const force = (1 - dist / mouse.radius) * repulsionPower;
+              const norm = dist / mouse.radius;
+              // Smooth cubic Hermite smoothstep curve: zero shock at edge
+              const falloff = 1 - norm * norm * (3 - 2 * norm);
+              const force = falloff * repulsionPower;
               const angle = Math.atan2(dy, dx);
               d.vx += Math.cos(angle) * force;
               d.vy += Math.sin(angle) * force;
-              d.activeFactor = Math.min(1, d.activeFactor + 0.12);
+              // Smooth asymptotic easing for active factor
+              d.activeFactor += (falloff - d.activeFactor) * 0.12;
             } else {
-              d.activeFactor = Math.max(0, d.activeFactor - 0.03);
+              d.activeFactor += (0 - d.activeFactor) * 0.04;
             }
           } else {
-            // Idle ambient wave
-            const waveX = Math.sin(d.x0 * 0.01 + d.y0 * 0.01 + time * 0.02) * 1.5;
-            const waveY = Math.cos(d.x0 * 0.01 - d.y0 * 0.01 + time * 0.02) * 1.5;
-            d.vx += waveX * 0.05;
-            d.vy += waveY * 0.05;
-            d.activeFactor = Math.max(0, d.activeFactor - 0.02);
+            // Gentle ambient breathing wave
+            const waveX = Math.sin(d.x0 * 0.008 + d.y0 * 0.008 + time * 0.015) * 1.0;
+            const waveY = Math.cos(d.x0 * 0.008 - d.y0 * 0.008 + time * 0.015) * 1.0;
+            d.vx += waveX * 0.035;
+            d.vy += waveY * 0.035;
+            d.activeFactor += (0 - d.activeFactor) * 0.03;
           }
 
-          // Spring return to original position
+          // Gentle spring return to equilibrium
           d.vx += (d.x0 - d.x) * spring;
           d.vy += (d.y0 - d.y) * spring;
           d.vx *= damping;
@@ -195,42 +197,23 @@ export default function InteractiveDottedCanvas() {
           d.x += d.vx;
           d.y += d.vy;
 
-          // Render dot
+          // Render dot with smooth radius and opacity interpolation
           ctx.beginPath();
-          const currentRadius = d.radius + d.activeFactor * 1.4;
+          const currentRadius = d.radius + d.activeFactor * 1.5;
           ctx.arc(d.x, d.y, currentRadius, 0, Math.PI * 2);
 
-          if (d.activeFactor > 0.05) {
+          if (d.activeFactor > 0.02) {
             ctx.fillStyle = d.activeColor;
-            ctx.globalAlpha = 0.3 + d.activeFactor * 0.7;
+            ctx.globalAlpha = 0.35 + d.activeFactor * 0.65;
           } else if (d.isBrandNode) {
             ctx.fillStyle = d.baseColor;
-            ctx.globalAlpha = 0.5;
+            ctx.globalAlpha = 0.45;
           } else {
             ctx.fillStyle = '#cbd5e1';
-            ctx.globalAlpha = 0.45;
+            ctx.globalAlpha = 0.38;
           }
 
           ctx.fill();
-        }
-
-        // Draw dynamic filament lines between adjacent active dots
-        ctx.globalAlpha = 0.18;
-        ctx.strokeStyle = '#008DD2';
-        for (let i = 0; i < len; i += 2) {
-          const d1 = dots[i];
-          if (d1.activeFactor > 0.25) {
-            for (let j = i + 1; j < Math.min(i + 5, len); j++) {
-              const d2 = dots[j];
-              const dist = Math.hypot(d1.x - d2.x, d1.y - d2.y);
-              if (dist < spacing * 1.5) {
-                ctx.beginPath();
-                ctx.moveTo(d1.x, d1.y);
-                ctx.lineTo(d2.x, d2.y);
-                ctx.stroke();
-              }
-            }
-          }
         }
 
         ctx.globalAlpha = 1.0;
