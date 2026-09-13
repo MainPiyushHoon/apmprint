@@ -15,6 +15,17 @@ export default function CinematicHero({ onSelectQuickTag }) {
   const cursorRef = useRef(null);
   const isMountedRef = useRef(true);
 
+  // Official APM Brand Logo Palette
+  const brandColors = [
+    '#008DD2', // Cyan / Process Blue
+    '#1D5FAB', // Royal Blue
+    '#E5097F', // Process Magenta / Pink
+    '#EF7F1A', // Bright Orange
+    '#B0CB1F', // Lime Offset Green
+  ];
+
+  const brandGradient = `linear-gradient(90deg, ${brandColors[0]} 0%, ${brandColors[1]} 25%, ${brandColors[2]} 50%, ${brandColors[3]} 75%, ${brandColors[4]} 100%)`;
+
   // Extract all 32 services safely
   const currentService = servicesData[serviceIndex] || servicesData[0] || {};
   const serviceTitle = currentService.title || currentService.name || 'Commercial Printing';
@@ -55,17 +66,17 @@ export default function CinematicHero({ onSelectQuickTag }) {
       delay: stagger(30),
       duration: 380,
     })
-    .add(chars, {
-      opacity: 1,
-      duration: 2200,
-    })
-    .add(chars, {
-      opacity: [1, 0],
-      translateY: [0, -6],
-      delay: stagger(18, { from: 'last' }),
-      duration: 280,
-      ease: 'inCubic',
-    });
+      .add(chars, {
+        opacity: 1,
+        duration: 2200,
+      })
+      .add(chars, {
+        opacity: [1, 0],
+        translateY: [0, -6],
+        delay: stagger(18, { from: 'last' }),
+        duration: 280,
+        ease: 'inCubic',
+      });
 
     return () => {
       isMountedRef.current = false;
@@ -121,7 +132,12 @@ export default function CinematicHero({ onSelectQuickTag }) {
             onClick={handleServiceClick}
             title="Click to view full specs &amp; get instant quote"
           >
-            <span className="typing-text" ref={textRef} key={currentService.id || serviceIndex}>
+            <span
+              className="typing-text"
+              ref={textRef}
+              key={currentService.id || serviceIndex}
+              style={{ backgroundImage: brandGradient }}
+            >
               {serviceTitle.split('').map((char, index) => (
                 <span
                   key={`${currentService.id || serviceIndex}-${index}`}
