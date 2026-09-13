@@ -450,7 +450,7 @@ export const servicesData = [
   },
   {
     id: 'outdoor-branding-advertising',
-    title: 'Outdoor Branding & Advertising',
+    title: 'Branding & Advertising',
     category: 'outdoor',
     badge: 'Turnkey',
     icon: 'ri-road-map-line',
