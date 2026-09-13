@@ -50,7 +50,7 @@ export default function App() {
       <Navbar />
 
       <main id="main-content">
-        <CinematicHero onSelectQuickTag={handleSelectQuickTag} />
+        <CinematicHero />
         <FacilitySpotlight onSelectQuickTag={handleSelectQuickTag} />
         <ServiceCatalog
           onOpenModal={handleOpenModal}

@@ -1471,9 +1471,9 @@ textarea.form-input {
   letter-spacing: -0.035em;
   color: var(--text-main);
   margin-bottom: 2.75rem;
-  cursor: pointer;
   min-height: 1.25em;
   display: flex;
+  cursor: default;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;

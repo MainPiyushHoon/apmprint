@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate } from 'animejs';
 import { servicesData } from '../data/servicesData';
-import { businessConfig } from '../data/businessConfig';
 import InteractiveDottedCanvas from './InteractiveDottedCanvas';
 
 /**
@@ -9,7 +8,7 @@ import InteractiveDottedCanvas from './InteractiveDottedCanvas';
  * High-tech cinematic entrance with interactive dotted physics canvas,
  * anime.js dynamic service typewriter reel, and single primary H1 SEO tag.
  */
-export default function CinematicHero({ onSelectQuickTag }) {
+export default function CinematicHero() {
   const [serviceIndex, setServiceIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -82,19 +81,6 @@ export default function CinematicHero({ onSelectQuickTag }) {
 
     return () => cursorAnim.pause();
   }, []);
-
-  const handleServiceClick = () => {
-    if (onSelectQuickTag && serviceTitle) {
-      onSelectQuickTag(serviceTitle);
-    }
-  };
-
-  const categoryFilters = [
-    { id: 'stationery', label: 'Stationery & Registers', icon: 'ri-file-list-3-line' },
-    { id: 'paper', label: 'Paper & Marketing', icon: 'ri-printer-line' },
-    { id: 'labels', label: 'Labels & Promo Gifts', icon: 'ri-gift-line' },
-    { id: 'outdoor', label: 'Outdoor & Signage', icon: 'ri-billboard-line' },
-  ];
 
   return (
     <section className="cinematic-hero" id="home">
