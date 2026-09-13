@@ -1406,10 +1406,12 @@ textarea.form-input {
   display: flex;
   justify-content: center;
   width: 100%;
+  padding: 0 1.25rem;
 }
 
 .cinematic-content {
   max-width: 920px;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   display: flex;
@@ -1431,23 +1433,26 @@ textarea.form-input {
   color: var(--text-muted);
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  max-width: 100%;
 }
 
 .cinematic-badge-pulse {
   width: 8px;
   height: 8px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--whatsapp-green);
   animation: pulseBeacon 2s infinite;
 }
 
 .cinematic-title {
-  font-size: 3.35rem;
+  font-size: clamp(2rem, 5.5vw, 3.35rem);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.03em;
   color: var(--text-main);
   margin-bottom: 1.5rem;
+  max-width: 100%;
 }
 
 .cinematic-title span {
@@ -1678,25 +1683,40 @@ textarea.form-input {
     min-height: auto;
   }
   .cinematic-title {
-    font-size: 2.2rem;
+    font-size: 1.85rem;
+    line-height: 1.22;
   }
   .dynamic-text {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
   .cinematic-dynamic-box {
-    padding: 1rem 1.2rem;
+    padding: 0.9rem 1rem;
+  }
+  .cinematic-badge {
+    font-size: 0.74rem;
+    padding: 0.35rem 0.85rem;
+  }
+  .cinematic-subtitle {
+    font-size: 0.95rem;
   }
   .cinematic-trust-row {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 0.85rem;
     padding: 1rem;
   }
   .facility-title {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
 }
 
 @media (max-width: 480px) {
+  .cinematic-title {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  .dynamic-text {
+    font-size: 1.15rem;
+  }
   .cinematic-trust-row {
     grid-template-columns: 1fr;
   }

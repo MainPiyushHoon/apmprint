@@ -15,8 +15,17 @@ export default function CinematicHero({ onSelectQuickTag }) {
   const cursorRef = useRef(null);
   const isMountedRef = useRef(true);
 
-  // Extract all 32 services
-  const currentService = servicesData[serviceIndex] || servicesData[0];
+  // Extract all 32 services safely
+  const currentService = servicesData[serviceIndex] || servicesData[0] || {};
+  const serviceTitle = currentService.title || currentService.name || 'Commercial Printing';
+
+  const categoryLabels = {
+    stationery: 'Stationery & Registers',
+    paper: 'Paper & Marketing',
+    labels: 'Labels & Promo Gifts',
+    outdoor: 'Outdoor & Signage',
+  };
+  const activeCategoryLabel = categoryLabels[currentService.category] || currentService.category || 'Printing';
 
   // anime.js character stagger typing & wipe cycle
   useEffect(() => {
@@ -62,7 +71,7 @@ export default function CinematicHero({ onSelectQuickTag }) {
       isMountedRef.current = false;
       tl.pause();
     };
-  }, [serviceIndex]);
+  }, [serviceIndex, serviceTitle]);
 
   // Cursor pulse animation with anime.js
   useEffect(() => {
@@ -79,16 +88,16 @@ export default function CinematicHero({ onSelectQuickTag }) {
   }, []);
 
   const handleServiceClick = () => {
-    if (onSelectQuickTag && currentService) {
-      onSelectQuickTag(currentService.name);
+    if (onSelectQuickTag && serviceTitle) {
+      onSelectQuickTag(serviceTitle);
     }
   };
 
-  const categories = [
-    { name: 'Paper & Offset Printing', icon: 'ri-printer-line' },
-    { name: 'Signage & Large Format', icon: 'ri-billboard-line' },
-    { name: 'Corporate Stationery', icon: 'ri-briefcase-line' },
-    { name: 'Promotional & Marketing', icon: 'ri-gift-line' },
+  const categoryFilters = [
+    { id: 'stationery', label: 'Stationery & Registers', icon: 'ri-file-list-3-line' },
+    { id: 'paper', label: 'Paper & Marketing', icon: 'ri-printer-line' },
+    { id: 'labels', label: 'Labels & Promo Gifts', icon: 'ri-gift-line' },
+    { id: 'outdoor', label: 'Outdoor & Signage', icon: 'ri-billboard-line' },
   ];
 
   return (
@@ -118,15 +127,15 @@ export default function CinematicHero({ onSelectQuickTag }) {
               <span className="prefix-label">Now Manufacturing:</span>
               <span className="category-pill-active">
                 <i className={currentService.icon || 'ri-check-double-line'}></i>
-                {currentService.category}
+                {activeCategoryLabel}
               </span>
             </div>
 
             <div className="dynamic-text-row">
-              <div className="dynamic-text" ref={textRef} key={currentService.id}>
-                {currentService.name.split('').map((char, index) => (
+              <div className="dynamic-text" ref={textRef} key={currentService.id || serviceIndex}>
+                {serviceTitle.split('').map((char, index) => (
                   <span
-                    key={`${currentService.id}-${index}`}
+                    key={`${currentService.id || serviceIndex}-${index}`}
                     className="typing-char"
                     style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
                   >
@@ -165,15 +174,15 @@ export default function CinematicHero({ onSelectQuickTag }) {
           {/* Category Quick Filter Pills */}
           <div className="cinematic-category-strip">
             <span className="category-strip-label">Quick Sectors:</span>
-            {categories.map((cat, idx) => (
+            {categoryFilters.map((cat) => (
               <a
-                key={idx}
+                key={cat.id}
                 href="#services"
-                className={`category-strip-btn ${currentService.category === cat.name ? 'active-cat' : ''}`}
-                onClick={() => onSelectQuickTag && onSelectQuickTag(cat.name)}
+                className={`category-strip-btn ${currentService.category === cat.id ? 'active-cat' : ''}`}
+                onClick={() => onSelectQuickTag && onSelectQuickTag(cat.label)}
               >
                 <i className={cat.icon}></i>
-                {cat.name}
+                {cat.label}
               </a>
             ))}
           </div>
