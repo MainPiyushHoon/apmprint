@@ -22,7 +22,9 @@ export default function ServiceCard({ service, onOpenModal, onSelectQuote }) {
           onClick={() => onOpenModal(service)}
           aria-label={`View technical specifications for ${service.title}`}
         >
-          <i className="ri-information-line"></i> View Specs
+          <i className="ri-information-line"></i>
+          <span className="btn-text-full">View Specs</span>
+          <span className="btn-text-short">Specs</span>
         </button>
         <a 
           href="#contact" 

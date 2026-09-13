@@ -3,25 +3,29 @@ import { categories, servicesData } from '../data/servicesData';
 import ServiceCard from './ServiceCard';
 
 export default function ServiceCatalog({ onOpenModal, onSelectQuote, externalSearch }) {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState(categories[0]?.id || 'stationery');
   const [searchQuery, setSearchQuery] = useState('');
 
   React.useEffect(() => {
     if (externalSearch) {
       setSearchQuery(externalSearch);
-      setActiveCategory('all');
+      const found = servicesData.find(s => s.title.toLowerCase().includes(externalSearch.toLowerCase()));
+      if (found) {
+        setActiveCategory(found.category);
+      }
     }
   }, [externalSearch]);
 
   const filteredServices = useMemo(() => {
     return servicesData.filter((service) => {
-      const matchesCategory = activeCategory === 'all' || service.category === activeCategory;
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !query ||
         service.title.toLowerCase().includes(query) ||
         service.desc.toLowerCase().includes(query) ||
         service.specs.some((s) => s.toLowerCase().includes(query));
+
+      const matchesCategory = query ? matchesSearch : service.category === activeCategory;
 
       return matchesCategory && matchesSearch;
     });
@@ -72,15 +76,6 @@ export default function ServiceCatalog({ onOpenModal, onSelectQuote, externalSea
           </div>
 
           <div className="category-tabs" role="tablist" aria-label="Service Categories">
-            <button
-              type="button"
-              className={`tab-btn ${activeCategory === 'all' ? 'active' : ''}`}
-              onClick={() => setActiveCategory('all')}
-              role="tab"
-              aria-selected={activeCategory === 'all'}
-            >
-              All Verticals <span className="tab-count">32</span>
-            </button>
             {categories.map((cat) => (
               <button
                 key={cat.id}
