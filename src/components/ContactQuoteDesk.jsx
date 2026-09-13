@@ -73,7 +73,7 @@ export default function ContactQuoteDesk({ selectedService, onShowToast }) {
             </h2>
 
             <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.6 }}>
-              Connect directly with <strong>{businessConfig.contactPerson}</strong> at our Sector 12 Vijay Nagar press. 
+              Connect directly with <strong>{businessConfig.contactPerson}</strong> at our Sector 12 Vijay Nagar press.
               Submit your job specifications online or send an instant WhatsApp message to get written pricing within minutes.
             </p>
 
@@ -86,10 +86,10 @@ export default function ContactQuoteDesk({ selectedService, onShowToast }) {
                 <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>
                   {businessConfig.address.full}
                 </p>
-                <a 
-                  href={businessConfig.googleRating.mapsUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={businessConfig.googleRating.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ color: 'var(--primary)', fontSize: '0.82rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.2rem' }}
                 >
                   <i className="ri-direction-line"></i> Open in Google Maps
@@ -214,14 +214,6 @@ export default function ContactQuoteDesk({ selectedService, onShowToast }) {
                   style={{ width: '100%', padding: '0.95rem', fontSize: '0.98rem', fontWeight: 700 }}
                 >
                   <i className="ri-whatsapp-fill" style={{ fontSize: '1.25rem' }}></i> Send Quote Request on WhatsApp
-                </button>
-
-                <button
-                  type="submit"
-                  className="btn btn-secondary"
-                  style={{ width: '100%', padding: '0.8rem', fontSize: '0.88rem' }}
-                >
-                  <i className="ri-send-plane-fill"></i> Submit Web Form Request
                 </button>
               </div>
             </form>

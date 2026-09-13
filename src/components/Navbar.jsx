@@ -61,12 +61,19 @@ export default function Navbar() {
                 Contact & Quote
               </a>
             </li>
+            <li className="mobile-nav-cta">
+              <a href="#contact" className="btn btn-primary" onClick={closeMobileMenu} style={{ width: '100%', justifyContent: 'center' }}>
+                <i className="ri-whatsapp-line"></i> Instant WhatsApp Quote
+              </a>
+            </li>
           </ul>
         </nav>
 
         <div className="nav-actions">
-          <a href="#contact" className="btn btn-primary" style={{ padding: '0.65rem 1.2rem', fontSize: '0.88rem' }}>
-            <i className="ri-whatsapp-line"></i> Quote Request
+          <a href="#contact" className="btn btn-primary nav-quote-btn">
+            <i className="ri-whatsapp-line"></i>
+            <span className="quote-text-full">Quote Request</span>
+            <span className="quote-text-short">Quote</span>
           </a>
           <button
             className="mobile-toggle"
