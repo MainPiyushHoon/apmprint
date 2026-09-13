@@ -14,13 +14,13 @@ export default function CinematicHero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const cursorRef = useRef(null);
 
-  // Official APM Brand Logo Palette
+  // Official APM Brand Logo Palette (Flipped: Orange -> Lime -> Magenta -> Cyan -> Royal Blue)
   const brandColors = [
-    '#008DD2', // Cyan / Process Blue
-    '#1D5FAB', // Royal Blue
-    '#E5097F', // Process Magenta / Pink
     '#EF7F1A', // Bright Orange
     '#B0CB1F', // Lime Offset Green
+    '#E5097F', // Process Magenta / Pink
+    '#008DD2', // Cyan / Process Blue
+    '#1D5FAB', // Royal Blue
   ];
 
   const brandGradient = `linear-gradient(90deg, ${brandColors[0]} 0%, ${brandColors[1]} 25%, ${brandColors[2]} 50%, ${brandColors[3]} 75%, ${brandColors[4]} 100%)`;
