@@ -108,7 +108,7 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
         <div className="hero-content">
           <div className="badge">
             <span className="pulse-dot"></span>
-            <span>Production Plant • Sector 12, Vijay Nagar, Ghaziabad</span>
+            <span>Sector 12, Vijay Nagar, Ghaziabad</span>
           </div>
 
           <h2 className="facility-title">
@@ -116,8 +116,8 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
           </h2>
 
           <p className="hero-subtitle">
-            Manufacturing press delivering carbonless NCR duplicate bill books, executive letterheads, 
-            3D acrylic LED signboards, heavy-duty Star Flex banners, and corporate gifts. Supervised on-site by 
+            Manufacturing press delivering carbonless NCR duplicate bill books, executive letterheads,
+            3D acrylic LED signboards, heavy-duty Star Flex banners, and corporate gifts. Supervised on-site by
             <strong> {businessConfig.contactPerson}</strong>.
           </p>
 

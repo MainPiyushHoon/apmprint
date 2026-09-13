@@ -1389,14 +1389,16 @@ textarea.form-input {
 
 .cinematic-hero {
   position: relative;
-  padding: 7rem 0 6rem;
+  min-height: calc(100vh - 78px);
+  min-height: calc(100dvh - 78px);
+  padding: 4rem 0;
   background: #ffffff;
   border-bottom: 1px solid var(--border-light);
   overflow: hidden;
-  min-height: 72vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .cinematic-container {
@@ -1406,7 +1408,8 @@ textarea.form-input {
   justify-content: center;
   width: 100%;
   padding: 0 1.5rem;
-  pointer-events: none; /* Mouse events pass directly through to canvas */
+  pointer-events: none;
+  /* Mouse events pass directly through to canvas */
 }
 
 .cinematic-content {
@@ -1417,7 +1420,8 @@ textarea.form-input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  pointer-events: none; /* Mouse events pass directly through to canvas */
+  pointer-events: none;
+  /* Mouse events pass directly through to canvas */
 }
 
 /* Enable pointer events only on interactive interactive elements */
@@ -1432,16 +1436,16 @@ textarea.form-input {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.45rem 1.25rem;
-  background: rgba(255, 255, 255, 0.88);
+  padding: 0.5rem 1.35rem;
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   border: 1.5px solid rgba(0, 141, 210, 0.22);
   border-radius: var(--radius-full);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   font-weight: 700;
   color: #008dd2;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 14px rgba(0, 141, 210, 0.08);
+  margin-bottom: 2.25rem;
+  box-shadow: 0 4px 16px rgba(0, 141, 210, 0.08);
   transition: all var(--transition-fast);
 }
 
@@ -1461,7 +1465,7 @@ textarea.form-input {
 }
 
 .cinematic-typing-headline {
-  font-size: clamp(2.6rem, 7vw, 5.25rem);
+  font-size: clamp(2.8rem, 6.8vw, 5.25rem);
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.035em;
@@ -1482,7 +1486,9 @@ textarea.form-input {
 }
 
 .typing-text {
-  color: var(--text-main);
+  background: linear-gradient(135deg, #1d4ed8 0%, #008dd2 38%, #e5097f 78%, #ef7f1a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1490,7 +1496,9 @@ textarea.form-input {
 
 .typing-char {
   display: inline-block;
-  color: var(--text-main);
+  background: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .typing-cursor {
@@ -1499,6 +1507,7 @@ textarea.form-input {
   color: #008dd2;
   margin-left: 0.15em;
   line-height: 1;
+  -webkit-text-fill-color: #008dd2;
 }
 
 .cinematic-cta-group {
@@ -1546,45 +1555,41 @@ textarea.form-input {
 
 @media (max-width: 768px) {
   .cinematic-hero {
-    padding: 3.5rem 0 3rem;
-    min-height: auto;
+    min-height: calc(100vh - 78px);
+    min-height: calc(100dvh - 78px);
+    padding: 3rem 0 2.5rem;
   }
-  .cinematic-title {
-    font-size: 1.85rem;
-    line-height: 1.22;
+
+  .cinematic-category-pill {
+    font-size: 0.78rem;
+    padding: 0.4rem 1rem;
+    margin-bottom: 1.5rem;
   }
-  .dynamic-text {
-    font-size: 1.25rem;
+
+  .cinematic-typing-headline {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-bottom: 2rem;
   }
-  .cinematic-dynamic-box {
-    padding: 0.9rem 1rem;
-  }
-  .cinematic-badge {
-    font-size: 0.74rem;
-    padding: 0.35rem 0.85rem;
-  }
-  .cinematic-subtitle {
-    font-size: 0.95rem;
-  }
-  .cinematic-trust-row {
-    grid-template-columns: repeat(2, 1fr);
+
+  .cinematic-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
     gap: 0.85rem;
-    padding: 1rem;
   }
+
+  .cinematic-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .facility-title {
     font-size: 1.75rem;
   }
 }
 
 @media (max-width: 480px) {
-  .cinematic-title {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
-  .dynamic-text {
-    font-size: 1.15rem;
-  }
-  .cinematic-trust-row {
-    grid-template-columns: 1fr;
+  .cinematic-typing-headline {
+    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
   }
 }
