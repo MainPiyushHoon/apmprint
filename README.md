@@ -72,11 +72,13 @@ The business verticals are organized into 4 primary category tabs:
 
 ## 🛠️ Technology Stack
 
-- **HTML5**: Semantic markup, accessible navigation, SEO-optimized meta tags & Schema ready.
-- **Vanilla CSS3**: Custom design tokens, CSS variables, Flexbox, Grid, smooth micro-animations. No heavy CSS frameworks.
-- **Vanilla JavaScript (ES6+)**: Zero-dependency scripts for instant search, category filtering, modal dialogs, scroll handlers, and WhatsApp URL generation.
-- **Remix Icon CDN**: Vector icon library for fast, lightweight visual cues.
-- **Google Maps Embed & Elfsight**: Live auto-syncing widget integration for Google reviews.
+- **React 19**: Modern component architecture, state management, and optimized virtual DOM.
+- **Vite 6**: Ultra-fast next-gen build tool and development server with Hot Module Replacement (HMR).
+- **Anime.js**: Fluid cursor pulse and typewriter micro-animations.
+- **HTML5 Canvas**: Custom particle physics mesh background with cursor repulsion and spring damping.
+- **Vanilla CSS3 Design System**: Custom design tokens, CSS variables, responsive typography, and mobile optimizations.
+- **Schema.org JSON-LD**: Rich structured data (`LocalBusiness`, `PrintingService`) for Google search indexing.
+- **Remix Icon**: Vector icon library for intuitive visual affordances.
 
 ---
 
@@ -84,17 +86,37 @@ The business verticals are organized into 4 primary category tabs:
 
 ```text
 apmprint/
-├── index.html            # Main single-page web application
-├── css/
-│   └── styles.css        # Minimal light design system & mobile media queries
-├── js/
-│   └── app.js            # Catalog filter engine, search, modals & WhatsApp builder
-├── images/               # Production photography assets
-│   ├── hero_press.jpg    # Industrial press line showcase
-│   ├── business_cards.jpg # Stationery & ID card photography
-│   ├── flex_boards.jpg   # Outdoor signage & glowsign showcase
-│   └── paper_flyers.jpg   # Pamphlets & billbook photography
-└── README.md             # Project documentation (this file)
+├── index.html            # Vite HTML entry point with Schema.org JSON-LD & SEO
+├── public/               # Static assets directly served at root
+│   ├── favicon.svg       # Official vector favicon
+│   ├── robots.txt        # Production crawl rules
+│   ├── sitemap.xml       # Full service index sitemap
+│   └── images/           # High-resolution facility & portfolio photography
+├── src/
+│   ├── components/       # Reusable UI components
+│   │   ├── CinematicHero.jsx          # Dynamic typewriter reel & brand gradient
+│   │   ├── InteractiveDottedCanvas.jsx # Cursor repulsion physics particle mesh
+│   │   ├── FacilitySpotlight.jsx      # Production machinery showcase & animated counters
+│   │   ├── ServiceCatalog.jsx         # 32-service filterable catalog
+│   │   ├── ServiceCard.jsx            # Individual service card with action CTAs
+│   │   ├── ServiceModal.jsx           # Technical specification popup dialog
+│   │   ├── ProductionShowcase.jsx     # Factory photo portfolio
+│   │   ├── GoogleReviews.jsx          # Google Maps verified reviews & photos
+│   │   ├── ContactQuoteDesk.jsx       # Instant WhatsApp lead generation quote builder
+│   │   ├── Navbar.jsx                 # Sticky blur header with mobile drawer
+│   │   ├── Footer.jsx                 # SEO footer with business hours & sitemap links
+│   │   ├── Toast.jsx                  # Floating notification feedback
+│   │   └── WhyUs.jsx                  # 4-pillar trust & quality breakdown
+│   ├── data/
+│   │   ├── businessConfig.js          # Business contact info, phone, address & hours
+│   │   └── servicesData.js            # Comprehensive 32 commercial printing services
+│   ├── styles/
+│   │   └── index.css                  # Custom design system tokens & responsive styles
+│   ├── App.jsx                        # Main application layout
+│   └── main.jsx                       # React 19 DOM bootstrap
+├── vite.config.js        # Vite 6 configuration with React plugin
+├── package.json          # Modern dependencies and build scripts
+└── README.md             # Project documentation
 ```
 
 ---
@@ -102,12 +124,19 @@ apmprint/
 ## 🚀 How to Run Locally
 
 1. **Clone or Download** the repository to your local computer.
-2. Open `index.html` directly in any web browser (Chrome, Firefox, Edge, Safari):
+2. **Install Dependencies**:
    ```bash
-   # Or start a simple local server using Python or Node.js
-   npx serve .
+   npm install
    ```
-3. Visit `http://localhost:3000` to interact with the website.
+3. **Start Development Server**:
+   ```bash
+   npm run dev
+   ```
+4. Visit `http://localhost:5173` to interact with the application.
+5. **Build for Production**:
+   ```bash
+   npm run build
+   ```
 
 ---
 

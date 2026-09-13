@@ -12,8 +12,8 @@
   --bg-card-hover: #f1f5f9;
 
   /* Primary Accent: Royal Ink Blue */
-  --primary: #1d4ed8;
-  --primary-hover: #1e40af;
+  --primary: #9f1fdf;
+  --primary-hover: #960dc4;
   --primary-light: #eff6ff;
   --primary-glow: rgba(29, 78, 216, 0.12);
 
@@ -1486,7 +1486,7 @@ textarea.form-input {
 }
 
 .typing-text {
-  background: linear-gradient(90deg, #008DD2 0%, #1D5FAB 25%, #E5097F 50%, #EF7F1A 75%, #B0CB1F 100%);
+  background: linear-gradient(90deg, #008DD2 75%, #1D5FAB 25%, #E5097F 50%, #EF7F1A 0%, #B0CB1F 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
