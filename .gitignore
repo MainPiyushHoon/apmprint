@@ -1,2 +1,5 @@
 DESIGN.md
 PRODUCT.md
+node_modules/
+dist/
+.DS_Store
