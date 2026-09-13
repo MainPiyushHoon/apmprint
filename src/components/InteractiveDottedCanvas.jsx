@@ -161,22 +161,30 @@ export default function InteractiveDottedCanvas() {
         for (let i = 0; i < len; i++) {
           const d = dots[i];
 
-          // Cursor repulsion with smoothstep falloff
+          // Cursor repulsion & active swelling
           if (mouse.isHovering) {
             const dx = d.x - mouse.x;
             const dy = d.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
+            const dx0 = d.x0 - mouse.x;
+            const dy0 = d.y0 - mouse.y;
+            const dist0 = Math.sqrt(dx0 * dx0 + dy0 * dy0);
+            const effectiveDist = Math.min(dist, dist0);
 
-            if (dist < mouse.radius && dist > 0.1) {
-              const norm = dist / mouse.radius;
-              // Smooth cubic Hermite smoothstep curve: zero shock at edge
+            if (effectiveDist < mouse.radius) {
+              const norm = effectiveDist / mouse.radius;
+              // Smooth cubic Hermite smoothstep curve
               const falloff = 1 - norm * norm * (3 - 2 * norm);
-              const force = falloff * repulsionPower;
-              const angle = Math.atan2(dy, dx);
-              d.vx += Math.cos(angle) * force;
-              d.vy += Math.sin(angle) * force;
-              // Smooth asymptotic easing for active factor
-              d.activeFactor += (falloff - d.activeFactor) * 0.12;
+
+              if (dist < mouse.radius && dist > 0.1) {
+                const force = Math.pow(1 - dist / mouse.radius, 1.2) * repulsionPower;
+                const angle = Math.atan2(dy, dx);
+                d.vx += Math.cos(angle) * force;
+                d.vy += Math.sin(angle) * force;
+              }
+
+              // Smooth responsive swelling
+              d.activeFactor += (falloff - d.activeFactor) * 0.10;
             } else {
               d.activeFactor += (0 - d.activeFactor) * 0.04;
             }
@@ -197,14 +205,14 @@ export default function InteractiveDottedCanvas() {
           d.x += d.vx;
           d.y += d.vy;
 
-          // Render dot with smooth radius and opacity interpolation
+          // Render dot with prominent smooth radius growth and vibrant brand color
           ctx.beginPath();
-          const currentRadius = d.radius + d.activeFactor * 1.5;
+          const currentRadius = d.radius + d.activeFactor * 3.6;
           ctx.arc(d.x, d.y, currentRadius, 0, Math.PI * 2);
 
           if (d.activeFactor > 0.02) {
             ctx.fillStyle = d.activeColor;
-            ctx.globalAlpha = 0.35 + d.activeFactor * 0.65;
+            ctx.globalAlpha = 0.4 + d.activeFactor * 0.6;
           } else if (d.isBrandNode) {
             ctx.fillStyle = d.baseColor;
             ctx.globalAlpha = 0.45;
