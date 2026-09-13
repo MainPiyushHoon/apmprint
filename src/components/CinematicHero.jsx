@@ -16,14 +16,15 @@ export default function CinematicHero() {
 
   // Official APM Brand Logo Palette (Flipped: Orange -> Lime -> Magenta -> Cyan -> Royal Blue)
   const brandColors = [
-    '#EF7F1A', // Bright Orange
-    '#B0CB1F', // Lime Offset Green
+    '#f07101ff', // Bright Orange
+    '#ce5205ff', // Darker Orange
     '#E5097F', // Process Magenta / Pink
     '#008DD2', // Cyan / Process Blue
     '#1D5FAB', // Royal Blue
+    '#3ffb00ff', // Lime Offset Green
   ];
 
-  const brandGradient = `linear-gradient(90deg, ${brandColors[0]} 0%, ${brandColors[1]} 25%, ${brandColors[2]} 50%, ${brandColors[3]} 75%, ${brandColors[4]} 100%)`;
+  const brandGradient = `linear-gradient(90deg, ${brandColors[0]} 0%, ${brandColors[1]} 20%, ${brandColors[2]} 40%, ${brandColors[3]} 60%, ${brandColors[4]} 80%, ${brandColors[5]} 100%)`;
 
   // Extract all 32 services safely
   const currentService = servicesData[serviceIndex] || servicesData[0] || {};

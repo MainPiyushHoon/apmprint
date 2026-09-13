@@ -1486,7 +1486,7 @@ textarea.form-input {
 }
 
 .typing-text {
-  background: linear-gradient(90deg, #ee750b 0%, #B0CB1F 25%, #E5097F 50%, #008DD2 75%, #1D5FAB 100%);
+  background: linear-gradient(90deg, #f07101 0%, #ce5205 20%, #E5097F 40%, #008DD2 60%, #1D5FAB 80%, #3ffb00 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
