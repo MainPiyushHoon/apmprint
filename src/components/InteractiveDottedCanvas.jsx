@@ -86,9 +86,11 @@ export default function InteractiveDottedCanvas() {
 
     initGrid();
 
-    // Mouse & Touch Listeners
+    // Mouse & Touch Listeners attached to hero section
+    const interactionTarget = container.closest('.cinematic-hero') || container.parentElement || container;
+
     const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
       mouse.targetX = e.clientX - rect.left;
       mouse.targetY = e.clientY - rect.top;
       mouse.isHovering = true;
@@ -102,7 +104,7 @@ export default function InteractiveDottedCanvas() {
 
     const handleTouchMove = (e) => {
       if (e.touches.length > 0) {
-        const rect = container.getBoundingClientRect();
+        const rect = canvas.getBoundingClientRect();
         mouse.targetX = e.touches[0].clientX - rect.left;
         mouse.targetY = e.touches[0].clientY - rect.top;
         mouse.isHovering = true;
@@ -124,10 +126,10 @@ export default function InteractiveDottedCanvas() {
     };
 
     window.addEventListener('resize', handleResize);
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-    container.addEventListener('touchmove', handleTouchMove, { passive: true });
-    container.addEventListener('touchend', handleTouchEnd);
+    interactionTarget.addEventListener('mousemove', handleMouseMove);
+    interactionTarget.addEventListener('mouseleave', handleMouseLeave);
+    interactionTarget.addEventListener('touchmove', handleTouchMove, { passive: true });
+    interactionTarget.addEventListener('touchend', handleTouchEnd);
 
     // Pause rendering when outside viewport
     const observer = new IntersectionObserver(
@@ -136,7 +138,7 @@ export default function InteractiveDottedCanvas() {
       },
       { threshold: 0.05 }
     );
-    observer.observe(container);
+    observer.observe(interactionTarget);
 
     // Physics Animation Loop
     let time = 0;
@@ -243,10 +245,10 @@ export default function InteractiveDottedCanvas() {
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
       window.removeEventListener('resize', handleResize);
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-      container.removeEventListener('touchmove', handleTouchMove);
-      container.removeEventListener('touchend', handleTouchEnd);
+      interactionTarget.removeEventListener('mousemove', handleMouseMove);
+      interactionTarget.removeEventListener('mouseleave', handleMouseLeave);
+      interactionTarget.removeEventListener('touchmove', handleTouchMove);
+      interactionTarget.removeEventListener('touchend', handleTouchEnd);
     };
   }, []);
 

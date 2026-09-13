@@ -108,57 +108,34 @@ export default function CinematicHero({ onSelectQuickTag }) {
       {/* Hero Foreground Content */}
       <div className="container cinematic-container">
         <div className="cinematic-content">
-          {/* Top Status Badge */}
-          <div className="cinematic-badge">
-            <span className="cinematic-badge-pulse"></span>
-            <span className="cinematic-badge-text">
-              Direct Commercial Manufacturing • Sector 12, Vijay Nagar, Ghaziabad
-            </span>
+          {/* Minimal Category Indicator Pill */}
+          <div className="cinematic-category-pill">
+            <span className="cinematic-pill-dot"></span>
+            <i className={currentService.icon || 'ri-printer-line'}></i>
+            <span>{activeCategoryLabel}</span>
           </div>
 
-          {/* Primary Single <h1> Tag for Technical SEO */}
-          <h1 className="cinematic-title">
-            Precision <span>Commercial Printing</span> &amp; Signage Press
+          {/* Primary Single <h1> Tag with Pure Dynamic Typing Headline */}
+          <h1
+            className="cinematic-typing-headline"
+            onClick={handleServiceClick}
+            title="Click to view full specs &amp; get instant quote"
+          >
+            <span className="typing-text" ref={textRef} key={currentService.id || serviceIndex}>
+              {serviceTitle.split('').map((char, index) => (
+                <span
+                  key={`${currentService.id || serviceIndex}-${index}`}
+                  className="typing-char"
+                  style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
+            </span>
+            <span className="typing-cursor" ref={cursorRef} aria-hidden="true">|</span>
           </h1>
 
-          {/* Dynamic Anime.js Typing Reel */}
-          <div className="cinematic-dynamic-box" onClick={handleServiceClick} title="Click to view full specs &amp; get instant quote">
-            <div className="dynamic-box-prefix">
-              <span className="prefix-label">Now Manufacturing:</span>
-              <span className="category-pill-active">
-                <i className={currentService.icon || 'ri-check-double-line'}></i>
-                {activeCategoryLabel}
-              </span>
-            </div>
-
-            <div className="dynamic-text-row">
-              <div className="dynamic-text" ref={textRef} key={currentService.id || serviceIndex}>
-                {serviceTitle.split('').map((char, index) => (
-                  <span
-                    key={`${currentService.id || serviceIndex}-${index}`}
-                    className="typing-char"
-                    style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </span>
-                ))}
-              </div>
-              <span className="typing-cursor" ref={cursorRef} aria-hidden="true">|</span>
-            </div>
-
-            <div className="dynamic-box-hint">
-              <i className="ri-cursor-line"></i> Click to view specs, bulk rates &amp; WhatsApp quote
-            </div>
-          </div>
-
-          {/* Subtitle with Sunil Bansal on-site supervision */}
-          <p className="cinematic-subtitle">
-            Supplying Delhi NCR &amp; pan-India enterprises with carbonless NCR duplicate bill books, 
-            executive letterheads, 3D acrylic LED signage, industrial Star Flex banners, and luxury marketing collateral. 
-            Supervised on-site by <strong>{businessConfig.contactPerson}</strong>.
-          </p>
-
-          {/* Quick Action CTAs */}
+          {/* Direct Action CTAs */}
           <div className="cinematic-cta-group">
             <a href="#contact" className="btn btn-primary cinematic-btn-glow">
               <i className="ri-whatsapp-line"></i> Instant WhatsApp Quote
@@ -169,42 +146,6 @@ export default function CinematicHero({ onSelectQuickTag }) {
             <a href="#facility-showcase" className="btn btn-outline">
               <i className="ri-building-line"></i> Machine Facility
             </a>
-          </div>
-
-          {/* Category Quick Filter Pills */}
-          <div className="cinematic-category-strip">
-            <span className="category-strip-label">Quick Sectors:</span>
-            {categoryFilters.map((cat) => (
-              <a
-                key={cat.id}
-                href="#services"
-                className={`category-strip-btn ${currentService.category === cat.id ? 'active-cat' : ''}`}
-                onClick={() => onSelectQuickTag && onSelectQuickTag(cat.label)}
-              >
-                <i className={cat.icon}></i>
-                {cat.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Trust Highlights */}
-          <div className="cinematic-trust-row">
-            <div className="trust-col">
-              <i className="ri-shield-check-fill text-success"></i>
-              <span>Direct Factory Wholesale</span>
-            </div>
-            <div className="trust-col">
-              <i className="ri-flashlight-fill text-amber"></i>
-              <span>24h Express Dispatch</span>
-            </div>
-            <div className="trust-col">
-              <i className="ri-google-fill text-primary"></i>
-              <span>4.9★ Google Maps Rating</span>
-            </div>
-            <div className="trust-col">
-              <i className="ri-check-double-line text-info"></i>
-              <span>Zero-Error Prepress Audit</span>
-            </div>
           </div>
         </div>
       </div>
