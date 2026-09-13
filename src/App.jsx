@@ -14,6 +14,7 @@ export default function App() {
   const [selectedModalService, setSelectedModalService] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quoteService, setQuoteService] = useState(null);
+  const [searchTag, setSearchTag] = useState('');
   const [toastMessage, setToastMessage] = useState('');
   const [isToastVisible, setIsToastVisible] = useState(false);
 
@@ -38,15 +39,21 @@ export default function App() {
     setQuoteService(service);
   };
 
+  const handleSelectQuickTag = (tag) => {
+    setSearchTag(tag);
+    showToast(`Filtering catalog by "${tag}"...`);
+  };
+
   return (
     <div className="app-layout">
       <Navbar />
 
       <main id="main-content">
-        <Hero />
+        <Hero onSelectQuickTag={handleSelectQuickTag} />
         <ServiceCatalog
           onOpenModal={handleOpenModal}
           onSelectQuote={handleSelectQuote}
+          externalSearch={searchTag}
         />
         <GoogleReviews onShowToast={showToast} />
         <ProductionShowcase />

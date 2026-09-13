@@ -20,16 +20,19 @@ export default function GoogleReviews({ onShowToast }) {
     {
       author: 'Rajesh Sharma (Sharma Traders)',
       rating: 5,
+      date: '2 weeks ago',
       text: 'Best printing press in Vijay Nagar Ghaziabad! Got 50 duplicate NCR bill books and 1000 letterheads printed in 24 hours. The paper quality and serial numbering were perfect.'
     },
     {
       author: 'Dr. Neha Verma (Apollo Clinic)',
       rating: 5,
+      date: '1 month ago',
       text: 'Ordered prescription pads, patient file folders, and an outdoor 3D acrylic LED board for our clinic. Exceptional quality and very polite team led by Sunil ji.'
     },
     {
       author: 'Amit Goel (Goel Logistics)',
       rating: 5,
+      date: '3 weeks ago',
       text: 'We order delivery challan books and fleet vinyl stickers in bulk. Press wholesale rates and reliable on-time delivery every single time.'
     }
   ];
@@ -39,12 +42,12 @@ export default function GoogleReviews({ onShowToast }) {
       <div className="container">
         <div className="section-header">
           <div className="badge">
-            <span className="badge-dot"></span>
+            <span className="pulse-dot"></span>
             <span>Google Verified Listing</span>
           </div>
           <h2 className="section-title">Verified Customer Reviews on Google Maps</h2>
           <p className="section-subtitle">
-            Ranked 4.9 ★★★★★ by corporate clients, small businesses, schools, and healthcare institutions across Ghaziabad & Delhi-NCR.
+            Ranked 4.9 ★★★★★ by corporate clients, retail traders, schools, and clinics across Ghaziabad &amp; Delhi-NCR.
           </p>
         </div>
 
@@ -86,21 +89,49 @@ export default function GoogleReviews({ onShowToast }) {
             </span>
           </div>
 
-          <div className="reviews-grid">
-            {reviews.map((r, i) => (
-              <div key={i} className="review-item">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="review-author">{r.author}</span>
-                  <div style={{ color: 'var(--google-star)', fontSize: '0.85rem' }}>
-                    ★★★★★
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+            {/* Visual Callout for Google Maps Photos */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '10px', padding: '0.8rem 1.2rem' }}>
+              <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                <img
+                  src="images/maps_acrylic_signboard.jpg"
+                  alt="Client signboard from Google Maps"
+                  width="54"
+                  height="40"
+                  style={{ borderRadius: '6px', objectFit: 'cover', border: '1px solid #93c5fd' }}
+                />
+                <img
+                  src="images/maps_glass_branding.jpg"
+                  alt="Glass door branding from Google Maps"
+                  width="54"
+                  height="40"
+                  style={{ borderRadius: '6px', objectFit: 'cover', border: '1px solid #93c5fd' }}
+                />
+              </div>
+              <div style={{ fontSize: '0.82rem', color: '#1e3a8a', lineHeight: 1.4 }}>
+                <strong>Client Project Photos on Google Maps:</strong> Includes installations for Contentegy, Sea Hawk Navigation, and local businesses in Sector 12.
+              </div>
+            </div>
+
+            <div className="reviews-grid">
+              {reviews.map((r, i) => (
+                <div key={i} className="review-item">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="review-author">{r.author}</span>
+                    <div style={{ color: 'var(--google-star)', fontSize: '0.85rem' }}>
+                      ★★★★★
+                    </div>
+                  </div>
+                  <p className="review-text">"{r.text}"</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '0.5rem' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                      <i className="ri-google-fill" style={{ color: 'var(--google-blue)' }}></i> Verified Review
+                    </span>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{r.date}</span>
                   </div>
                 </div>
-                <p className="review-text">"{r.text}"</p>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', marginTop: 'auto' }}>
-                  <i className="ri-google-fill" style={{ color: 'var(--google-blue)' }}></i> Verified Google Review
-                </span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -2,9 +2,16 @@ import React, { useState, useMemo } from 'react';
 import { categories, servicesData } from '../data/servicesData';
 import ServiceCard from './ServiceCard';
 
-export default function ServiceCatalog({ onOpenModal, onSelectQuote }) {
+export default function ServiceCatalog({ onOpenModal, onSelectQuote, externalSearch }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  React.useEffect(() => {
+    if (externalSearch) {
+      setSearchQuery(externalSearch);
+      setActiveCategory('all');
+    }
+  }, [externalSearch]);
 
   const filteredServices = useMemo(() => {
     return servicesData.filter((service) => {
