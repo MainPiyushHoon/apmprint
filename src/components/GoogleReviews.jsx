@@ -94,14 +94,14 @@ export default function GoogleReviews({ onShowToast }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '10px', padding: '0.8rem 1.2rem' }}>
               <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
                 <img
-                  src="images/maps_acrylic_signboard.jpg"
+                  src="/images/maps_acrylic_signboard.webp"
                   alt="Client signboard from Google Maps"
                   width="54"
                   height="40"
                   style={{ borderRadius: '6px', objectFit: 'cover', border: '1px solid #93c5fd' }}
                 />
                 <img
-                  src="images/maps_glass_branding.jpg"
+                  src="/images/maps_glass_branding.webp"
                   alt="Glass door branding from Google Maps"
                   width="54"
                   height="40"
