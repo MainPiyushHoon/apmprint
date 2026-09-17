@@ -20,9 +20,9 @@ export default function Navbar() {
   return (
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="#home" className="brand-logo" onClick={closeMobileMenu}>
+        <a href="/" className="brand-logo" onClick={closeMobileMenu}>
           <img
-            src="images/apm-logo.svg"
+            src="/images/apm-logo.svg"
             alt="Aggarwal Print Media Official Logo"
             className="logo-img"
             width="50"
@@ -37,32 +37,32 @@ export default function Navbar() {
         <nav aria-label="Main Navigation">
           <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
             <li>
-              <a href="#services" className="nav-link" onClick={closeMobileMenu}>
+              <a href="/services/" className="nav-link" onClick={closeMobileMenu}>
                 Services (32)
               </a>
             </li>
             <li>
-              <a href="#google-reviews" className="nav-link" onClick={closeMobileMenu}>
+              <a href="/#google-reviews" className="nav-link" onClick={closeMobileMenu}>
                 Google Reviews
               </a>
             </li>
             <li>
-              <a href="#portfolio" className="nav-link" onClick={closeMobileMenu}>
+              <a href="/#portfolio" className="nav-link" onClick={closeMobileMenu}>
                 Production Showcase
               </a>
             </li>
             <li>
-              <a href="#why-us" className="nav-link" onClick={closeMobileMenu}>
+              <a href="/#why-us" className="nav-link" onClick={closeMobileMenu}>
                 Why APM
               </a>
             </li>
             <li>
-              <a href="#contact" className="nav-link" onClick={closeMobileMenu}>
+              <a href="/#contact" className="nav-link" onClick={closeMobileMenu}>
                 Contact & Quote
               </a>
             </li>
             <li className="mobile-nav-cta">
-              <a href="#contact" className="btn btn-primary" onClick={closeMobileMenu} style={{ width: '100%', justifyContent: 'center' }}>
+              <a href="/#contact" className="btn btn-primary" onClick={closeMobileMenu} style={{ width: '100%', justifyContent: 'center' }}>
                 <i className="ri-whatsapp-line"></i> Instant WhatsApp Quote
               </a>
             </li>
@@ -70,7 +70,7 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions">
-          <a href="#contact" className="btn btn-primary nav-quote-btn">
+          <a href="/#contact" className="btn btn-primary nav-quote-btn">
             <i className="ri-whatsapp-line"></i>
             <span className="quote-text-full">Quote Request</span>
             <span className="quote-text-short">Quote</span>
