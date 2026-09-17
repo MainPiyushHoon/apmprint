@@ -98,9 +98,15 @@ export default function CinematicHero() {
             <span>{activeCategoryLabel}</span>
           </div>
 
-          {/* Primary Single <h1> Tag with Pure Dynamic Typing Headline */}
-          <h1
+          {/* Primary Static <h1> for SEO & Immediate Crawlability */}
+          <h1 className="cinematic-static-h1">
+            Commercial Printing &amp; Signage in Ghaziabad
+          </h1>
+
+          {/* Dynamic Typing Accent Subheading */}
+          <div
             className="cinematic-typing-headline"
+            aria-label="Commercial printing services"
           >
             <span
               className="typing-text"
@@ -116,14 +122,14 @@ export default function CinematicHero() {
               {displayedText || '\u00A0'}
             </span>
             <span className="typing-cursor" ref={cursorRef} aria-hidden="true">|</span>
-          </h1>
+          </div>
 
           {/* Direct Action CTAs */}
           <div className="cinematic-cta-group">
             <a href="#contact" className="btn btn-primary cinematic-btn-glow">
               <i className="ri-whatsapp-line"></i> Instant WhatsApp Quote
             </a>
-            <a href="#services" className="btn btn-secondary">
+            <a href="/services/" className="btn btn-secondary">
               <i className="ri-grid-fill"></i> Browse All 32 Services
             </a>
             <a href="#facility-showcase" className="btn btn-secondary">
