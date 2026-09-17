@@ -8,9 +8,9 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Col 1: Brand Info */}
           <div className="footer-col">
-            <a href="#home" className="brand-logo">
+            <a href="/" className="brand-logo">
               <img 
-                src="images/apm-logo.svg" 
+                src="/images/apm-logo.svg" 
                 alt="Aggarwal Print Media Logo" 
                 width="42" 
                 height="42" 
@@ -35,25 +35,27 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Quick Navigation</h4>
             <ul className="footer-links">
-              <li><a href="#services">Service Catalog (32)</a></li>
-              <li><a href="#google-reviews">Google Reviews (4.9 ★)</a></li>
-              <li><a href="#portfolio">Press Facility & Machines</a></li>
-              <li><a href="#why-us">Why Choose APM</a></li>
-              <li><a href="#contact">Contact & Quote Desk</a></li>
-              <li><a href="sitemap.xml" target="_blank" rel="noopener noreferrer">XML Sitemap</a></li>
+              <li><a href="/services/">All 32 Services Directory</a></li>
+              <li><a href="/#google-reviews">Google Reviews (4.9 ★)</a></li>
+              <li><a href="/#portfolio">Press Facility & Machines</a></li>
+              <li><a href="/#why-us">Why Choose APM</a></li>
+              <li><a href="/#contact">Contact & Quote Desk</a></li>
+              <li><a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">XML Sitemap</a></li>
             </ul>
           </div>
 
           {/* Col 3: Key Offerings */}
           <div className="footer-col">
-            <h4>Key Offerings</h4>
+            <h4>Core Service Pages</h4>
             <ul className="footer-links">
-              <li><a href="#services">NCR Bill Books & Invoices</a></li>
-              <li><a href="#services">3D LED & Glowsign Boards</a></li>
-              <li><a href="#services">Flex & Sandwich Boards</a></li>
-              <li><a href="#services">School ID Cards & Ledgers</a></li>
-              <li><a href="#services">Brochures & Pamphlets</a></li>
-              <li><a href="#services">Wall Clock & Watch Printing</a></li>
+              <li><a href="/services/bill-book-printing/">Bill Book Printing</a></li>
+              <li><a href="/services/flex-board-printing/">Flex Board Printing</a></li>
+              <li><a href="/services/glow-sign-board/">3D LED & Glowsign Boards</a></li>
+              <li><a href="/services/pamphlet-printing/">Pamphlet & Flyer Printing</a></li>
+              <li><a href="/services/letterhead-printing/">Letterhead & Stationery</a></li>
+              <li><a href="/services/school-id-cards-registers/">School ID Cards & Registers</a></li>
+              <li><a href="/services/sticker-label-printing/">Sticker & Label Printing</a></li>
+              <li><a href="/services/brochure-catalogue-printing/">Brochure & Catalogue Printing</a></li>
             </ul>
           </div>
 
@@ -81,9 +83,9 @@ export default function Footer() {
         <div className="footer-bottom">
           <div>&copy; {new Date().getFullYear()} Aggarwal Print Media (APM Print). All Rights Reserved.</div>
           <div style={{ display: 'flex', gap: '1.4rem' }}>
-            <a href="#home">Back to Top</a>
-            <a href="sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>
-            <a href="robots.txt" target="_blank" rel="noopener noreferrer">Robots</a>
+            <a href="#">Back to Top</a>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>
+            <a href="/robots.txt" target="_blank" rel="noopener noreferrer">Robots</a>
           </div>
         </div>
       </div>
