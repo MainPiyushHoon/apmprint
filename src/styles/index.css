@@ -2,8 +2,6 @@
    Aggarwal Print Media - Minimalist Light Ink & Paper Design System
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 :root {
   /* Minimal Light Ink & Paper Theme */
   --bg-main: #ffffff;
@@ -1628,6 +1626,7 @@ textarea.form-input {
 
 /* Enable pointer events only on interactive interactive elements */
 .cinematic-category-pill,
+.cinematic-static-h1,
 .cinematic-typing-headline,
 .cinematic-cta-group a,
 .cinematic-cta-group button {
@@ -1666,13 +1665,24 @@ textarea.form-input {
   animation: pulseBeacon 2s infinite;
 }
 
-.cinematic-typing-headline {
-  font-size: clamp(2.8rem, 6.8vw, 5.25rem);
+.cinematic-static-h1 {
+  font-size: clamp(2.2rem, 5vw, 3.75rem);
   font-weight: 800;
-  line-height: 1.12;
+  line-height: 1.14;
   letter-spacing: -0.035em;
   color: var(--text-main);
-  margin-bottom: 2.75rem;
+  margin-bottom: 0.65rem;
+  text-align: center;
+  max-width: 960px;
+}
+
+.cinematic-typing-headline {
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  margin-bottom: 2.25rem;
   min-height: 1.25em;
   display: flex;
   cursor: default;
@@ -1762,9 +1772,14 @@ textarea.form-input {
     margin-bottom: 1.5rem;
   }
 
+  .cinematic-static-h1 {
+    font-size: clamp(1.75rem, 6.5vw, 2.4rem);
+    margin-bottom: 0.5rem;
+  }
+
   .cinematic-typing-headline {
-    font-size: clamp(2rem, 8vw, 2.8rem);
-    margin-bottom: 2rem;
+    font-size: clamp(1.3rem, 5vw, 1.85rem);
+    margin-bottom: 1.75rem;
   }
 
   .cinematic-cta-group {
@@ -1830,8 +1845,15 @@ textarea.form-input {
     min-height: calc(100dvh - 60px);
   }
 
+  .cinematic-static-h1 {
+    font-size: clamp(1.45rem, 6.8vw, 1.95rem);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
   .cinematic-typing-headline {
-    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+    font-size: clamp(1.15rem, 5.2vw, 1.5rem);
+    margin-bottom: 1.5rem;
   }
 
   .services-grid {
@@ -1892,5 +1914,620 @@ textarea.form-input {
   .card-btn {
     padding: 0.35rem 0.15rem;
     font-size: 0.64rem;
+  }
+}
+
+/* ==========================================================================
+   Service Cluster & Directory Pages (SEO Information Architecture)
+   ========================================================================== */
+
+.breadcrumb-nav {
+  padding: 1rem 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.breadcrumb-item a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--primary);
+}
+
+.breadcrumb-item.active {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.breadcrumb-separator {
+  margin-right: 0.5rem;
+  color: var(--text-dim);
+}
+
+/* Service Page Hero */
+.service-page-hero {
+  padding: 4.5rem 0 3.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, var(--bg-surface) 100%);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.service-hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.service-page-h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.service-hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.service-hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.service-quick-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.quick-tags-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.service-quick-pill {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
+
+/* Service Overview Card */
+.service-overview-section {
+  padding: 4.5rem 0;
+}
+
+.overview-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.overview-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-main);
+}
+
+/* Cluster Services Grid */
+.cluster-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.cluster-service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+}
+
+.cluster-service-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-hover);
+}
+
+.cluster-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.cluster-service-title {
+  font-size: 1.35rem;
+  color: var(--text-main);
+  margin-bottom: 0.6rem;
+}
+
+.cluster-service-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.cluster-specs-list {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.specs-heading {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.cluster-specs-list ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.cluster-specs-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.cluster-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cluster-card-actions .card-btn {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Specifications Table */
+.service-specs-section {
+  padding: 4rem 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.specs-table-grid {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.spec-table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.4rem;
+  gap: 1.5rem;
+  transition: border-color var(--transition-fast);
+}
+
+.spec-table-row:hover {
+  border-color: var(--border-active);
+}
+
+.spec-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  flex-basis: 35%;
+  flex-shrink: 0;
+}
+
+.spec-value {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  text-align: right;
+  flex-basis: 65%;
+}
+
+/* Use Cases & Ordering */
+.service-usecases-section {
+  padding: 4.5rem 0;
+}
+
+.usecases-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.usecase-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.usecase-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-size: 0.94rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.usecase-icon {
+  font-size: 1.25rem;
+  color: var(--primary);
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.ordering-process-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.timeline-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  font-size: 1rem;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.step-content p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* FAQ Accordion */
+.service-faq-section {
+  padding: 4rem 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+}
+
+.faq-accordion {
+  max-width: 850px;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.faq-card.expanded {
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  gap: 1rem;
+}
+
+.faq-question i {
+  font-size: 1.25rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.faq-answer {
+  padding: 0 1.4rem 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border-light);
+  padding-top: 0.85rem;
+}
+
+/* Related Clusters Cross-Linking */
+.service-related-section {
+  padding: 4.5rem 0;
+}
+
+.related-clusters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.related-cluster-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+}
+
+.related-cluster-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-hover);
+}
+
+.related-card-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.related-card-title {
+  font-size: 1.2rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.related-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.related-card-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* CTA Banner */
+.service-cta-banner {
+  padding: 2rem 0 4.5rem;
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2rem;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-hover);
+}
+
+.cta-banner-card h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: white;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.cta-banner-card p {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.cta-banner-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Featured Clusters in Services Directory */
+.featured-clusters-section {
+  padding: 4rem 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.featured-clusters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.featured-cluster-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+}
+
+.featured-cluster-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-hover);
+}
+
+.featured-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.featured-card-arrow {
+  color: var(--text-dim);
+  font-size: 1.2rem;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.featured-cluster-card:hover .featured-card-arrow {
+  color: var(--primary);
+  transform: translate(2px, -2px);
+}
+
+.featured-card-title {
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.featured-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+}
+
+.featured-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.featured-card-tag {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
+
+/* Media queries for service cluster pages */
+@media (max-width: 768px) {
+  .usecases-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .spec-table-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .spec-value {
+    text-align: left;
+  }
+
+  .overview-card {
+    padding: 1.5rem;
   }
 }
