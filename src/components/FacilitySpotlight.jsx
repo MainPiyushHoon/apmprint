@@ -11,7 +11,7 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
   const slides = [
     {
       id: 0,
-      image: 'images/komori_offset_press.jpg',
+      image: '/images/komori_offset_press.webp',
       tag: 'Commercial Offset Line',
       tagIcon: 'ri-printer-line',
       title: 'Komori Lithrone 28 Multi-Unit High-Speed Press',
@@ -19,7 +19,7 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
     },
     {
       id: 1,
-      image: 'images/flex_banner_printer.jpg',
+      image: '/images/flex_banner_printer.webp',
       tag: 'Large-Format Solvent Press',
       tagIcon: 'ri-billboard-line',
       title: 'Heavy-Duty Roll-to-Roll Flex & Vinyl Printer',
@@ -27,7 +27,7 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
     },
     {
       id: 2,
-      image: 'images/maps_acrylic_signboard.jpg',
+      image: '/images/maps_acrylic_signboard.webp',
       tag: 'Google Maps Verified Work',
       tagIcon: 'ri-google-fill',
       title: '3D Acrylic Raised Logo Wall Signboard (Contentegy)',
@@ -35,7 +35,7 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
     },
     {
       id: 3,
-      image: 'images/maps_glass_branding.jpg',
+      image: '/images/maps_glass_branding.webp',
       tag: 'Google Maps Verified Work',
       tagIcon: 'ri-google-fill',
       title: 'Frosted Glass Door Vinyl Graphics (Sea Hawk Navigation)',
@@ -125,7 +125,7 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
             <a href="#contact" className="btn btn-primary" style={{ padding: '0.9rem 1.8rem' }}>
               <i className="ri-whatsapp-line"></i> Direct Factory Quote
             </a>
-            <a href="#services" className="btn btn-secondary" style={{ padding: '0.9rem 1.6rem' }}>
+            <a href="/services/" className="btn btn-secondary" style={{ padding: '0.9rem 1.6rem' }}>
               <i className="ri-grid-fill"></i> View All 32 Services
             </a>
           </div>
