@@ -7,7 +7,7 @@ export default function ProductionShowcase() {
     {
       id: 1,
       category: 'machinery',
-      image: 'images/komori_offset_press.jpg',
+      image: '/images/komori_offset_press.webp',
       badge: 'Facility Machinery',
       title: 'Komori Lithrone 28 Multi-Unit Press',
       desc: 'High-speed automated offset press line for executive letterheads, multi-page product catalogues, and high-volume NCR duplicate bill books.',
@@ -16,7 +16,7 @@ export default function ProductionShowcase() {
     {
       id: 2,
       category: 'machinery',
-      image: 'images/flex_banner_printer.jpg',
+      image: '/images/flex_banner_printer.webp',
       badge: 'Signage Press',
       title: 'Heavy-Duty Roll Flex & Vinyl Printer',
       desc: 'High-speed solvent/eco-solvent roll printer for outdoor Star Flex hoardings, one-way vision window films, and stage backdrops.',
@@ -25,7 +25,7 @@ export default function ProductionShowcase() {
     {
       id: 3,
       category: 'client-work',
-      image: 'images/maps_acrylic_signboard.jpg',
+      image: '/images/maps_acrylic_signboard.webp',
       badge: 'Google Maps Verified Work',
       title: '3D Acrylic Raised Logo Signboard (Contentegy)',
       desc: 'Laser-cut 3D acrylic brand lettering with high-gloss finish and architectural wall mounting for corporate reception branding.',
@@ -34,7 +34,7 @@ export default function ProductionShowcase() {
     {
       id: 4,
       category: 'client-work',
-      image: 'images/maps_glass_branding.jpg',
+      image: '/images/maps_glass_branding.webp',
       badge: 'Google Maps Verified Work',
       title: 'Frosted Glass Door Graphics (Sea Hawk Navigation)',
       alt: 'Frosted vinyl glass partition branding and office door graphics for Sea Hawk Navigation',
@@ -43,7 +43,7 @@ export default function ProductionShowcase() {
     {
       id: 5,
       category: 'paper',
-      image: 'images/paper_flyers.jpg',
+      image: '/images/paper_flyers.webp',
       badge: 'Marketing Collateral',
       title: 'Leaflets, Brochures & Corporate Pamphlets',
       desc: 'Precision folded pamphlets on 130/170 GSM gloss art paper with spot UV lamination, vibrant color fidelity, and clean die-cutting.',
@@ -52,7 +52,7 @@ export default function ProductionShowcase() {
     {
       id: 6,
       category: 'paper',
-      image: 'images/business_cards.jpg',
+      image: '/images/business_cards.webp',
       badge: 'Stationery & PVC',
       title: 'PVC ID Cards, Letterheads & Files',
       desc: 'Thermal fused 760-micron PVC identity cards with heat-transfer satin lanyards, 100 GSM Royal bond letterheads, and cardboard cobra files.',
