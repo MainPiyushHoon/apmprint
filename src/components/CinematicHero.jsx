@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate } from 'animejs';
 import { servicesData } from '../data/servicesData';
+import { getAppUrl } from '../utils/urlHelper';
 import InteractiveDottedCanvas from './InteractiveDottedCanvas';
 
 /**
@@ -129,7 +130,7 @@ export default function CinematicHero() {
             <a href="#contact" className="btn btn-primary cinematic-btn-glow">
               <i className="ri-whatsapp-line"></i> Instant WhatsApp Quote
             </a>
-            <a href="/services/" className="btn btn-secondary">
+            <a href={getAppUrl('services/')} className="btn btn-secondary">
               <i className="ri-grid-fill"></i> Browse All 32 Services
             </a>
             <a href="#facility-showcase" className="btn btn-secondary">
