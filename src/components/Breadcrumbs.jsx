@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAppUrl } from '../utils/urlHelper';
 
 export default function Breadcrumbs({ items }) {
   if (!items || items.length === 0) return null;
@@ -8,7 +9,7 @@ export default function Breadcrumbs({ items }) {
       <div className="container">
         <ol className="breadcrumb-list">
           <li className="breadcrumb-item">
-            <a href="/">Home</a>
+            <a href={getAppUrl('/')}>Home</a>
           </li>
           {items.map((item, index) => {
             const isLast = index === items.length - 1;
@@ -18,7 +19,7 @@ export default function Breadcrumbs({ items }) {
                 {isLast || !item.url ? (
                   <span aria-current={isLast ? 'page' : undefined}>{item.label}</span>
                 ) : (
-                  <a href={item.url}>{item.label}</a>
+                  <a href={getAppUrl(item.url)}>{item.label}</a>
                 )}
               </li>
             );
