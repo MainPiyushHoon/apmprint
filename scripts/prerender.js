@@ -18,6 +18,32 @@ if (!fs.existsSync(distDir)) {
 const templatePath = path.resolve(distDir, 'index.html');
 const templateHtml = fs.readFileSync(templatePath, 'utf-8');
 
+let rawBase = process.env.VITE_BASE_PATH ?? '/apmprint/';
+if (!rawBase || rawBase === '') {
+  rawBase = '/';
+}
+const basePath = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
+function getAppUrl(p = '') {
+  if (!p) return basePath;
+  if (
+    p.startsWith('http://') ||
+    p.startsWith('https://') ||
+    p.startsWith('mailto:') ||
+    p.startsWith('tel:')
+  ) {
+    return p;
+  }
+  if (p.startsWith('#')) {
+    return `${basePath}${p}`;
+  }
+  if (p.startsWith('/#')) {
+    return `${basePath}${p.slice(1)}`;
+  }
+  const clean = p.startsWith('/') ? p.slice(1) : p;
+  return `${basePath}${clean}`;
+}
+
 function escapeHtml(str) {
   if (!str) return '';
   return str
@@ -31,9 +57,9 @@ function renderNavbar() {
   return `
     <header class="navbar">
       <div class="container nav-container">
-        <a href="/" class="brand-logo">
+        <a href="${getAppUrl('/')}" class="brand-logo">
           <img
-            src="/images/apm-logo.svg"
+            src="${getAppUrl('images/apm-logo.svg')}"
             alt="Aggarwal Print Media Official Logo"
             class="logo-img"
             width="50"
@@ -47,13 +73,13 @@ function renderNavbar() {
 
         <nav aria-label="Main Navigation">
           <ul class="nav-links">
-            <li><a href="/services/" class="nav-link">Services (32)</a></li>
-            <li><a href="/#google-reviews" class="nav-link">Google Reviews</a></li>
-            <li><a href="/#portfolio" class="nav-link">Production Showcase</a></li>
-            <li><a href="/#why-us" class="nav-link">Why APM</a></li>
-            <li><a href="/#contact" class="nav-link">Contact &amp; Quote</a></li>
+            <li><a href="${getAppUrl('services/')}" class="nav-link">Services (32)</a></li>
+            <li><a href="${getAppUrl('#google-reviews')}" class="nav-link">Google Reviews</a></li>
+            <li><a href="${getAppUrl('#portfolio')}" class="nav-link">Production Showcase</a></li>
+            <li><a href="${getAppUrl('#why-us')}" class="nav-link">Why APM</a></li>
+            <li><a href="${getAppUrl('#contact')}" class="nav-link">Contact &amp; Quote</a></li>
             <li class="mobile-nav-cta">
-              <a href="/#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">
+              <a href="${getAppUrl('#contact')}" class="btn btn-primary" style="width: 100%; justify-content: center;">
                 <i class="ri-whatsapp-line"></i> Instant WhatsApp Quote
               </a>
             </li>
@@ -61,7 +87,7 @@ function renderNavbar() {
         </nav>
 
         <div class="nav-actions">
-          <a href="/#contact" class="btn btn-primary nav-quote-btn">
+          <a href="${getAppUrl('#contact')}" class="btn btn-primary nav-quote-btn">
             <i class="ri-whatsapp-line"></i>
             <span class="quote-text-full">Quote Request</span>
             <span class="quote-text-short">Quote</span>
@@ -78,9 +104,9 @@ function renderFooter() {
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <a href="/" class="brand-logo">
+            <a href="${getAppUrl('/')}" class="brand-logo">
               <img 
-                src="/images/apm-logo.svg" 
+                src="${getAppUrl('images/apm-logo.svg')}" 
                 alt="Aggarwal Print Media Logo" 
                 width="42" 
                 height="42" 
@@ -104,26 +130,26 @@ function renderFooter() {
           <div class="footer-col">
             <h4>Quick Navigation</h4>
             <ul class="footer-links">
-              <li><a href="/services/">All 32 Services Directory</a></li>
-              <li><a href="/#google-reviews">Google Reviews (4.9 ★)</a></li>
-              <li><a href="/#portfolio">Press Facility &amp; Machines</a></li>
-              <li><a href="/#why-us">Why Choose APM</a></li>
-              <li><a href="/#contact">Contact &amp; Quote Desk</a></li>
-              <li><a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">XML Sitemap</a></li>
+              <li><a href="${getAppUrl('services/')}">All 32 Services Directory</a></li>
+              <li><a href="${getAppUrl('#google-reviews')}">Google Reviews (4.9 ★)</a></li>
+              <li><a href="${getAppUrl('#portfolio')}">Press Facility &amp; Machines</a></li>
+              <li><a href="${getAppUrl('#why-us')}">Why Choose APM</a></li>
+              <li><a href="${getAppUrl('#contact')}">Contact &amp; Quote Desk</a></li>
+              <li><a href="${getAppUrl('sitemap.xml')}" target="_blank" rel="noopener noreferrer">XML Sitemap</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h4>Core Service Pages</h4>
             <ul class="footer-links">
-              <li><a href="/services/bill-book-printing/">Bill Book Printing</a></li>
-              <li><a href="/services/flex-board-printing/">Flex Board Printing</a></li>
-              <li><a href="/services/glow-sign-board/">3D LED &amp; Glowsign Boards</a></li>
-              <li><a href="/services/pamphlet-printing/">Pamphlet &amp; Flyer Printing</a></li>
-              <li><a href="/services/letterhead-printing/">Letterhead &amp; Stationery</a></li>
-              <li><a href="/services/school-id-cards-registers/">School ID Cards &amp; Registers</a></li>
-              <li><a href="/services/sticker-label-printing/">Sticker &amp; Label Printing</a></li>
-              <li><a href="/services/brochure-catalogue-printing/">Brochure &amp; Catalogue Printing</a></li>
+              <li><a href="${getAppUrl('services/bill-book-printing/')}">Bill Book Printing</a></li>
+              <li><a href="${getAppUrl('services/flex-board-printing/')}">Flex Board Printing</a></li>
+              <li><a href="${getAppUrl('services/glow-sign-board/')}">3D LED &amp; Glowsign Boards</a></li>
+              <li><a href="${getAppUrl('services/pamphlet-printing/')}">Pamphlet &amp; Flyer Printing</a></li>
+              <li><a href="${getAppUrl('services/letterhead-printing/')}">Letterhead &amp; Stationery</a></li>
+              <li><a href="${getAppUrl('services/school-id-cards-registers/')}">School ID Cards &amp; Registers</a></li>
+              <li><a href="${getAppUrl('services/sticker-label-printing/')}">Sticker &amp; Label Printing</a></li>
+              <li><a href="${getAppUrl('services/brochure-catalogue-printing/')}">Brochure &amp; Catalogue Printing</a></li>
             </ul>
           </div>
 
@@ -151,8 +177,8 @@ function renderFooter() {
           <div>&copy; ${new Date().getFullYear()} Aggarwal Print Media (APM Print). All Rights Reserved.</div>
           <div style="display: flex; gap: 1.4rem;">
             <a href="#">Back to Top</a>
-            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>
-            <a href="/robots.txt" target="_blank" rel="noopener noreferrer">Robots</a>
+            <a href="${getAppUrl('sitemap.xml')}" target="_blank" rel="noopener noreferrer">Sitemap</a>
+            <a href="${getAppUrl('robots.txt')}" target="_blank" rel="noopener noreferrer">Robots</a>
           </div>
         </div>
       </div>
@@ -165,14 +191,14 @@ function renderBreadcrumbs(items) {
     <nav aria-label="Breadcrumb" class="breadcrumb-nav">
       <div class="container">
         <ol class="breadcrumb-list">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="${getAppUrl('/')}">Home</a></li>
           ${items
             .map((item, index) => {
               const isLast = index === items.length - 1;
               return `
                 <li class="breadcrumb-item ${isLast ? 'active' : ''}">
                   <span class="breadcrumb-separator" aria-hidden="true">/</span>
-                  ${isLast || !item.url ? `<span aria-current="${isLast ? 'page' : ''}">${escapeHtml(item.label)}</span>` : `<a href="${item.url}">${escapeHtml(item.label)}</a>`}
+                  ${isLast || !item.url ? `<span aria-current="${isLast ? 'page' : ''}">${escapeHtml(item.label)}</span>` : `<a href="${getAppUrl(item.url)}">${escapeHtml(item.label)}</a>`}
                 </li>
               `;
             })
@@ -238,7 +264,7 @@ function prerenderServicesDirectory() {
   const featuredCardsHtml = serviceClusters
     .map(
       (c) => `
-      <a href="${c.path}" class="featured-cluster-card">
+      <a href="${getAppUrl(c.path)}" class="featured-cluster-card">
         <div class="featured-card-header">
           <span class="card-badge">${escapeHtml(c.categoryBadge)}</span>
           <span class="featured-card-arrow"><i class="ri-arrow-right-up-line"></i></span>
@@ -266,7 +292,7 @@ function prerenderServicesDirectory() {
           <p class="service-desc">${escapeHtml(s.desc)}</p>
         </div>
         <div class="card-actions">
-          <a href="/#contact" class="card-btn btn-primary"><i class="ri-whatsapp-line"></i> Quote</a>
+          <a href="${getAppUrl('#contact')}" class="card-btn btn-primary"><i class="ri-whatsapp-line"></i> Quote</a>
         </div>
       </article>
     `
@@ -452,7 +478,7 @@ function prerenderClusterPages() {
     const relatedCardsHtml = relatedClusters
       .map(
         (rel) => `
-        <a href="${rel.path}" class="related-cluster-card">
+        <a href="${getAppUrl(rel.path)}" class="related-cluster-card">
           <div class="related-card-badge">${escapeHtml(rel.categoryBadge)}</div>
           <h3 class="related-card-title">${escapeHtml(rel.h1)}</h3>
           <p class="related-card-desc">${escapeHtml(rel.subtitle)}</p>
@@ -595,7 +621,7 @@ function prerenderClusterPages() {
                   <a href="tel:${businessConfig.phone.primaryRaw}" class="btn btn-secondary" style="padding: 0.85rem 1.6rem;">
                     <i class="ri-phone-line"></i> Call ${escapeHtml(businessConfig.phone.primary)}
                   </a>
-                  <a href="/services/" class="btn btn-secondary" style="padding: 0.85rem 1.6rem;">
+                  <a href="${getAppUrl('services/')}" class="btn btn-secondary" style="padding: 0.85rem 1.6rem;">
                     <i class="ri-grid-fill"></i> View All 32 Services
                   </a>
                 </div>
@@ -709,13 +735,13 @@ function prerenderHomepage() {
                 <span class="typing-cursor" aria-hidden="true">|</span>
               </div>
               <div class="cinematic-cta-group">
-                <a href="/#contact" class="btn btn-primary cinematic-btn-glow">
+                <a href="${getAppUrl('#contact')}" class="btn btn-primary cinematic-btn-glow">
                   <i class="ri-whatsapp-line"></i> Instant WhatsApp Quote
                 </a>
-                <a href="/services/" class="btn btn-secondary">
+                <a href="${getAppUrl('services/')}" class="btn btn-secondary">
                   <i class="ri-grid-fill"></i> Browse All 32 Services
                 </a>
-                <a href="/#portfolio" class="btn btn-secondary">
+                <a href="${getAppUrl('#portfolio')}" class="btn btn-secondary">
                   <i class="ri-building-line"></i> Machine Facility
                 </a>
               </div>
@@ -737,10 +763,10 @@ function prerenderHomepage() {
                 <strong>${escapeHtml(businessConfig.contactPerson)}</strong>.
               </p>
               <div class="hero-cta">
-                <a href="/#contact" class="btn btn-primary" style="padding: 0.9rem 1.8rem;">
+                <a href="${getAppUrl('#contact')}" class="btn btn-primary" style="padding: 0.9rem 1.8rem;">
                   <i class="ri-whatsapp-line"></i> Direct Factory Quote
                 </a>
-                <a href="/services/" class="btn btn-secondary" style="padding: 0.9rem 1.6rem;">
+                <a href="${getAppUrl('services/')}" class="btn btn-secondary" style="padding: 0.9rem 1.6rem;">
                   <i class="ri-grid-fill"></i> View All 32 Services
                 </a>
               </div>
