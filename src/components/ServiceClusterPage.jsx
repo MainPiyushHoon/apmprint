@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { businessConfig } from '../data/businessConfig';
 import { servicesData } from '../data/servicesData';
 import { serviceClusters } from '../data/serviceClustersData';
+import { getAppUrl } from '../utils/urlHelper';
 import Breadcrumbs from './Breadcrumbs';
 import ServiceModal from './ServiceModal';
 
@@ -324,7 +325,7 @@ export default function ServiceClusterPage({ cluster, onOpenServiceModal }) {
 
             <div className="related-clusters-grid">
               {relatedClusters.map((rel) => (
-                <a key={rel.slug} href={rel.path} className="related-cluster-card">
+                <a key={rel.slug} href={getAppUrl(rel.path)} className="related-cluster-card">
                   <div className="related-card-badge">{rel.categoryBadge}</div>
                   <h3 className="related-card-title">{rel.h1}</h3>
                   <p className="related-card-desc">{rel.subtitle}</p>
@@ -364,7 +365,7 @@ export default function ServiceClusterPage({ cluster, onOpenServiceModal }) {
               >
                 <i className="ri-phone-line"></i> Call {businessConfig.phone.primary}
               </a>
-              <a href="/services/" className="btn btn-secondary" style={{ padding: '0.85rem 1.6rem' }}>
+              <a href={getAppUrl('services/')} className="btn btn-secondary" style={{ padding: '0.85rem 1.6rem' }}>
                 <i className="ri-grid-fill"></i> View All 32 Services
               </a>
             </div>
