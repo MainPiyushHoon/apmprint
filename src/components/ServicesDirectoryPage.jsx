@@ -1,6 +1,7 @@
 import React from 'react';
 import { businessConfig } from '../data/businessConfig';
 import { serviceClusters } from '../data/serviceClustersData';
+import { getAppUrl } from '../utils/urlHelper';
 import Breadcrumbs from './Breadcrumbs';
 import ServiceCatalog from './ServiceCatalog';
 import ServiceModal from './ServiceModal';
@@ -77,7 +78,7 @@ export default function ServicesDirectoryPage({ onOpenModal, onSelectQuote }) {
 
           <div className="featured-clusters-grid">
             {serviceClusters.map((cluster) => (
-              <a key={cluster.slug} href={cluster.path} className="featured-cluster-card">
+              <a key={cluster.slug} href={getAppUrl(cluster.path)} className="featured-cluster-card">
                 <div className="featured-card-header">
                   <span className="card-badge">{cluster.categoryBadge}</span>
                   <span className="featured-card-arrow">
