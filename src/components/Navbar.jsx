@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { businessConfig } from '../data/businessConfig';
+import { getAppUrl } from '../utils/urlHelper';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,9 +21,9 @@ export default function Navbar() {
   return (
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="/" className="brand-logo" onClick={closeMobileMenu}>
+        <a href={getAppUrl('/')} className="brand-logo" onClick={closeMobileMenu}>
           <img
-            src="/images/apm-logo.svg"
+            src={getAppUrl('images/apm-logo.svg')}
             alt="Aggarwal Print Media Official Logo"
             className="logo-img"
             width="50"
@@ -37,32 +38,32 @@ export default function Navbar() {
         <nav aria-label="Main Navigation">
           <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
             <li>
-              <a href="/services/" className="nav-link" onClick={closeMobileMenu}>
+              <a href={getAppUrl('services/')} className="nav-link" onClick={closeMobileMenu}>
                 Services (32)
               </a>
             </li>
             <li>
-              <a href="/#google-reviews" className="nav-link" onClick={closeMobileMenu}>
+              <a href={getAppUrl('#google-reviews')} className="nav-link" onClick={closeMobileMenu}>
                 Google Reviews
               </a>
             </li>
             <li>
-              <a href="/#portfolio" className="nav-link" onClick={closeMobileMenu}>
+              <a href={getAppUrl('#portfolio')} className="nav-link" onClick={closeMobileMenu}>
                 Production Showcase
               </a>
             </li>
             <li>
-              <a href="/#why-us" className="nav-link" onClick={closeMobileMenu}>
+              <a href={getAppUrl('#why-us')} className="nav-link" onClick={closeMobileMenu}>
                 Why APM
               </a>
             </li>
             <li>
-              <a href="/#contact" className="nav-link" onClick={closeMobileMenu}>
+              <a href={getAppUrl('#contact')} className="nav-link" onClick={closeMobileMenu}>
                 Contact & Quote
               </a>
             </li>
             <li className="mobile-nav-cta">
-              <a href="/#contact" className="btn btn-primary" onClick={closeMobileMenu} style={{ width: '100%', justifyContent: 'center' }}>
+              <a href={getAppUrl('#contact')} className="btn btn-primary" onClick={closeMobileMenu} style={{ width: '100%', justifyContent: 'center' }}>
                 <i className="ri-whatsapp-line"></i> Instant WhatsApp Quote
               </a>
             </li>
@@ -70,7 +71,7 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions">
-          <a href="/#contact" className="btn btn-primary nav-quote-btn">
+          <a href={getAppUrl('#contact')} className="btn btn-primary nav-quote-btn">
             <i className="ri-whatsapp-line"></i>
             <span className="quote-text-full">Quote Request</span>
             <span className="quote-text-short">Quote</span>
