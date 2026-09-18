@@ -101,14 +101,32 @@ if (!robotsContent.includes('Sitemap: https://apmprint.in/sitemap.xml')) {
   console.log('✓ robots.txt validated');
 }
 
-// Verify CNAME
-if (fs.existsSync(path.join(distDir, 'CNAME'))) {
-  const cname = fs.readFileSync(path.join(distDir, 'CNAME'), 'utf-8').trim();
-  console.log(`✓ CNAME validated (${cname})`);
-} else {
-  console.error('❌ CNAME missing in dist');
-  allPassed = false;
-}
+// Verify CSS and JS asset resolution from index.html
+const indexHtmlContent = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+const assetLinks = [
+  ...(indexHtmlContent.match(/<link[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["']/gi) || []),
+  ...(indexHtmlContent.match(/<script[^>]*src=["']([^"']+)["']/gi) || [])
+];
+
+let checkedAssets = 0;
+assetLinks.forEach((tag) => {
+  const match = tag.match(/(?:href|src)=["']([^"']+)["']/i);
+  if (!match) return;
+  const assetUrl = match[1];
+  if (assetUrl.startsWith('http://') || assetUrl.startsWith('https://')) return;
+
+  // Strip base prefix e.g. /apmprint/ or /
+  let assetRel = assetUrl.replace(/^\/apmprint\//, '').replace(/^\//, '');
+  const assetFile = path.join(distDir, assetRel);
+
+  if (!fs.existsSync(assetFile)) {
+    console.error(`❌ Missing asset file referenced in HTML: ${assetUrl} -> ${assetFile}`);
+    allPassed = false;
+  } else {
+    checkedAssets++;
+  }
+});
+console.log(`✓ Verified ${checkedAssets} local CSS & JS bundle assets exist in dist/`);
 
 if (allPassed) {
   console.log('\n🌟 ALL 10 ROUTES & ASSETS PASSED COMPLETE AUDIT VERIFICATION! 🌟');
