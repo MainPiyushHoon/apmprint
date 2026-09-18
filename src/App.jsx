@@ -13,23 +13,16 @@ import Toast from './components/Toast';
 import ServicesDirectoryPage from './components/ServicesDirectoryPage';
 import ServiceClusterPage from './components/ServiceClusterPage';
 import { serviceClusters, getServiceClusterBySlug } from './data/serviceClustersData';
-
-function normalizePath(pathname) {
-  if (!pathname) return '/';
-  let path = pathname.trim().split('?')[0].split('#')[0];
-  if (path !== '/' && !path.endsWith('/')) {
-    path += '/';
-  }
-  return path;
-}
+import { BASE_URL, getAppUrl, getRoutePath } from './utils/urlHelper';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => {
     if (typeof window !== 'undefined') {
-      return normalizePath(window.location.pathname);
+      return getRoutePath(window.location.pathname);
     }
     return '/';
   });
+
 
   const [selectedModalService, setSelectedModalService] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +68,7 @@ export default function App() {
   // Handle client-side popstate for back/forward navigation
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentPath(normalizePath(window.location.pathname));
+      setCurrentPath(getRoutePath(window.location.pathname));
       if (window.location.hash) {
         const el = document.querySelector(window.location.hash);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -107,24 +100,32 @@ export default function App() {
       return;
     }
 
-    // Hash anchor on current page
+    // Hash anchor on current page (#contact)
     if (href.startsWith('#')) {
       return; // Allow standard smooth scrolling
     }
 
-    // Cross-page anchor (e.g. /#contact)
-    if (href.startsWith('/#')) {
-      const hash = href.substring(1);
+    // Cross-page anchor (e.g. /#contact or /apmprint/#contact)
+    const baseNoTrailing = BASE_URL.replace(/\/$/, '');
+    const isAnchorWithBase =
+      href.startsWith('/#') ||
+      href.startsWith(`${BASE_URL}#`) ||
+      (baseNoTrailing && href.startsWith(`${baseNoTrailing}/#`));
+
+    if (isAnchorWithBase) {
+      e.preventDefault();
+      const hashIndex = href.indexOf('#');
+      const hash = href.substring(hashIndex);
+      const targetUrl = getAppUrl(hash);
+
       if (currentPath === '/' || currentPath === '/index.html/') {
         const el = document.querySelector(hash);
         if (el) {
-          e.preventDefault();
           el.scrollIntoView({ behavior: 'smooth' });
-          window.history.pushState({}, '', href);
+          window.history.pushState({}, '', targetUrl);
         }
       } else {
-        e.preventDefault();
-        window.history.pushState({}, '', href);
+        window.history.pushState({}, '', targetUrl);
         setCurrentPath('/');
         setTimeout(() => {
           const el = document.querySelector(hash);
@@ -135,11 +136,16 @@ export default function App() {
     }
 
     // Internal path navigation (/services/, /services/bill-book-printing/, /)
-    if (href.startsWith('/')) {
+    if (href.startsWith('/') || href.startsWith(BASE_URL)) {
+      // Don't intercept static file downloads
+      if (href.endsWith('.xml') || href.endsWith('.txt') || href.endsWith('.pdf')) {
+        return;
+      }
+
       e.preventDefault();
-      const norm = normalizePath(href);
+      const norm = getRoutePath(href);
       if (norm !== currentPath) {
-        window.history.pushState({}, '', href);
+        window.history.pushState({}, '', getAppUrl(norm));
         setCurrentPath(norm);
         window.scrollTo(0, 0);
       }
