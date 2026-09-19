@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { businessConfig } from '../data/businessConfig';
+import { getAppUrl } from '../utils/urlHelper';
 
 export default function ServiceModal({ service, isOpen, onClose }) {
   useEffect(() => {
@@ -21,6 +22,8 @@ export default function ServiceModal({ service, isOpen, onClose }) {
     return `https://wa.me/${businessConfig.phone.whatsappRaw}?text=${text}`;
   };
 
+  const imageUrl = service.image ? getAppUrl(service.image) : null;
+
   return (
     <div 
       className={`modal-backdrop ${isOpen ? 'active' : ''}`} 
@@ -38,11 +41,27 @@ export default function ServiceModal({ service, isOpen, onClose }) {
           &times;
         </button>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
-          <span className="badge" style={{ width: 'fit-content' }}>
-            <span className="badge-dot"></span>
-            {service.category.toUpperCase()}
-          </span>
+        {imageUrl && (
+          <div className="modal-hero-image-wrap">
+            <img 
+              src={imageUrl} 
+              alt={service.imageAlt || service.title} 
+              className="modal-hero-img"
+              width="800"
+              height="500"
+            />
+            <span className="modal-badge-overlay">{service.badge}</span>
+          </div>
+        )}
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', padding: imageUrl ? '0.4rem 0 0' : '0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <span className="badge" style={{ width: 'fit-content' }}>
+              <span className="badge-dot"></span>
+              {service.category.toUpperCase()}
+            </span>
+            <span className="card-badge">{service.badge}</span>
+          </div>
 
           <h3 id="modal-title" style={{ fontSize: '1.45rem', color: 'var(--text-main)' }}>
             {service.title}
@@ -66,20 +85,20 @@ export default function ServiceModal({ service, isOpen, onClose }) {
             </ul>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.4rem' }}>
+          <div style={{ display: 'flex', gap: '0.8rem', marginTop: '0.4rem', flexWrap: 'wrap' }}>
             <a 
               href={getWhatsAppUrl()} 
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn btn-whatsapp" 
-              style={{ flex: 1.2 }}
+              style={{ flex: '1.2 1 180px' }}
             >
               <i className="ri-whatsapp-fill"></i> Instant WhatsApp Quote
             </a>
             <a 
               href={`tel:${businessConfig.phone.primaryRaw}`} 
               className="btn btn-secondary" 
-              style={{ flex: 0.8 }}
+              style={{ flex: '0.8 1 140px' }}
             >
               <i className="ri-phone-fill"></i> Call Press
             </a>
