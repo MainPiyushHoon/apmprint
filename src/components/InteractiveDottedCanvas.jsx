@@ -79,7 +79,7 @@ export default function InteractiveDottedCanvas() {
             y: y0,
             vx: 0,
             vy: 0,
-            radius: 1.8,
+            radius: isBrandNode ? 2.4 : 1.8,
             baseColor: '#cbd5e1',
             activeColor: brandColor,
             isBrandNode,
