@@ -57,7 +57,7 @@ The business catalog is organized into 4 distinct categories:
 | **Leaflet / Pumplet** | Vibrant promotional flyers on 100/130/170 GSM glossy art paper |
 | **Brochure** | Bi-fold & tri-fold corporate brochures with soft-touch matte lamination |
 | **Catalogue** | Multi-page showcase books with saddle-stitch or perfect spine binding |
-| **Calenders** | Wall calendars & tabletop tent calendars with top wiro wire binding |
+| **Calenders** | Wall calenders & tabletop tent calenders with top wiro wire binding |
 | **Tant Card** | Tabletop tent cards for restaurants, cafes, and event desks |
 | **Dangler** | Retail ceiling danglers with die-cut shapes and punch-hole strings |
 

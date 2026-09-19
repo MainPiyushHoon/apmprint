@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>APM Print Product Mockup Generator</title>
@@ -14,11 +15,13 @@
       align-items: center;
       padding: 20px;
     }
+
     canvas {
       border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
       background: #ffffff;
     }
+
     #status {
       margin-top: 15px;
       font-size: 16px;
@@ -26,6 +29,7 @@
     }
   </style>
 </head>
+
 <body>
   <h1>APM Product Mockup Generator</h1>
   <canvas id="c" width="800" height="500"></canvas>
@@ -104,7 +108,7 @@
         ctx.save();
         // Shadow
         ctx.beginPath();
-        ctx.ellipse(400, 390, 240, 22, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 390, 240, 22, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -200,7 +204,7 @@
         ctx.save();
         // Ground shadow
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.16)';
         ctx.filter = 'blur(12px)';
         ctx.fill();
@@ -291,7 +295,7 @@
         ctx.save();
         // Shadow
         ctx.beginPath();
-        ctx.ellipse(390, 400, 210, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(390, 400, 210, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.16)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -330,7 +334,7 @@
 
         // Logo Crest & Brand
         ctx.beginPath();
-        ctx.arc(-105, -140, 20, 0, Math.PI*2);
+        ctx.arc(-105, -140, 20, 0, Math.PI * 2);
         ctx.fillStyle = '#1D5FAB';
         ctx.fill();
         ctx.fillStyle = '#ffffff';
@@ -398,7 +402,7 @@
         ctx.save();
         // Shadow
         ctx.beginPath();
-        ctx.ellipse(400, 395, 240, 22, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 240, 22, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -477,7 +481,7 @@
         // Gold stamping on spine
         ctx.save();
         ctx.translate(-152, 0);
-        ctx.rotate(-Math.PI/2);
+        ctx.rotate(-Math.PI / 2);
         ctx.fillStyle = '#fbbf24';
         ctx.font = 'bold 12px sans-serif';
         ctx.fillText('ATTENDANCE LEDGER 2026', 0, 4);
@@ -493,7 +497,7 @@
         ctx.save();
         // Shadow
         ctx.beginPath();
-        ctx.ellipse(400, 400, 220, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 220, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -553,7 +557,7 @@
         ctx.stroke();
         // Silhouette photo
         ctx.beginPath();
-        ctx.arc(0, -35, 18, 0, Math.PI*2);
+        ctx.arc(0, -35, 18, 0, Math.PI * 2);
         ctx.fillStyle = '#94a3b8';
         ctx.fill();
         ctx.beginPath();
@@ -624,7 +628,7 @@
         drawStudioBackground('Office Files', 'Stationery', 'Heavy Cardboard');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -639,11 +643,11 @@
         ctx.fill();
         // Silver spine metal ring
         ctx.beginPath();
-        ctx.arc(-110, 0, 14, 0, Math.PI*2);
+        ctx.arc(-110, 0, 14, 0, Math.PI * 2);
         ctx.fillStyle = '#cbd5e1';
         ctx.fill();
         ctx.beginPath();
-        ctx.arc(-110, 0, 8, 0, Math.PI*2);
+        ctx.arc(-110, 0, 8, 0, Math.PI * 2);
         ctx.fillStyle = '#1e3a8a';
         ctx.fill();
         ctx.restore();
@@ -667,7 +671,7 @@
         ctx.font = 'bold 11px sans-serif';
         ctx.save();
         ctx.translate(-122, 0);
-        ctx.rotate(-Math.PI/2);
+        ctx.rotate(-Math.PI / 2);
         ctx.textAlign = 'center';
         ctx.fillText('FINANCE & GST 2026', 0, 4);
         ctx.restore();
@@ -699,7 +703,7 @@
         drawStudioBackground('Record Registers', 'Stationery', 'Industrial');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -737,7 +741,7 @@
         // Gold Spine Text
         ctx.save();
         ctx.translate(-156, 0);
-        ctx.rotate(-Math.PI/2);
+        ctx.rotate(-Math.PI / 2);
         ctx.fillStyle = '#fef3c7';
         ctx.font = 'bold 13px serif';
         ctx.fillText('STOCK REGISTER - 400 PAGES', 0, 4);
@@ -752,7 +756,7 @@
         drawStudioBackground('Envelope', 'Stationery', 'Custom Printed');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.16)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -828,7 +832,7 @@
         drawStudioBackground('Other Stationery', 'Stationery', 'Office Desk');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -846,7 +850,7 @@
         // Wire-o rings on top
         for (let i = 0; i < 9; i++) {
           ctx.beginPath();
-          ctx.arc(-80 + i * 20, -130, 7, 0, Math.PI*2);
+          ctx.arc(-80 + i * 20, -130, 7, 0, Math.PI * 2);
           ctx.strokeStyle = '#64748b';
           ctx.lineWidth = 2.5;
           ctx.stroke();
@@ -902,7 +906,7 @@
         drawStudioBackground('Leaflet / Pumplet', 'Paper & Marketing', 'Glossy 170 GSM');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -940,7 +944,7 @@
 
           // Starburst badge
           ctx.beginPath();
-          ctx.arc(65, -125, 22, 0, Math.PI*2);
+          ctx.arc(65, -125, 22, 0, Math.PI * 2);
           ctx.fillStyle = '#fbbf24';
           ctx.fill();
           ctx.fillStyle = '#78350f';
@@ -977,7 +981,7 @@
         drawStudioBackground('Brochure', 'Paper & Marketing', 'Tri-Fold & Bi-Fold');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 240, 22, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 240, 22, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1016,7 +1020,7 @@
         // Icons
         for (let i = 0; i < 3; i++) {
           ctx.beginPath();
-          ctx.arc(0, -35 + i * 45, 14, 0, Math.PI*2);
+          ctx.arc(0, -35 + i * 45, 14, 0, Math.PI * 2);
           ctx.fillStyle = '#008DD2';
           ctx.fill();
         }
@@ -1061,7 +1065,7 @@
         drawStudioBackground('Catalogue', 'Paper & Marketing', 'Multi-Page Book');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1117,7 +1121,7 @@
         drawStudioBackground('Calenders', 'Paper & Marketing', 'Wiro Desk & Wall');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1137,7 +1141,7 @@
         ctx.fillStyle = '#94a3b8';
         ctx.fill();
 
-        // Calendar Card Face
+        // calender Card Face
         roundRect(ctx, -150, -120, 300, 240, 8);
         ctx.fillStyle = '#ffffff';
         ctx.fill();
@@ -1191,7 +1195,7 @@
         drawStudioBackground('Tant Card', 'Paper & Marketing', 'Table Standee');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 200, 18, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 200, 18, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(12px)';
         ctx.fill();
@@ -1245,7 +1249,7 @@
         drawStudioBackground('Dangler', 'Paper & Marketing', 'Die-Cut Ceiling');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 410, 180, 16, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 410, 180, 16, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.15)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1265,19 +1269,19 @@
 
         // Die-cut starburst / scalloped outer ring
         ctx.beginPath();
-        ctx.arc(0, 0, 110, 0, Math.PI*2);
+        ctx.arc(0, 0, 110, 0, Math.PI * 2);
         ctx.fillStyle = '#EF7F1A';
         ctx.fill();
 
         // Inner circle
         ctx.beginPath();
-        ctx.arc(0, 0, 95, 0, Math.PI*2);
+        ctx.arc(0, 0, 95, 0, Math.PI * 2);
         ctx.fillStyle = '#ffffff';
         ctx.fill();
 
         // Punch hole at top
         ctx.beginPath();
-        ctx.arc(0, -98, 5, 0, Math.PI*2);
+        ctx.arc(0, -98, 5, 0, Math.PI * 2);
         ctx.fillStyle = '#e2e8f0';
         ctx.fill();
         ctx.strokeStyle = '#64748b';
@@ -1306,7 +1310,7 @@
         drawStudioBackground('Product Label', 'Labels & Promo Gifts', 'Roll & Sheet');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1317,11 +1321,11 @@
         ctx.translate(340, 240);
         // Roll core
         ctx.beginPath();
-        ctx.ellipse(0, 0, 70, 120, 0, 0, Math.PI*2);
+        ctx.ellipse(0, 0, 70, 120, 0, 0, Math.PI * 2);
         ctx.fillStyle = '#e2e8f0';
         ctx.fill();
         ctx.beginPath();
-        ctx.ellipse(0, 0, 25, 45, 0, 0, Math.PI*2);
+        ctx.ellipse(0, 0, 25, 45, 0, 0, Math.PI * 2);
         ctx.fillStyle = '#94a3b8';
         ctx.fill();
 
@@ -1351,7 +1355,7 @@
 
           // Gold seal
           ctx.beginPath();
-          ctx.arc(-37 + i * 100, 15, 14, 0, Math.PI*2);
+          ctx.arc(-37 + i * 100, 15, 14, 0, Math.PI * 2);
           ctx.fillStyle = '#fbbf24';
           ctx.fill();
 
@@ -1373,7 +1377,7 @@
         drawStudioBackground('Sticker', 'Labels & Promo Gifts', 'Vinyl Die-Cut');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1403,7 +1407,7 @@
         ctx.translate(460, 255);
         ctx.rotate(0.06);
         ctx.beginPath();
-        ctx.arc(0, 0, 75, 0, Math.PI*2);
+        ctx.arc(0, 0, 75, 0, Math.PI * 2);
         ctx.fillStyle = '#B0CB1F';
         ctx.fill();
         ctx.strokeStyle = '#ffffff';
@@ -1435,7 +1439,7 @@
         drawStudioBackground('Wall Clock', 'Labels & Promo Gifts', 'Corporate Gifting');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 200, 18, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 200, 18, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1445,19 +1449,19 @@
         ctx.translate(400, 235);
         // Outer Bezel
         ctx.beginPath();
-        ctx.arc(0, 0, 130, 0, Math.PI*2);
+        ctx.arc(0, 0, 130, 0, Math.PI * 2);
         ctx.fillStyle = '#1e293b';
         ctx.fill();
 
         // Inner Bezel Chrome ring
         ctx.beginPath();
-        ctx.arc(0, 0, 118, 0, Math.PI*2);
+        ctx.arc(0, 0, 118, 0, Math.PI * 2);
         ctx.fillStyle = '#cbd5e1';
         ctx.fill();
 
         // Clock Dial Face
         ctx.beginPath();
-        ctx.arc(0, 0, 112, 0, Math.PI*2);
+        ctx.arc(0, 0, 112, 0, Math.PI * 2);
         ctx.fillStyle = '#ffffff';
         ctx.fill();
 
@@ -1477,7 +1481,7 @@
           const x = Math.sin(angle) * 92;
           const y = -Math.cos(angle) * 92;
           ctx.beginPath();
-          ctx.arc(x, y, 3.5, 0, Math.PI*2);
+          ctx.arc(x, y, 3.5, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -1504,7 +1508,7 @@
         ctx.stroke();
         // Center Pin
         ctx.beginPath();
-        ctx.arc(0, 0, 6, 0, Math.PI*2);
+        ctx.arc(0, 0, 6, 0, Math.PI * 2);
         ctx.fillStyle = '#dc2626';
         ctx.fill();
 
@@ -1512,7 +1516,7 @@
         ctx.save();
         ctx.globalAlpha = 0.12;
         ctx.beginPath();
-        ctx.arc(0, 0, 112, -Math.PI*0.8, -Math.PI*0.1);
+        ctx.arc(0, 0, 112, -Math.PI * 0.8, -Math.PI * 0.1);
         ctx.lineTo(0, 0);
         ctx.closePath();
         ctx.fillStyle = '#ffffff';
@@ -1528,7 +1532,7 @@
         drawStudioBackground('Wrist Watch', 'Labels & Promo Gifts', 'Custom Dial');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 190, 18, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 190, 18, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1553,7 +1557,7 @@
 
         // Watch Case (Stainless Steel)
         ctx.beginPath();
-        ctx.arc(0, 0, 85, 0, Math.PI*2);
+        ctx.arc(0, 0, 85, 0, Math.PI * 2);
         ctx.fillStyle = '#e2e8f0';
         ctx.fill();
         ctx.strokeStyle = '#94a3b8';
@@ -1567,7 +1571,7 @@
 
         // Blue Sunray Dial
         ctx.beginPath();
-        ctx.arc(0, 0, 72, 0, Math.PI*2);
+        ctx.arc(0, 0, 72, 0, Math.PI * 2);
         const dialGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, 72);
         dialGrad.addColorStop(0, '#1D5FAB');
         dialGrad.addColorStop(1, '#0f172a');
@@ -1611,7 +1615,7 @@
         drawStudioBackground('Flex Board', 'Outdoor & Signage', 'Heavy Duty Frame');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 260, 22, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 260, 22, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.2)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1637,8 +1641,8 @@
         ctx.fillStyle = '#cbd5e1';
         for (let x = -205; x <= 205; x += 40) {
           ctx.beginPath();
-          ctx.arc(x, -118, 3, 0, Math.PI*2);
-          ctx.arc(x, 118, 3, 0, Math.PI*2);
+          ctx.arc(x, -118, 3, 0, Math.PI * 2);
+          ctx.arc(x, 118, 3, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -1673,7 +1677,7 @@
         drawStudioBackground('Back Drop', 'Outdoor & Signage', 'Media & Events');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 405, 250, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 405, 250, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1715,7 +1719,7 @@
         drawStudioBackground('Glowsign Board', 'Outdoor & Signage', '3D LED Acrylic');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 260, 24, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 260, 24, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.22)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1766,7 +1770,7 @@
         drawStudioBackground('Dealers Board', 'Outdoor & Signage', 'Retail Network');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1786,7 +1790,7 @@
         ctx.fillStyle = '#cbd5e1';
         [[-195, -110], [195, -110], [-195, 110], [195, 110]].forEach(([x, y]) => {
           ctx.beginPath();
-          ctx.arc(x, y, 4, 0, Math.PI*2);
+          ctx.arc(x, y, 4, 0, Math.PI * 2);
           ctx.fill();
         });
 
@@ -1820,7 +1824,7 @@
         drawStudioBackground('Digital Vinyl', 'Outdoor & Signage', 'High Resolution');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1874,7 +1878,7 @@
         drawStudioBackground('One Way Vision', 'Outdoor & Signage', 'Perforated Film');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1904,7 +1908,7 @@
         for (let x = -175; x <= 175; x += 14) {
           for (let y = -120; y <= 120; y += 14) {
             ctx.beginPath();
-            ctx.arc(x, y, 2, 0, Math.PI*2);
+            ctx.arc(x, y, 2, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -1927,7 +1931,7 @@
         drawStudioBackground('Sunpack', 'Outdoor & Signage', 'Fluted Sheets');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 230, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 230, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -1966,10 +1970,10 @@
         ctx.fillStyle = '#fbbf24';
         [[-130, -100], [130, -100], [-130, 100], [130, 100]].forEach(([x, y]) => {
           ctx.beginPath();
-          ctx.arc(x, y, 6, 0, Math.PI*2);
+          ctx.arc(x, y, 6, 0, Math.PI * 2);
           ctx.fill();
           ctx.beginPath();
-          ctx.arc(x, y, 3, 0, Math.PI*2);
+          ctx.arc(x, y, 3, 0, Math.PI * 2);
           ctx.fillStyle = '#0f172a';
           ctx.fill();
           ctx.fillStyle = '#fbbf24';
@@ -1996,7 +2000,7 @@
         drawStudioBackground('Roll up Standee', 'Outdoor & Signage', 'Retractable Aluminum');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 420, 180, 16, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 420, 180, 16, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.2)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -2041,7 +2045,7 @@
 
         // Photo / Graphic icon
         ctx.beginPath();
-        ctx.arc(0, -20, 28, 0, Math.PI*2);
+        ctx.arc(0, -20, 28, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255,255,255,0.2)';
         ctx.fill();
 
@@ -2061,7 +2065,7 @@
         drawStudioBackground('Canopy', 'Outdoor & Signage', '3x3m Pop-Up Tent');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 410, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 410, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -2116,7 +2120,7 @@
         drawStudioBackground('ACP Sheet Cutting Board', 'Outdoor & Signage', 'CNC Router Architectural');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 250, 22, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 250, 22, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.2)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -2166,7 +2170,7 @@
         drawStudioBackground('Clip on Board', 'Outdoor & Signage', 'Snap Frame LED Lightbox');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -2221,7 +2225,7 @@
         drawStudioBackground('Sandwich Board', 'Outdoor & Signage', 'Sidewalk A-Frame');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 410, 210, 18, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 410, 210, 18, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -2286,7 +2290,7 @@
         drawStudioBackground('Outdoor Branding', 'Outdoor & Signage', 'Large Hoardings');
         ctx.save();
         ctx.beginPath();
-        ctx.ellipse(400, 410, 260, 22, 0, 0, Math.PI*2);
+        ctx.ellipse(400, 410, 260, 22, 0, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0,0,0,0.2)';
         ctx.filter = 'blur(14px)';
         ctx.fill();
@@ -2340,7 +2344,7 @@
     };
 
     // Public API called by Node runner
-    window.renderProduct = function(productId) {
+    window.renderProduct = function (productId) {
       if (renderers[productId]) {
         renderers[productId]();
         document.getElementById('status').innerText = 'Rendered: ' + productId;
@@ -2351,4 +2355,5 @@
     };
   </script>
 </body>
+
 </html>

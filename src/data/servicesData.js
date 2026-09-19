@@ -205,14 +205,14 @@ export const servicesData = [
   {
     id: 'calenders',
     image: '/images/products/calenders.webp',
-    imageAlt: 'Desktop tent calendars and corporate wall calendars with top wiro wire binding',
+    imageAlt: 'Desktop tent calenders and corporate wall calenders with top wiro wire binding',
     title: 'Calenders',
     category: 'paper',
     badge: 'Seasonal',
-    icon: 'ri-calendar-line',
-    desc: 'Corporate wall calendars and desktop tent stand calendars with top wiro wire binding and custom monthly pages.',
+    icon: 'ri-calender-line',
+    desc: 'Corporate wall calenders and desktop tent stand calenders with top wiro wire binding and custom monthly pages.',
     specs: [
-      'Formats: Desktop tent calendar (12 leaves) & wall hanger',
+      'Formats: Desktop tent calender (12 leaves) & wall hanger',
       'Base: Heavy 2mm kappa board covered base',
       'Media: 220 GSM royal matte card',
       'Binding: High-gauge double-loop wire-o binding'

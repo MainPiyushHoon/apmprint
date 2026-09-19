@@ -18,7 +18,7 @@ const altMap = {
   'leaflet-pumplet': 'High-gloss 170 GSM promotional pamphlets and advertising flyers with vibrant CMYK print',
   'brochure': 'Corporate tri-fold and bi-fold marketing brochures with soft-touch matte lamination',
   'catalogue': 'Multi-page commercial product catalog book with saddle-stitch wire and glossy cover',
-  'calenders': 'Desktop tent calendars and corporate wall calendars with top wiro wire binding',
+  'calenders': 'Desktop tent calenders and corporate wall calenders with top wiro wire binding',
   'tant-card': 'Tabletop triangular tent cards for restaurant menus and conference table standees',
   'dangler': 'Die-cut promotional ceiling danglers with custom retail marketing shapes and hanging string',
   'product-label': 'Adhesive packaging roll labels and barcode stickers for bottles, jars, and cartons',
