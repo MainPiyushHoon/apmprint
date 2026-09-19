@@ -41,6 +41,10 @@ export default function InteractiveDottedCanvas() {
       isHovering: false,
     };
 
+    // Mouse activity state (detect movement vs at rest)
+    let lastMoveTime = 0;
+    let mouseActivity = 0; // 0 = at rest / idle, 1 = actively moving
+
     let dots = [];
     const spacing = 30; // Grid density
 
@@ -64,7 +68,7 @@ export default function InteractiveDottedCanvas() {
         for (let c = 0; c < cols; c++) {
           const x0 = offsetX + c * spacing;
           const y0 = offsetY + r * spacing;
-          // Seed ~15% of dots with permanent subtle brand colors
+          // Seed ~15% of dots with dynamic brand colors on interaction
           const isBrandNode = (c * 7 + r * 13) % 7 === 0;
           const brandColor = brandColors[(c + r * 3) % brandColors.length];
 
@@ -75,8 +79,8 @@ export default function InteractiveDottedCanvas() {
             y: y0,
             vx: 0,
             vy: 0,
-            radius: isBrandNode ? 1.8 : 1.8,
-            baseColor: isBrandNode ? '#cbd5e1' : '#cbd5e1',
+            radius: 1.8,
+            baseColor: '#cbd5e1',
             activeColor: brandColor,
             isBrandNode,
             activeFactor: 0,
@@ -95,12 +99,14 @@ export default function InteractiveDottedCanvas() {
       mouse.targetX = e.clientX - rect.left;
       mouse.targetY = e.clientY - rect.top;
       mouse.isHovering = true;
+      lastMoveTime = performance.now();
     };
 
     const handleMouseLeave = () => {
       mouse.targetX = -9999;
       mouse.targetY = -9999;
       mouse.isHovering = false;
+      lastMoveTime = 0;
     };
 
     const handleTouchMove = (e) => {
@@ -109,6 +115,7 @@ export default function InteractiveDottedCanvas() {
         mouse.targetX = e.touches[0].clientX - rect.left;
         mouse.targetY = e.touches[0].clientY - rect.top;
         mouse.isHovering = true;
+        lastMoveTime = performance.now();
       }
     };
 
@@ -116,6 +123,7 @@ export default function InteractiveDottedCanvas() {
       mouse.targetX = -9999;
       mouse.targetY = -9999;
       mouse.isHovering = false;
+      lastMoveTime = 0;
     };
 
     let resizeTimer;
@@ -142,51 +150,61 @@ export default function InteractiveDottedCanvas() {
     observer.observe(interactionTarget);
 
     // Smooth Physics Animation Loop
-    let time = 0;
-    const spring = 0.065;
-    const damping = 0.85;
+    const spring = 0.07;
+    const damping = 0.84;
     const repulsionPower = 4.4;
 
     const render = () => {
       if (isVisible) {
-        time++;
         ctx.clearRect(0, 0, width, height);
+
+        const now = performance.now();
+        // Mouse is actively moving if an event occurred within 160ms
+        const isMoving = mouse.isHovering && (now - lastMoveTime < 160);
+
+        // Smoothly interpolate mouseActivity:
+        // Fast rise when moving (0.22), gentle graceful fade when resting (0.055)
+        const targetActivity = isMoving ? 1 : 0;
+        const activityLerp = isMoving ? 0.22 : 0.055;
+        mouseActivity += (targetActivity - mouseActivity) * activityLerp;
+        if (mouseActivity < 0.001) mouseActivity = 0;
 
         // Smooth mouse lerp
         mouse.x += (mouse.targetX - mouse.x) * 0.25;
         mouse.y += (mouse.targetY - mouse.y) * 0.25;
 
-        // Update and draw dots (clean particle field without connecting lines)
+        const isRepelling = mouse.isHovering && mouseActivity > 0.005;
+
+        // Update and draw dots
         const len = dots.length;
         for (let i = 0; i < len; i++) {
           const d = dots[i];
 
-          // Cursor repulsion & active swelling
-          if (mouse.isHovering) {
+          // Cursor repulsion & active swelling only during active mouse movement
+          if (isRepelling) {
             const dx = d.x - mouse.x;
             const dy = d.y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            const dist = Math.hypot(dx, dy);
 
             if (dist < mouse.radius && dist > 0.1) {
-              const force = (1 - dist / mouse.radius) * repulsionPower;
+              const force = (1 - dist / mouse.radius) * repulsionPower * mouseActivity;
               const angle = Math.atan2(dy, dx);
               d.vx += Math.cos(angle) * force;
               d.vy += Math.sin(angle) * force;
-              // Smooth easing into active size
-              d.activeFactor += (1 - d.activeFactor) * 0.16;
+              // Smooth swelling scaled by motion activity
+              const targetActive = (1 - dist / mouse.radius) * mouseActivity;
+              d.activeFactor += (targetActive - d.activeFactor) * 0.16;
             } else {
-              d.activeFactor += (0 - d.activeFactor) * 0.04;
+              d.activeFactor += (0 - d.activeFactor) * 0.06;
             }
           } else {
-            // Gentle ambient breathing wave
-            const waveX = Math.sin(d.x0 * 0.01 + d.y0 * 0.01 + time * 0.02) * 1.2;
-            const waveY = Math.cos(d.x0 * 0.01 - d.y0 * 0.01 + time * 0.02) * 1.2;
-            d.vx += waveX * 0.04;
-            d.vy += waveY * 0.04;
-            d.activeFactor += (0 - d.activeFactor) * 0.03;
+            // Mouse is at rest or outside hero: smooth graceful return to resting state
+            d.activeFactor += (0 - d.activeFactor) * 0.06;
           }
 
-          // Gentle spring return to equilibrium
+          if (d.activeFactor < 0.001) d.activeFactor = 0;
+
+          // Pure spring return to equilibrium (no wave distortion)
           d.vx += (d.x0 - d.x) * spring;
           d.vy += (d.y0 - d.y) * spring;
           d.vx *= damping;
@@ -194,17 +212,14 @@ export default function InteractiveDottedCanvas() {
           d.x += d.vx;
           d.y += d.vy;
 
-          // Render dot (exact radius increase as original: + 1.4)
+          // Render dot
           ctx.beginPath();
           const currentRadius = d.radius + d.activeFactor * 1.4;
           ctx.arc(d.x, d.y, currentRadius, 0, Math.PI * 2);
 
-          if (d.activeFactor > 0.02) {
+          if (d.activeFactor > 0.01) {
             ctx.fillStyle = d.activeColor;
-            ctx.globalAlpha = 0.35 + d.activeFactor * 0.65;
-          } else if (d.isBrandNode) {
-            ctx.fillStyle = d.baseColor;
-            ctx.globalAlpha = 0.45;
+            ctx.globalAlpha = 0.38 + d.activeFactor * 0.62;
           } else {
             ctx.fillStyle = '#cbd5e1';
             ctx.globalAlpha = 0.38;
