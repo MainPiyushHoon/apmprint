@@ -129,12 +129,29 @@ export default function ServiceClusterPage({ cluster, onOpenServiceModal }) {
           <div className="cluster-services-grid">
             {includedServices.map((service) => (
               <article key={service.id} className="cluster-service-card">
-                <div className="cluster-card-top">
-                  <div className="card-icon" aria-hidden="true">
-                    <i className={service.icon}></i>
+                {service.image ? (
+                  <div className="card-image-wrap">
+                    <img
+                      src={getAppUrl(service.image)}
+                      alt={service.imageAlt || service.title}
+                      className="card-product-img"
+                      loading="lazy"
+                      width="800"
+                      height="500"
+                    />
+                    <span className="card-badge-overlay">{service.badge}</span>
+                    <div className="card-icon-overlay" aria-hidden="true" title={service.title}>
+                      <i className={service.icon}></i>
+                    </div>
                   </div>
-                  <span className="card-badge">{service.badge}</span>
-                </div>
+                ) : (
+                  <div className="cluster-card-top">
+                    <div className="card-icon" aria-hidden="true">
+                      <i className={service.icon}></i>
+                    </div>
+                    <span className="card-badge">{service.badge}</span>
+                  </div>
+                )}
 
                 <h3 className="cluster-service-title">{service.title}</h3>
                 <p className="cluster-service-desc">{service.desc}</p>
