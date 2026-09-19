@@ -18,11 +18,15 @@ if (!fs.existsSync(distDir)) {
 const templatePath = path.resolve(distDir, 'index.html');
 const templateHtml = fs.readFileSync(templatePath, 'utf-8');
 
-let rawBase = process.env.VITE_BASE_PATH ?? '/apmprint/';
-if (!rawBase || rawBase === '') {
-  rawBase = '/';
+let basePath = '/apmprint/';
+const cnameSrc = path.resolve(rootDir, 'public', 'CNAME');
+if (fs.existsSync(cnameSrc) && fs.readFileSync(cnameSrc, 'utf-8').trim().length > 0) {
+  basePath = '/';
 }
-const basePath = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+if (process.env.VITE_BASE_PATH !== undefined) {
+  const raw = process.env.VITE_BASE_PATH;
+  basePath = (!raw || raw === '/') ? '/' : (raw.endsWith('/') ? raw : `${raw}/`);
+}
 
 function getAppUrl(p = '') {
   if (!p) return basePath;
@@ -849,7 +853,6 @@ fs.copyFileSync(templatePath, path.resolve(distDir, '404.html'));
 console.log('✓ Created /404.html fallback');
 
 // Ensure CNAME exists in dist
-const cnameSrc = path.resolve(rootDir, 'public', 'CNAME');
 if (fs.existsSync(cnameSrc)) {
   fs.copyFileSync(cnameSrc, path.resolve(distDir, 'CNAME'));
   console.log('✓ Verified /CNAME in dist');
