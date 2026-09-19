@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>APM Print Product Mockup Generator</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    canvas {
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      background: #ffffff;
+    }
+    #status {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <h1>APM Product Mockup Generator</h1>
+  <canvas id="c" width="800" height="500"></canvas>
+  <div id="status">Ready</div>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const W = 800;
+    const H = 500;
+
+    // Palette
+    const BRAND = {
+      blue: '#008DD2',
+      royal: '#1D5FAB',
+      orange: '#EF7F1A',
+      green: '#B0CB1F',
+      magenta: '#E5097F',
+      dark: '#1e293b',
+      light: '#f8fafc',
+      gray: '#94a3b8'
+    };
+
+    function drawStudioBackground(title, categoryLabel, badgeText) {
+      ctx.save();
+      // Floor / Studio backdrop
+      const bgGrad = ctx.createRadialGradient(W / 2, H * 0.45, 50, W / 2, H * 0.5, W * 0.7);
+      bgGrad.addColorStop(0, '#ffffff');
+      bgGrad.addColorStop(0.6, '#f8fafc');
+      bgGrad.addColorStop(1, '#e2e8f0');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle ambient vignette
+      const vignette = ctx.createLinearGradient(0, 0, 0, H);
+      vignette.addColorStop(0, 'rgba(255,255,255,0.8)');
+      vignette.addColorStop(0.7, 'rgba(241,245,249,0.3)');
+      vignette.addColorStop(1, 'rgba(203,213,225,0.5)');
+      ctx.fillStyle = vignette;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle studio ground shadow
+      ctx.beginPath();
+      ctx.ellipse(W / 2, H * 0.82, W * 0.38, 26, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.08)';
+      ctx.filter = 'blur(12px)';
+      ctx.fill();
+      ctx.filter = 'none';
+
+      // Subtle product label watermark on bottom right
+      ctx.font = '600 13px -apple-system, sans-serif';
+      ctx.fillStyle = 'rgba(148, 163, 184, 0.45)';
+      ctx.textAlign = 'right';
+      ctx.fillText('APM PRINT MANUFACTURING', W - 28, H - 24);
+
+      ctx.restore();
+    }
+
+    // Helper: Rounded Rect
+    function roundRect(ctx, x, y, w, h, r) {
+      if (w < 2 * r) r = w / 2;
+      if (h < 2 * r) r = h / 2;
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    const renderers = {
+      // 1. Bill Book
+      'bill-book': () => {
+        drawStudioBackground('Bill Book', 'Stationery', 'Popular');
+        ctx.save();
+        // Shadow
+        ctx.beginPath();
+        ctx.ellipse(400, 390, 240, 22, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Bottom Book (Pink Copy)
+        ctx.save();
+        ctx.translate(370, 260);
+        ctx.rotate(-0.06);
+        roundRect(ctx, -170, -120, 340, 230, 8);
+        ctx.fillStyle = '#fce7f3';
+        ctx.fill();
+        ctx.strokeStyle = '#f472b6';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        // Pink spine
+        roundRect(ctx, -170, -120, 38, 230, 4);
+        ctx.fillStyle = '#db2777';
+        ctx.fill();
+        ctx.restore();
+
+        // Top Book (Original White NCR)
+        ctx.save();
+        ctx.translate(410, 240);
+        ctx.rotate(0.04);
+        // Base cover
+        roundRect(ctx, -170, -125, 340, 240, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Blue Binding Tape
+        roundRect(ctx, -170, -125, 38, 240, 4);
+        ctx.fillStyle = '#1D5FAB';
+        ctx.fill();
+        // Perforation Dotted Line
+        ctx.beginPath();
+        ctx.setLineDash([4, 4]);
+        ctx.moveTo(-120, -115);
+        ctx.lineTo(-120, 105);
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Invoice Header
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText('TAX INVOICE', -100, -85);
+        ctx.fillStyle = '#EF7F1A';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillText('AGGARWAL PRINT MEDIA', -100, -68);
+
+        // Red Sequential Stamp
+        ctx.fillStyle = '#dc2626';
+        ctx.font = 'bold 13px monospace';
+        ctx.fillText('No. 004821', 45, -85);
+
+        // Invoice Table Lines
+        ctx.fillStyle = '#f1f5f9';
+        roundRect(ctx, -100, -50, 250, 18, 2);
+        ctx.fill();
+        ctx.fillStyle = '#475569';
+        ctx.font = 'bold 10px sans-serif';
+        ctx.fillText('S.N.   DESCRIPTION           QTY   RATE   AMOUNT', -95, -37);
+
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 5; i++) {
+          ctx.beginPath();
+          ctx.moveTo(-100, -15 + i * 20);
+          ctx.lineTo(150, -15 + i * 20);
+          ctx.stroke();
+        }
+
+        // Totals Box
+        roundRect(ctx, 40, 80, 110, 26, 4);
+        ctx.fillStyle = '#e0f2fe';
+        ctx.fill();
+        ctx.fillStyle = '#0284c7';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText('TOTAL:  Rs. 18,450/-', 46, 97);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 2. Challan Book
+      'challan-book': () => {
+        drawStudioBackground('Challan Book', 'Stationery', 'Essential');
+        ctx.save();
+        // Ground shadow
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.16)';
+        ctx.filter = 'blur(12px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Triplicate yellow slip underneath
+        ctx.save();
+        ctx.translate(380, 260);
+        ctx.rotate(-0.08);
+        roundRect(ctx, -160, -115, 320, 220, 8);
+        ctx.fillStyle = '#fef08a';
+        ctx.fill();
+        ctx.strokeStyle = '#facc15';
+        ctx.stroke();
+        roundRect(ctx, -160, -115, 35, 220, 4);
+        ctx.fillStyle = '#ca8a04';
+        ctx.fill();
+        ctx.restore();
+
+        // Main Delivery Challan Book
+        ctx.save();
+        ctx.translate(415, 235);
+        ctx.rotate(0.03);
+        roundRect(ctx, -165, -120, 330, 230, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Green binding cloth tape
+        roundRect(ctx, -165, -120, 38, 230, 4);
+        ctx.fillStyle = '#16a34a';
+        ctx.fill();
+
+        // Dotted perforation
+        ctx.beginPath();
+        ctx.setLineDash([4, 4]);
+        ctx.moveTo(-115, -110);
+        ctx.lineTo(-115, 100);
+        ctx.strokeStyle = '#94a3b8';
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.fillText('DELIVERY CHALLAN', -95, -80);
+        ctx.fillStyle = '#16a34a';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText('GOODS TRANSPORT DISPATCH SLIP', -95, -62);
+
+        ctx.fillStyle = '#dc2626';
+        ctx.font = 'bold 13px monospace';
+        ctx.fillText('CH-00892', 65, -80);
+
+        // Vehicle details box
+        roundRect(ctx, -95, -45, 240, 30, 4);
+        ctx.fillStyle = '#f8fafc';
+        ctx.fill();
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.stroke();
+        ctx.fillStyle = '#475569';
+        ctx.font = '11px sans-serif';
+        ctx.fillText('Vehicle No: UP-14-BT-9241    Date: 19/09/2026', -88, -25);
+
+        // Grid lines
+        for (let i = 0; i < 4; i++) {
+          ctx.beginPath();
+          ctx.moveTo(-95, 5 + i * 22);
+          ctx.lineTo(145, 5 + i * 22);
+          ctx.strokeStyle = '#e2e8f0';
+          ctx.stroke();
+        }
+
+        // Signature stamp
+        ctx.fillStyle = '#1e3a8a';
+        ctx.font = '11px sans-serif';
+        ctx.fillText("Receiver's Signature", -90, 95);
+        ctx.fillText("Authorized Signatory", 40, 95);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 3. Letter Head
+      'letter-head': () => {
+        drawStudioBackground('Letter Head', 'Stationery', 'Corporate');
+        ctx.save();
+        // Shadow
+        ctx.beginPath();
+        ctx.ellipse(390, 400, 210, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.16)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Secondary sheet angled
+        ctx.save();
+        ctx.translate(370, 250);
+        ctx.rotate(-0.06);
+        roundRect(ctx, -140, -180, 280, 350, 4);
+        ctx.fillStyle = '#f8fafc';
+        ctx.fill();
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.stroke();
+        ctx.restore();
+
+        // Primary A4 Letterhead
+        ctx.save();
+        ctx.translate(410, 235);
+        ctx.rotate(0.02);
+        roundRect(ctx, -145, -185, 290, 360, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Header Design (Royal Blue & Gold Ribbon)
+        const headerGrad = ctx.createLinearGradient(-145, -185, 145, -185);
+        headerGrad.addColorStop(0, '#1D5FAB');
+        headerGrad.addColorStop(0.7, '#008DD2');
+        headerGrad.addColorStop(1, '#EF7F1A');
+        ctx.fillStyle = headerGrad;
+        roundRect(ctx, -145, -185, 290, 10, 0);
+        ctx.fill();
+
+        // Logo Crest & Brand
+        ctx.beginPath();
+        ctx.arc(-105, -140, 20, 0, Math.PI*2);
+        ctx.fillStyle = '#1D5FAB';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.fillText('A', -111, -134);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('AGGARWAL PRINT MEDIA', -75, -145);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '10px sans-serif';
+        ctx.fillText('Sector 12, Vijay Nagar, Ghaziabad | +91 95820 23022', -75, -130);
+
+        // Dividing rule
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.beginPath();
+        ctx.moveTo(-125, -110);
+        ctx.lineTo(125, -110);
+        ctx.stroke();
+
+        // Watermark in center
+        ctx.save();
+        ctx.globalAlpha = 0.06;
+        ctx.font = 'bold 54px sans-serif';
+        ctx.fillStyle = '#1D5FAB';
+        ctx.textAlign = 'center';
+        ctx.fillText('APM PRINT', 0, 10);
+        ctx.restore();
+
+        // Simulated text lines
+        ctx.fillStyle = '#cbd5e1';
+        for (let i = 0; i < 9; i++) {
+          const lw = i === 8 ? 160 : 250;
+          roundRect(ctx, -125, -75 + i * 18, lw, 6, 2);
+          ctx.fill();
+        }
+
+        // Footer band
+        ctx.fillStyle = '#1e293b';
+        roundRect(ctx, -145, 163, 290, 12, 0);
+        ctx.fill();
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '8px sans-serif';
+        ctx.fillText('ISO 9001:2015 CERTIFIED COMMERCIAL OFFSET & DIGITAL PRESS', -115, 172);
+
+        // Luxury Executive Pen alongside
+        ctx.save();
+        ctx.translate(155, 30);
+        ctx.rotate(-0.3);
+        roundRect(ctx, -4, -90, 8, 180, 4);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+        roundRect(ctx, -4, -90, 8, 30, 2);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 4. School Office Registers
+      'school-registers': () => {
+        drawStudioBackground('School Office Registers', 'Stationery', 'Bulk Supply');
+        ctx.save();
+        // Shadow
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 240, 22, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Stacked bottom register
+        ctx.save();
+        ctx.translate(380, 270);
+        ctx.rotate(-0.05);
+        roundRect(ctx, -170, -120, 340, 240, 10);
+        ctx.fillStyle = '#831843'; // deep maroon
+        ctx.fill();
+        roundRect(ctx, -170, -120, 40, 240, 6);
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.restore();
+
+        // Main Hardbound Student Register
+        ctx.save();
+        ctx.translate(415, 235);
+        ctx.rotate(0.03);
+        roundRect(ctx, -175, -125, 350, 250, 10);
+        // Marble cover texture
+        const coverGrad = ctx.createLinearGradient(-175, -125, 175, 125);
+        coverGrad.addColorStop(0, '#065f46');
+        coverGrad.addColorStop(0.5, '#047857');
+        coverGrad.addColorStop(1, '#064e3b');
+        ctx.fillStyle = coverGrad;
+        ctx.fill();
+
+        // Black canvas spine
+        roundRect(ctx, -175, -125, 45, 250, 6);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+
+        // Gold corner protectors
+        ctx.fillStyle = '#f59e0b';
+        // top-right
+        ctx.beginPath();
+        ctx.moveTo(175, -125);
+        ctx.lineTo(145, -125);
+        ctx.lineTo(175, -95);
+        ctx.fill();
+        // bottom-right
+        ctx.beginPath();
+        ctx.moveTo(175, 125);
+        ctx.lineTo(145, 125);
+        ctx.lineTo(175, 95);
+        ctx.fill();
+
+        // Central white title label
+        roundRect(ctx, -70, -60, 200, 120, 6);
+        ctx.fillStyle = '#fffbeb';
+        ctx.fill();
+        ctx.strokeStyle = '#d97706';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 16px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('STUDENT ATTENDANCE', 30, -30);
+        ctx.fillText('REGISTER', 30, -10);
+
+        ctx.strokeStyle = '#b45309';
+        ctx.beginPath();
+        ctx.moveTo(-40, 5);
+        ctx.lineTo(100, 5);
+        ctx.stroke();
+
+        ctx.fillStyle = '#475569';
+        ctx.font = '11px sans-serif';
+        ctx.fillText('CLASS: ________  SEC: ____', 30, 24);
+        ctx.fillText('SESSION: 2026 - 2027', 30, 42);
+
+        // Gold stamping on spine
+        ctx.save();
+        ctx.translate(-152, 0);
+        ctx.rotate(-Math.PI/2);
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillText('ATTENDANCE LEDGER 2026', 0, 4);
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 5. School Office ID Cards
+      'school-id-cards': () => {
+        drawStudioBackground('School Office ID Cards', 'Stationery', 'PVC & Satin');
+        ctx.save();
+        // Shadow
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 220, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Satin Lanyard trailing down
+        ctx.beginPath();
+        ctx.moveTo(400, 0);
+        ctx.bezierCurveTo(400, 70, 330, 90, 330, 140);
+        ctx.lineWidth = 18;
+        ctx.strokeStyle = '#1D5FAB';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(400, 0);
+        ctx.bezierCurveTo(400, 70, 470, 90, 470, 140);
+        ctx.lineWidth = 18;
+        ctx.strokeStyle = '#1D5FAB';
+        ctx.stroke();
+
+        // Metal Swivel Clip
+        roundRect(ctx, 388, 130, 24, 28, 4);
+        ctx.fillStyle = '#94a3b8';
+        ctx.fill();
+
+        // Card 1: Student ID (Front)
+        ctx.save();
+        ctx.translate(340, 260);
+        ctx.rotate(-0.06);
+        roundRect(ctx, -95, -135, 190, 270, 10);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Header band
+        const c1Grad = ctx.createLinearGradient(-95, -135, 95, -135);
+        c1Grad.addColorStop(0, '#1D5FAB');
+        c1Grad.addColorStop(1, '#008DD2');
+        ctx.fillStyle = c1Grad;
+        roundRect(ctx, -95, -135, 190, 50, 0);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('DELHI PUBLIC SCHOOL', 0, -112);
+        ctx.font = '9px sans-serif';
+        ctx.fillText('STUDENT IDENTITY CARD', 0, -98);
+
+        // Photo slot
+        roundRect(ctx, -40, -70, 80, 95, 6);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.stroke();
+        // Silhouette photo
+        ctx.beginPath();
+        ctx.arc(0, -35, 18, 0, Math.PI*2);
+        ctx.fillStyle = '#94a3b8';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(0, 10, 28, 20, 0, 0, Math.PI);
+        ctx.fill();
+
+        // Student Info
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 13px sans-serif';
+        ctx.fillText('AARAV SHARMA', 0, 42);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '10px sans-serif';
+        ctx.fillText('Class: X - A | Roll: 24', 0, 58);
+        ctx.fillText('Blood Group: O+ve', 0, 72);
+
+        // Barcode
+        ctx.fillStyle = '#0f172a';
+        for (let i = 0; i < 24; i++) {
+          const bw = (i % 3 === 0) ? 3 : 1.5;
+          ctx.fillRect(-60 + i * 5, 88, bw, 20);
+        }
+        ctx.restore();
+
+        // Card 2: Staff / Corporate ID (Back/Tilted)
+        ctx.save();
+        ctx.translate(470, 280);
+        ctx.rotate(0.08);
+        roundRect(ctx, -90, -130, 180, 260, 10);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        roundRect(ctx, -90, -130, 180, 45, 0);
+        ctx.fillStyle = '#EF7F1A';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('CORPORATE ID PASS', 0, -104);
+
+        roundRect(ctx, -35, -65, 70, 80, 6);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillText('PRIYA VERMA', 0, 35);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '9px sans-serif';
+        ctx.fillText('EMP ID: APM-8421', 0, 50);
+
+        // Hologram sticker
+        roundRect(ctx, -16, 70, 32, 22, 4);
+        const holo = ctx.createLinearGradient(-16, 70, 16, 92);
+        holo.addColorStop(0, '#f472b6');
+        holo.addColorStop(0.5, '#38bdf8');
+        holo.addColorStop(1, '#fbbf24');
+        ctx.fillStyle = holo;
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 6. Office Files
+      'office-files': () => {
+        drawStudioBackground('Office Files', 'Stationery', 'Heavy Cardboard');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Pair of cobra clip and box files
+        ctx.save();
+        ctx.translate(360, 250);
+        ctx.rotate(-0.06);
+        roundRect(ctx, -150, -140, 300, 280, 8);
+        ctx.fillStyle = '#1e3a8a'; // deep royal navy
+        ctx.fill();
+        // Silver spine metal ring
+        ctx.beginPath();
+        ctx.arc(-110, 0, 14, 0, Math.PI*2);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(-110, 0, 8, 0, Math.PI*2);
+        ctx.fillStyle = '#1e3a8a';
+        ctx.fill();
+        ctx.restore();
+
+        // Top open Cobra file
+        ctx.save();
+        ctx.translate(430, 240);
+        ctx.rotate(0.04);
+        roundRect(ctx, -150, -135, 300, 270, 8);
+        ctx.fillStyle = '#1d4ed8';
+        ctx.fill();
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // White Spine Label insert
+        roundRect(ctx, -140, -110, 35, 220, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.save();
+        ctx.translate(-122, 0);
+        ctx.rotate(-Math.PI/2);
+        ctx.textAlign = 'center';
+        ctx.fillText('FINANCE & GST 2026', 0, 4);
+        ctx.restore();
+
+        // Cobra metal clip mechanism
+        roundRect(ctx, -80, -90, 200, 25, 4);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.fillStyle = '#64748b';
+        ctx.font = 'bold 10px sans-serif';
+        ctx.fillText('STAINLESS STEEL SPRING COBRA CLIP', -60, -74);
+
+        // Internal paper stack
+        roundRect(ctx, -80, -50, 195, 160, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.fillStyle = '#94a3b8';
+        for (let i = 0; i < 7; i++) {
+          roundRect(ctx, -65, -30 + i * 20, 160, 6, 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 7. Record Registers
+      'record-registers': () => {
+        drawStudioBackground('Record Registers', 'Stationery', 'Industrial');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 240);
+        ctx.rotate(0.02);
+        roundRect(ctx, -180, -130, 360, 260, 10);
+        ctx.fillStyle = '#78350f'; // rich leather brown
+        ctx.fill();
+
+        // Canvas Buckram Spine
+        roundRect(ctx, -180, -130, 48, 260, 6);
+        ctx.fillStyle = '#451a03';
+        ctx.fill();
+
+        // Gold decorative filigree frame
+        roundRect(ctx, -115, -110, 280, 220, 6);
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 18px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('GENERAL STOCK & RECORD', 25, -40);
+        ctx.fillText('REGISTER', 25, -15);
+
+        ctx.fillStyle = '#fde68a';
+        ctx.font = '12px sans-serif';
+        ctx.fillText('FACTORY LOGBOOK & INVENTORY', 25, 25);
+        ctx.fillText('APM HEAVY INDUSTRIAL SERIES', 25, 45);
+
+        // Gold Spine Text
+        ctx.save();
+        ctx.translate(-156, 0);
+        ctx.rotate(-Math.PI/2);
+        ctx.fillStyle = '#fef3c7';
+        ctx.font = 'bold 13px serif';
+        ctx.fillText('STOCK REGISTER - 400 PAGES', 0, 4);
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 8. Envelope
+      'envelope': () => {
+        drawStudioBackground('Envelope', 'Stationery', 'Custom Printed');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.16)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // A4 Large Catalog Envelope (underneath)
+        ctx.save();
+        ctx.translate(370, 260);
+        ctx.rotate(-0.06);
+        roundRect(ctx, -160, -110, 320, 220, 6);
+        ctx.fillStyle = '#fef3c7'; // buff / manila card
+        ctx.fill();
+        ctx.strokeStyle = '#fde68a';
+        ctx.stroke();
+        ctx.restore();
+
+        // DL 9x4 Commercial Envelope (Top)
+        ctx.save();
+        ctx.translate(420, 235);
+        ctx.rotate(0.04);
+        roundRect(ctx, -165, -85, 330, 170, 6);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Branding Ribbon on Left
+        const envGrad = ctx.createLinearGradient(-165, 0, -135, 0);
+        envGrad.addColorStop(0, '#1D5FAB');
+        envGrad.addColorStop(1, '#008DD2');
+        ctx.fillStyle = envGrad;
+        roundRect(ctx, -165, -85, 25, 170, 4);
+        ctx.fill();
+
+        // Return Address
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 13px sans-serif';
+        ctx.fillText('AGGARWAL PRINT MEDIA', -125, -55);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '9px sans-serif';
+        ctx.fillText('Sector 12, Vijay Nagar, Ghaziabad - 201009', -125, -40);
+
+        // Postage Stamp Box
+        roundRect(ctx, 115, -75, 35, 45, 2);
+        ctx.strokeStyle = '#94a3b8';
+        ctx.setLineDash([2, 2]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '8px sans-serif';
+        ctx.fillText('STAMP', 120, -50);
+
+        // Address Lines
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '12px sans-serif';
+        ctx.fillText('To,', -30, -5);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          ctx.moveTo(-10, 15 + i * 22);
+          ctx.lineTo(140, 15 + i * 22);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 9. Other Stationery
+      'other-stationery': () => {
+        drawStudioBackground('Other Stationery', 'Stationery', 'Office Desk');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Spiral Notepad
+        ctx.save();
+        ctx.translate(340, 240);
+        ctx.rotate(-0.05);
+        roundRect(ctx, -110, -130, 220, 260, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.stroke();
+        // Wire-o rings on top
+        for (let i = 0; i < 9; i++) {
+          ctx.beginPath();
+          ctx.arc(-80 + i * 20, -130, 7, 0, Math.PI*2);
+          ctx.strokeStyle = '#64748b';
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+        }
+        ctx.fillStyle = '#1D5FAB';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText('MEMO PAD', -80, -85);
+        ctx.fillStyle = '#94a3b8';
+        for (let i = 0; i < 7; i++) {
+          roundRect(ctx, -80, -60 + i * 22, 160, 4, 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Self-inking Rubber Stamp
+        ctx.save();
+        ctx.translate(490, 250);
+        // Stamp Handle
+        roundRect(ctx, -35, -90, 70, 70, 35);
+        ctx.fillStyle = '#dc2626';
+        ctx.fill();
+        // Stamp Body
+        roundRect(ctx, -50, -20, 100, 60, 6);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+        // Clear Base
+        roundRect(ctx, -55, 40, 110, 25, 4);
+        ctx.fillStyle = 'rgba(226, 232, 240, 0.8)';
+        ctx.fill();
+        ctx.strokeStyle = '#94a3b8';
+        ctx.stroke();
+
+        // Red ink stamp impression on paper
+        ctx.save();
+        ctx.translate(20, 85);
+        ctx.rotate(-0.1);
+        roundRect(ctx, -60, -20, 120, 40, 4);
+        ctx.strokeStyle = '#dc2626';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = '#dc2626';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('VERIFIED & PAID', 0, 5);
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 10. Leaflet / Pumplet
+      'leaflet-pumplet': () => {
+        drawStudioBackground('Leaflet / Pumplet', 'Paper & Marketing', 'Glossy 170 GSM');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // 3 Fanning flyers
+        const angles = [-0.12, 0, 0.12];
+        const colors = ['#f43f5e', '#008DD2', '#EF7F1A'];
+        for (let i = 0; i < 3; i++) {
+          ctx.save();
+          ctx.translate(350 + i * 50, 240 - i * 10);
+          ctx.rotate(angles[i]);
+          roundRect(ctx, -100, -145, 200, 290, 6);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+          ctx.strokeStyle = '#cbd5e1';
+          ctx.stroke();
+
+          // Vibrant Header Graphic
+          roundRect(ctx, -100, -145, 200, 120, 4);
+          ctx.fillStyle = colors[i];
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 18px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('GRAND OPENING', 0, -90);
+          ctx.font = 'bold 24px sans-serif';
+          ctx.fillText('FLAT 50% OFF', 0, -60);
+
+          // Content body
+          ctx.fillStyle = '#0f172a';
+          ctx.font = 'bold 12px sans-serif';
+          ctx.fillText('FULL COLOR GLOSS FLYERS', 0, 0);
+
+          // Starburst badge
+          ctx.beginPath();
+          ctx.arc(65, -125, 22, 0, Math.PI*2);
+          ctx.fillStyle = '#fbbf24';
+          ctx.fill();
+          ctx.fillStyle = '#78350f';
+          ctx.font = 'bold 9px sans-serif';
+          ctx.fillText('SALE', 65, -122);
+
+          // Simulated text lines
+          ctx.fillStyle = '#cbd5e1';
+          for (let j = 0; j < 4; j++) {
+            roundRect(ctx, -80, 20 + j * 16, 160, 6, 2);
+            ctx.fill();
+          }
+
+          // Gloss sheen diagonal stripe
+          ctx.save();
+          ctx.globalAlpha = 0.15;
+          ctx.beginPath();
+          ctx.moveTo(-100, -145);
+          ctx.lineTo(-40, -145);
+          ctx.lineTo(100, 145);
+          ctx.lineTo(40, 145);
+          ctx.closePath();
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+          ctx.restore();
+
+          ctx.restore();
+        }
+        ctx.restore();
+      },
+
+      // 11. Brochure
+      'brochure': () => {
+        drawStudioBackground('Brochure', 'Paper & Marketing', 'Tri-Fold & Bi-Fold');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 240, 22, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Upright Tri-Fold Brochure
+        ctx.save();
+        ctx.translate(400, 235);
+
+        // Panel 1 (Left fold)
+        ctx.save();
+        ctx.transform(1, -0.08, 0, 1, -110, 0);
+        roundRect(ctx, -55, -140, 110, 280, 4);
+        ctx.fillStyle = '#008DD2';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ABOUT US', 0, -70);
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        for (let i = 0; i < 5; i++) {
+          roundRect(ctx, -40, -40 + i * 18, 80, 5, 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Panel 2 (Center)
+        ctx.save();
+        roundRect(ctx, -55, -140, 110, 280, 4);
+        ctx.fillStyle = '#1D5FAB';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SERVICES', 0, -80);
+        // Icons
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          ctx.arc(0, -35 + i * 45, 14, 0, Math.PI*2);
+          ctx.fillStyle = '#008DD2';
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Panel 3 (Right Front Cover)
+        ctx.save();
+        ctx.transform(1, 0.08, 0, 1, 110, 0);
+        roundRect(ctx, -55, -140, 110, 280, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.stroke();
+
+        roundRect(ctx, -55, -140, 110, 90, 0);
+        ctx.fillStyle = '#EF7F1A';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('COMPANY', 0, -95);
+        ctx.fillText('PROFILE', 0, -75);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText('INNOVATION &', 0, -20);
+        ctx.fillText('EXCELLENCE', 0, -5);
+
+        ctx.fillStyle = '#cbd5e1';
+        roundRect(ctx, -40, 25, 80, 6, 2);
+        ctx.fill();
+        roundRect(ctx, -40, 40, 80, 6, 2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 12. Catalogue
+      'catalogue': () => {
+        drawStudioBackground('Catalogue', 'Paper & Marketing', 'Multi-Page Book');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 240);
+        ctx.rotate(0.03);
+        // Multi-page thick spine edge
+        for (let i = 0; i < 6; i++) {
+          roundRect(ctx, -150 - i * 2, -135 + i * 2, 300, 270, 6);
+          ctx.fillStyle = '#f1f5f9';
+          ctx.fill();
+          ctx.strokeStyle = '#e2e8f0';
+          ctx.stroke();
+        }
+
+        // Top glossy cover
+        roundRect(ctx, -150, -135, 300, 270, 6);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+
+        // High gloss color artwork
+        const catGrad = ctx.createLinearGradient(-150, -135, 150, 135);
+        catGrad.addColorStop(0, '#1D5FAB');
+        catGrad.addColorStop(0.5, '#E5097F');
+        catGrad.addColorStop(1, '#EF7F1A');
+        roundRect(ctx, -150, -135, 300, 140, 0);
+        ctx.fillStyle = catGrad;
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('PRODUCT CATALOG', 0, -75);
+        ctx.font = '13px sans-serif';
+        ctx.fillText('COMMERCIAL PRINTING & SIGNAGE', 0, -50);
+
+        // Product grid thumbnail mockups on cover
+        for (let r = 0; r < 2; r++) {
+          for (let c = 0; c < 3; c++) {
+            roundRect(ctx, -110 + c * 80, 25 + r * 45, 60, 35, 4);
+            ctx.fillStyle = '#334155';
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 13. Calenders
+      'calenders': () => {
+        drawStudioBackground('Calenders', 'Paper & Marketing', 'Wiro Desk & Wall');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Triangular desktop tent stand
+        ctx.save();
+        ctx.translate(400, 240);
+
+        // Triangular Base Shadow
+        ctx.beginPath();
+        ctx.moveTo(-160, 120);
+        ctx.lineTo(160, 120);
+        ctx.lineTo(140, 135);
+        ctx.lineTo(-140, 135);
+        ctx.closePath();
+        ctx.fillStyle = '#94a3b8';
+        ctx.fill();
+
+        // Calendar Card Face
+        roundRect(ctx, -150, -120, 300, 240, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Silver Wiro Binding loops at top
+        for (let i = 0; i < 11; i++) {
+          roundRect(ctx, -135 + i * 27, -132, 10, 24, 5);
+          ctx.fillStyle = '#94a3b8';
+          ctx.fill();
+        }
+
+        // Header Month Banner
+        roundRect(ctx, -150, -108, 300, 48, 0);
+        ctx.fillStyle = '#1D5FAB';
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('OCTOBER 2026', 0, -78);
+
+        // Days of week
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 11px sans-serif';
+        const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        days.forEach((d, i) => {
+          ctx.fillStyle = (i === 0) ? '#dc2626' : '#0f172a';
+          ctx.fillText(d, -120 + i * 40, -45);
+        });
+
+        // Date grid numbers
+        ctx.font = '11px sans-serif';
+        for (let row = 0; row < 5; row++) {
+          for (let col = 0; col < 7; col++) {
+            const date = row * 7 + col + 1;
+            if (date <= 31) {
+              ctx.fillStyle = (col === 0) ? '#dc2626' : '#475569';
+              ctx.fillText(date.toString(), -120 + col * 40, -22 + row * 26);
+            }
+          }
+        }
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 14. Tant Card
+      'tant-card': () => {
+        drawStudioBackground('Tant Card', 'Paper & Marketing', 'Table Standee');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 200, 18, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(12px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 235);
+        // Left folded facet
+        ctx.save();
+        ctx.transform(0.85, 0, -0.2, 1, -50, 0);
+        roundRect(ctx, -70, -140, 140, 270, 6);
+        ctx.fillStyle = '#f1f5f9';
+        ctx.fill();
+        ctx.restore();
+
+        // Right main face (Tilted forward)
+        ctx.save();
+        ctx.transform(0.9, 0, 0.15, 1, 40, 0);
+        roundRect(ctx, -75, -140, 150, 270, 6);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.stroke();
+
+        // Header
+        roundRect(ctx, -75, -140, 150, 80, 0);
+        ctx.fillStyle = '#E5097F';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText("TODAY'S SPECIAL", 0, -95);
+        ctx.font = '10px sans-serif';
+        ctx.fillText('CHEF RECOMMENDS', 0, -75);
+
+        // QR Code scan square
+        roundRect(ctx, -35, -20, 70, 70, 4);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 9px sans-serif';
+        ctx.fillText('SCAN FOR MENU', 0, 80);
+
+        ctx.restore();
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 15. Dangler
+      'dangler': () => {
+        drawStudioBackground('Dangler', 'Paper & Marketing', 'Die-Cut Ceiling');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 410, 180, 16, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.15)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Hanging thread from ceiling
+        ctx.beginPath();
+        ctx.moveTo(400, 0);
+        ctx.lineTo(400, 140);
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Hanging circular die-cut dangler
+        ctx.save();
+        ctx.translate(400, 250);
+
+        // Die-cut starburst / scalloped outer ring
+        ctx.beginPath();
+        ctx.arc(0, 0, 110, 0, Math.PI*2);
+        ctx.fillStyle = '#EF7F1A';
+        ctx.fill();
+
+        // Inner circle
+        ctx.beginPath();
+        ctx.arc(0, 0, 95, 0, Math.PI*2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        // Punch hole at top
+        ctx.beginPath();
+        ctx.arc(0, -98, 5, 0, Math.PI*2);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.strokeStyle = '#64748b';
+        ctx.stroke();
+
+        // Graphics
+        ctx.fillStyle = '#dc2626';
+        ctx.font = '900 32px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SALE', 0, -10);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText('UP TO 60% OFF', 0, 25);
+
+        ctx.fillStyle = '#1D5FAB';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText('NEW ARRIVALS 2026', 0, 52);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 16. Product Label
+      'product-label': () => {
+        drawStudioBackground('Product Label', 'Labels & Promo Gifts', 'Roll & Sheet');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Label Roll
+        ctx.save();
+        ctx.translate(340, 240);
+        // Roll core
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 70, 120, 0, 0, Math.PI*2);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 25, 45, 0, 0, Math.PI*2);
+        ctx.fillStyle = '#94a3b8';
+        ctx.fill();
+
+        // Ribbon of labels unwinding to the right
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(440, 250);
+        ctx.rotate(0.04);
+        roundRect(ctx, -100, -90, 220, 180, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Peelable labels on backing
+        for (let i = 0; i < 2; i++) {
+          roundRect(ctx, -80 + i * 100, -70, 85, 140, 8);
+          ctx.fillStyle = '#0284c7';
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('ORGANIC', -37 + i * 100, -35);
+          ctx.fillText('HONEY', -37 + i * 100, -18);
+
+          // Gold seal
+          ctx.beginPath();
+          ctx.arc(-37 + i * 100, 15, 14, 0, Math.PI*2);
+          ctx.fillStyle = '#fbbf24';
+          ctx.fill();
+
+          // Barcode
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(-65 + i * 100, 42, 55, 16);
+          ctx.fillStyle = '#0f172a';
+          for (let b = 0; b < 10; b++) {
+            ctx.fillRect(-62 + i * 100 + b * 5, 44, 2, 12);
+          }
+        }
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 17. Sticker
+      'sticker': () => {
+        drawStudioBackground('Sticker', 'Labels & Promo Gifts', 'Vinyl Die-Cut');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Sticker 1: Hexagon Waterproof Decal
+        ctx.save();
+        ctx.translate(340, 235);
+        ctx.rotate(-0.08);
+        roundRect(ctx, -75, -75, 150, 150, 20);
+        ctx.fillStyle = '#E5097F';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('PREMIUM', 0, -10);
+        ctx.fillText('QUALITY', 0, 15);
+        ctx.font = '10px sans-serif';
+        ctx.fillText('100% WATERPROOF', 0, 38);
+        ctx.restore();
+
+        // Sticker 2: Circular Badge (with peel corner)
+        ctx.save();
+        ctx.translate(460, 255);
+        ctx.rotate(0.06);
+        ctx.beginPath();
+        ctx.arc(0, 0, 75, 0, Math.PI*2);
+        ctx.fillStyle = '#B0CB1F';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '900 20px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('APM PRINT', 0, -8);
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillText('DIE-CUT VINYL', 0, 18);
+
+        // Peeling corner effect
+        ctx.beginPath();
+        ctx.moveTo(45, 45);
+        ctx.lineTo(75, 20);
+        ctx.lineTo(20, 75);
+        ctx.closePath();
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 18. Wall Clock Printing
+      'wall-clock': () => {
+        drawStudioBackground('Wall Clock', 'Labels & Promo Gifts', 'Corporate Gifting');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 200, 18, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 235);
+        // Outer Bezel
+        ctx.beginPath();
+        ctx.arc(0, 0, 130, 0, Math.PI*2);
+        ctx.fillStyle = '#1e293b';
+        ctx.fill();
+
+        // Inner Bezel Chrome ring
+        ctx.beginPath();
+        ctx.arc(0, 0, 118, 0, Math.PI*2);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fill();
+
+        // Clock Dial Face
+        ctx.beginPath();
+        ctx.arc(0, 0, 112, 0, Math.PI*2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        // Brand Logo on Dial
+        ctx.fillStyle = '#1D5FAB';
+        ctx.font = 'bold 13px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('AGGARWAL PRINT MEDIA', 0, -45);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '9px sans-serif';
+        ctx.fillText('QUARTZ', 0, 45);
+
+        // Hour markers
+        ctx.fillStyle = '#0f172a';
+        for (let i = 0; i < 12; i++) {
+          const angle = (i * Math.PI) / 6;
+          const x = Math.sin(angle) * 92;
+          const y = -Math.cos(angle) * 92;
+          ctx.beginPath();
+          ctx.arc(x, y, 3.5, 0, Math.PI*2);
+          ctx.fill();
+        }
+
+        // Clock Hands (10:10)
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#0f172a';
+        // Hour hand
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(-45, -35);
+        ctx.stroke();
+        // Minute hand
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(55, -45);
+        ctx.stroke();
+        // Red second hand
+        ctx.strokeStyle = '#dc2626';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(0, 15);
+        ctx.lineTo(0, -75);
+        ctx.stroke();
+        // Center Pin
+        ctx.beginPath();
+        ctx.arc(0, 0, 6, 0, Math.PI*2);
+        ctx.fillStyle = '#dc2626';
+        ctx.fill();
+
+        // Glass reflection arc
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.beginPath();
+        ctx.arc(0, 0, 112, -Math.PI*0.8, -Math.PI*0.1);
+        ctx.lineTo(0, 0);
+        ctx.closePath();
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 19. Wrist Watch Printing
+      'wrist-watch': () => {
+        drawStudioBackground('Wrist Watch', 'Labels & Promo Gifts', 'Custom Dial');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 190, 18, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 235);
+        // Leather Straps (Top & Bottom)
+        roundRect(ctx, -28, -170, 56, 340, 8);
+        ctx.fillStyle = '#451a03'; // textured leather
+        ctx.fill();
+        // Strap stitching
+        ctx.strokeStyle = '#b45309';
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(-22, -165);
+        ctx.lineTo(-22, 165);
+        ctx.moveTo(22, -165);
+        ctx.lineTo(22, 165);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Watch Case (Stainless Steel)
+        ctx.beginPath();
+        ctx.arc(0, 0, 85, 0, Math.PI*2);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fill();
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Crown button on right
+        roundRect(ctx, 84, -12, 10, 24, 3);
+        ctx.fillStyle = '#64748b';
+        ctx.fill();
+
+        // Blue Sunray Dial
+        ctx.beginPath();
+        ctx.arc(0, 0, 72, 0, Math.PI*2);
+        const dialGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, 72);
+        dialGrad.addColorStop(0, '#1D5FAB');
+        dialGrad.addColorStop(1, '#0f172a');
+        ctx.fillStyle = dialGrad;
+        ctx.fill();
+
+        // Custom Logo Print
+        ctx.fillStyle = '#f59e0b';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('APM PRINT', 0, -28);
+
+        // Indices
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < 12; i++) {
+          const angle = (i * Math.PI) / 6;
+          const x = Math.sin(angle) * 58;
+          const y = -Math.cos(angle) * 58;
+          roundRect(ctx, x - 1.5, y - 5, 3, 10, 1);
+          ctx.fill();
+        }
+
+        // Hands (10:10)
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(-28, -22);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(35, -28);
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 20. Flex Board
+      'flex-board': () => {
+        drawStudioBackground('Flex Board', 'Outdoor & Signage', 'Heavy Duty Frame');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 260, 22, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Welded MS Iron Box Frame
+        roundRect(ctx, -225, -135, 450, 270, 4);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+
+        // Flex Banner Face
+        roundRect(ctx, -215, -125, 430, 250, 2);
+        const bannerGrad = ctx.createLinearGradient(-215, -125, 215, 125);
+        bannerGrad.addColorStop(0, '#008DD2');
+        bannerGrad.addColorStop(0.5, '#1D5FAB');
+        bannerGrad.addColorStop(1, '#EF7F1A');
+        ctx.fillStyle = bannerGrad;
+        ctx.fill();
+
+        // Rivet grommets on perimeter
+        ctx.fillStyle = '#cbd5e1';
+        for (let x = -205; x <= 205; x += 40) {
+          ctx.beginPath();
+          ctx.arc(x, -118, 3, 0, Math.PI*2);
+          ctx.arc(x, 118, 3, 0, Math.PI*2);
+          ctx.fill();
+        }
+
+        // Bold Banner Typography
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 28px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('AGGARWAL PRINT MEDIA', 0, -45);
+
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText('STAR FLEX OUTDOOR HOARDING & FRAMES', 0, -12);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '13px sans-serif';
+        ctx.fillText('Weather-Resistant Solvent Printing | Sector 12, Vijay Nagar', 0, 20);
+
+        // Contact Box
+        roundRect(ctx, -130, 45, 260, 36, 18);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText('CALL: +91 95820 23022', 0, 68);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 21. Back Drop
+      'back-drop': () => {
+        drawStudioBackground('Back Drop', 'Outdoor & Signage', 'Media & Events');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 405, 250, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Aluminum Truss Legs
+        ctx.fillStyle = '#64748b';
+        ctx.fillRect(-220, -140, 12, 280);
+        ctx.fillRect(208, -140, 12, 280);
+        // Floor feet
+        roundRect(ctx, -240, 135, 50, 10, 4);
+        ctx.fill();
+        roundRect(ctx, 190, 135, 50, 10, 4);
+        ctx.fill();
+
+        // Tension Fabric Matte Backdrop Screen
+        roundRect(ctx, -205, -135, 410, 265, 4);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+
+        // Step-and-Repeat Sponsor Logo Grid
+        for (let r = 0; r < 5; r++) {
+          for (let c = 0; c < 5; c++) {
+            const isAlt = (r + c) % 2 === 0;
+            ctx.fillStyle = isAlt ? '#38bdf8' : '#fb923c';
+            ctx.font = 'bold 10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('APM PRINT', -160 + c * 80, -95 + r * 50);
+          }
+        }
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 22. Glowsign Board
+      'glowsign-board': () => {
+        drawStudioBackground('Glowsign Board', 'Outdoor & Signage', '3D LED Acrylic');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 260, 24, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.22)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Dark Architectural Storefront Fascia
+        roundRect(ctx, -230, -130, 460, 260, 8);
+        ctx.fillStyle = '#090d16';
+        ctx.fill();
+
+        // Glowing LED Glow effect
+        ctx.save();
+        ctx.shadowColor = '#008DD2';
+        ctx.shadowBlur = 30;
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = '900 38px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('APM PRINT', 0, -30);
+
+        ctx.shadowColor = '#EF7F1A';
+        ctx.shadowBlur = 24;
+        ctx.fillStyle = '#fb923c';
+        ctx.font = 'bold 20px sans-serif';
+        ctx.fillText('3D LED GLOWSIGN BOARD', 0, 15);
+        ctx.restore();
+
+        // Channel Letter 3D Edge Bevel
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 38px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('APM PRINT', 0, -30);
+
+        ctx.fillStyle = '#fef08a';
+        ctx.font = 'bold 20px sans-serif';
+        ctx.fillText('3D LED GLOWSIGN BOARD', 0, 15);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px sans-serif';
+        ctx.fillText('DAY & NIGHT HIGH-LUMEN BACKLIT ILLUMINATION', 0, 60);
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 23. Dealers Board
+      'dealers-board': () => {
+        drawStudioBackground('Dealers Board', 'Outdoor & Signage', 'Retail Network');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 395, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 235);
+        // Heavy Tin / Sunpack Retail Board
+        roundRect(ctx, -210, -125, 420, 250, 6);
+        ctx.fillStyle = '#1e3a8a';
+        ctx.fill();
+        ctx.strokeStyle = '#fbbf24';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // Corner screw holes
+        ctx.fillStyle = '#cbd5e1';
+        [[-195, -110], [195, -110], [-195, 110], [195, 110]].forEach(([x, y]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, Math.PI*2);
+          ctx.fill();
+        });
+
+        // Top Corporate Branding
+        roundRect(ctx, -200, -115, 400, 75, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '900 24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('AUTHORIZED DEALER', 0, -82);
+        ctx.fillStyle = '#dc2626';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText('GENUINE PRODUCTS & SERVICES', 0, -56);
+
+        // Retailer Dealer Name Box
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 22px sans-serif';
+        ctx.fillText('AGGARWAL PRINT MEDIA', 0, 10);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '13px sans-serif';
+        ctx.fillText('Shop No. 12, Main Market, Vijay Nagar, Ghaziabad', 0, 42);
+        ctx.fillText('Ph: +91 95820 23022 | All Commercial Printing Available', 0, 65);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 24. Digital Vinyl
+      'digital-vinyl': () => {
+        drawStudioBackground('Digital Vinyl', 'Outdoor & Signage', 'High Resolution');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 235);
+        // Glass Panel / Wall surface
+        roundRect(ctx, -190, -135, 380, 270, 8);
+        ctx.fillStyle = '#f8fafc';
+        ctx.fill();
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.stroke();
+
+        // High resolution printed vinyl film partially peeling/applied
+        roundRect(ctx, -170, -120, 340, 240, 4);
+        const vinGrad = ctx.createLinearGradient(-170, -120, 170, 120);
+        vinGrad.addColorStop(0, '#008DD2');
+        vinGrad.addColorStop(0.5, '#E5097F');
+        vinGrad.addColorStop(1, '#EF7F1A');
+        ctx.fillStyle = vinGrad;
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 28px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('HIGH-RES DIGITAL VINYL', 0, -25);
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('WALL & GLASS GRAPHICS', 0, 15);
+        ctx.font = '12px sans-serif';
+        ctx.fillText('Matte / Gloss Lamination | Bubble-Free Application', 0, 45);
+
+        // Squeegee tool applying vinyl on bottom right
+        ctx.save();
+        ctx.translate(120, 70);
+        ctx.rotate(-0.3);
+        roundRect(ctx, -40, -15, 80, 30, 4);
+        ctx.fillStyle = '#f59e0b';
+        ctx.fill();
+        roundRect(ctx, -40, 10, 80, 8, 2);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 25. One Way Vision
+      'one-way-vision': () => {
+        drawStudioBackground('One Way Vision', 'Outdoor & Signage', 'Perforated Film');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 235);
+        // Glass Window Pane with metal frame
+        roundRect(ctx, -190, -135, 380, 270, 4);
+        ctx.fillStyle = '#e0f2fe';
+        ctx.fill();
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 6;
+        ctx.stroke();
+
+        // Colorful Graphic on Film
+        roundRect(ctx, -185, -130, 370, 260, 0);
+        const owGrad = ctx.createLinearGradient(-185, -130, 185, 130);
+        owGrad.addColorStop(0, '#1D5FAB');
+        owGrad.addColorStop(0.5, '#008DD2');
+        owGrad.addColorStop(1, '#B0CB1F');
+        ctx.fillStyle = owGrad;
+        ctx.fill();
+
+        // Micro-perforation dots pattern
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        for (let x = -175; x <= 175; x += 14) {
+          for (let y = -120; y <= 120; y += 14) {
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, Math.PI*2);
+            ctx.fill();
+          }
+        }
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 26px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ONE WAY VISION', 0, -20);
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('PERFORATED GLASS BRANDING', 0, 15);
+        ctx.font = '11px sans-serif';
+        ctx.fillText('Outside Graphic View | 100% Inside Transparency', 0, 42);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 26. Sunpack
+      'sunpack': () => {
+        drawStudioBackground('Sunpack', 'Outdoor & Signage', 'Fluted Sheets');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 230, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        // Pair of sunpack pole kiosk sheets
+        ctx.save();
+        ctx.translate(370, 250);
+        ctx.rotate(-0.06);
+        roundRect(ctx, -140, -110, 280, 220, 6);
+        ctx.fillStyle = '#fbbf24'; // Yellow
+        ctx.fill();
+        ctx.strokeStyle = '#d97706';
+        ctx.stroke();
+        ctx.restore();
+
+        // Top Sheet (Blue)
+        ctx.save();
+        ctx.translate(420, 230);
+        ctx.rotate(0.04);
+        roundRect(ctx, -145, -115, 290, 230, 6);
+        ctx.fillStyle = '#0284c7';
+        ctx.fill();
+
+        // Fluted corrugated texture lines
+        ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+        ctx.lineWidth = 2;
+        for (let x = -135; x <= 135; x += 8) {
+          ctx.beginPath();
+          ctx.moveTo(x, -110);
+          ctx.lineTo(x, 110);
+          ctx.stroke();
+        }
+
+        // Corner brass eyelets for pole tie
+        ctx.fillStyle = '#fbbf24';
+        [[-130, -100], [130, -100], [-130, 100], [130, 100]].forEach(([x, y]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, 6, 0, Math.PI*2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(x, y, 3, 0, Math.PI*2);
+          ctx.fillStyle = '#0f172a';
+          ctx.fill();
+          ctx.fillStyle = '#fbbf24';
+        });
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 22px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SUNPACK SHEET', 0, -35);
+        ctx.fillStyle = '#fef08a';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('POLE KIOSK ADVERTISING', 0, -5);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '12px sans-serif';
+        ctx.fillText('Weatherproof Corrugated Plastic', 0, 25);
+        ctx.fillText('Bulk Screen & UV Printing', 0, 45);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 27. Roll up Standee
+      'rollup-standee': () => {
+        drawStudioBackground('Roll up Standee', 'Outdoor & Signage', 'Retractable Aluminum');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 420, 180, 16, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Aluminum Cassette Base
+        roundRect(ctx, -100, 160, 200, 25, 6);
+        ctx.fillStyle = '#94a3b8';
+        ctx.fill();
+        // Stabilizer Feet
+        roundRect(ctx, -120, 180, 60, 8, 4);
+        ctx.fill();
+        roundRect(ctx, 60, 180, 60, 8, 4);
+        ctx.fill();
+
+        // Vertical Banner Graphic (6x3 ratio mockup)
+        roundRect(ctx, -85, -165, 170, 325, 4);
+        const rollGrad = ctx.createLinearGradient(-85, -165, 85, 160);
+        rollGrad.addColorStop(0, '#1D5FAB');
+        rollGrad.addColorStop(0.5, '#008DD2');
+        rollGrad.addColorStop(1, '#EF7F1A');
+        ctx.fillStyle = rollGrad;
+        ctx.fill();
+
+        // Top Aluminum Profile Bar
+        roundRect(ctx, -90, -175, 180, 12, 3);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fill();
+
+        // Standee Content
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ROLL UP', 0, -130);
+        ctx.fillText('STANDEE', 0, -110);
+
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText('6 x 3 FT PROPORTIONS', 0, -75);
+
+        // Photo / Graphic icon
+        ctx.beginPath();
+        ctx.arc(0, -20, 28, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText('PORTABLE & LIGHTWEIGHT', 0, 30);
+        ctx.font = '9px sans-serif';
+        ctx.fillText('Tear-Resistant Matte Vinyl', 0, 50);
+        ctx.fillText('Includes Carry Bag', 0, 68);
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 28. Canopy
+      'canopy': () => {
+        drawStudioBackground('Canopy', 'Outdoor & Signage', '3x3m Pop-Up Tent');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 410, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Scissor Frame Legs
+        ctx.fillStyle = '#475569';
+        [[-160, 15], [-60, 15], [60, 15], [160, 15]].forEach(([x, y]) => {
+          ctx.fillRect(x, y, 8, 140);
+        });
+
+        // Canopy Back Wall
+        roundRect(ctx, -155, 15, 310, 130, 0);
+        ctx.fillStyle = '#f8fafc';
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('AGGARWAL PRINT MEDIA', 0, 65);
+        ctx.fillStyle = '#008DD2';
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillText('PROMOTIONAL CAMPAIGN CANOPY', 0, 90);
+
+        // Canopy Pyramid Roof
+        ctx.beginPath();
+        ctx.moveTo(0, -145);
+        ctx.lineTo(-180, 15);
+        ctx.lineTo(180, 15);
+        ctx.closePath();
+        const roofGrad = ctx.createLinearGradient(0, -145, 0, 15);
+        roofGrad.addColorStop(0, '#EF7F1A');
+        roofGrad.addColorStop(1, '#dc2626');
+        ctx.fillStyle = roofGrad;
+        ctx.fill();
+
+        // Valance Overhang Banner
+        roundRect(ctx, -180, 0, 360, 25, 0);
+        ctx.fillStyle = '#1D5FAB';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 13px sans-serif';
+        ctx.fillText('APM PRINTING PRESS & OUTDOOR ADVERTISING', 0, 17);
+
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 29. ACP Sheet Cutting Board
+      'acp-cutting-board': () => {
+        drawStudioBackground('ACP Sheet Cutting Board', 'Outdoor & Signage', 'CNC Router Architectural');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 250, 22, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Brushed Aluminum Composite Panel
+        roundRect(ctx, -220, -125, 440, 250, 6);
+        ctx.fillStyle = '#1e293b'; // Charcoal metallic ACP
+        ctx.fill();
+
+        // Metallic edge trim
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Backlit Acrylic 3D Raised Letters
+        ctx.save();
+        ctx.shadowColor = '#fbbf24';
+        ctx.shadowBlur = 20;
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = '900 32px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ARCHITECTURAL ACP', 0, -25);
+        ctx.restore();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 32px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ARCHITECTURAL ACP', 0, -25);
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText('CNC ROUTER CUT 3D ACRYLIC EMBOSS', 0, 20);
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '12px sans-serif';
+        ctx.fillText('Exterior Building Cladding & Premium Corporate Facade', 0, 55);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 30. Clip on Board
+      'clip-on-board': () => {
+        drawStudioBackground('Clip on Board', 'Outdoor & Signage', 'Snap Frame LED Lightbox');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 400, 240, 20, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Aluminum Mitered Snap Frame
+        roundRect(ctx, -170, -135, 340, 270, 4);
+        ctx.fillStyle = '#cbd5e1'; // Anodized silver
+        ctx.fill();
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Miter corner joints
+        [[-170, -135], [170, -135], [-170, 135], [170, 135]].forEach(([x, y]) => {
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x > 0 ? x - 20 : x + 20, y > 0 ? y - 20 : y + 20);
+          ctx.strokeStyle = '#64748b';
+          ctx.stroke();
+        });
+
+        // High-Lumen Illuminated Poster Face
+        roundRect(ctx, -145, -112, 290, 224, 2);
+        const postGrad = ctx.createLinearGradient(-145, -112, 145, 112);
+        postGrad.addColorStop(0, '#0f172a');
+        postGrad.addColorStop(1, '#1D5FAB');
+        ctx.fillStyle = postGrad;
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ULTRA-SLIM', 0, -40);
+        ctx.fillText('CLIP-ON LIGHTBOX', 0, -10);
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 13px sans-serif';
+        ctx.fillText('EASY POSTER SNAP OPEN & CHANGE', 0, 25);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px sans-serif';
+        ctx.fillText('Even Edge-Lit LED Illumination', 0, 55);
+        ctx.restore();
+
+        ctx.restore();
+      },
+
+      // 31. Sandwich Board
+      'sandwich-board': () => {
+        drawStudioBackground('Sandwich Board', 'Outdoor & Signage', 'Sidewalk A-Frame');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 410, 210, 18, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 230);
+        // Back leg (depth perspective)
+        ctx.save();
+        ctx.transform(0.9, 0, -0.15, 1, -25, 0);
+        roundRect(ctx, -100, -140, 200, 280, 8);
+        ctx.fillStyle = '#475569';
+        ctx.fill();
+        ctx.restore();
+
+        // Front Face A-Frame
+        ctx.save();
+        ctx.transform(0.9, 0, 0.12, 1, 25, 0);
+        // Wooden/Aluminum Frame
+        roundRect(ctx, -105, -145, 210, 290, 8);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Poster / Board Area
+        roundRect(ctx, -85, -125, 170, 245, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        ctx.fillStyle = '#EF7F1A';
+        roundRect(ctx, -85, -125, 170, 60, 0);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SPECIAL OFFER', 0, -90);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('DOUBLE SIDED', 0, -25);
+        ctx.fillText('A-FRAME BOARD', 0, -5);
+
+        ctx.fillStyle = '#dc2626';
+        ctx.font = 'bold 20px sans-serif';
+        ctx.fillText('VISIT US TODAY', 0, 40);
+
+        ctx.fillStyle = '#64748b';
+        ctx.font = '10px sans-serif';
+        ctx.fillText('Durable Sidewalk Display', 0, 75);
+        ctx.fillText('Pavement Poster Stand', 0, 92);
+
+        ctx.restore();
+        ctx.restore();
+        ctx.restore();
+      },
+
+      // 32. Outdoor Branding & Advertising
+      'outdoor-branding': () => {
+        drawStudioBackground('Outdoor Branding', 'Outdoor & Signage', 'Large Hoardings');
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(400, 410, 260, 22, 0, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.filter = 'none';
+
+        ctx.save();
+        ctx.translate(400, 220);
+        // Unipole Steel Pillar
+        roundRect(ctx, -16, 80, 32, 110, 4);
+        ctx.fillStyle = '#475569';
+        ctx.fill();
+
+        // Massive Billboard Display
+        roundRect(ctx, -230, -120, 460, 200, 6);
+        ctx.fillStyle = '#0f172a';
+        ctx.fill();
+
+        // Sky & Cityscape background inside billboard
+        const bGrad = ctx.createLinearGradient(-230, -120, 230, 80);
+        bGrad.addColorStop(0, '#008DD2');
+        bGrad.addColorStop(0.6, '#1D5FAB');
+        bGrad.addColorStop(1, '#E5097F');
+        roundRect(ctx, -220, -110, 440, 180, 4);
+        ctx.fillStyle = bGrad;
+        ctx.fill();
+
+        // Overhead Floodlights
+        ctx.fillStyle = '#e2e8f0';
+        [[-150, -128], [-50, -128], [50, -128], [150, -128]].forEach(([x, y]) => {
+          roundRect(ctx, x - 12, y, 24, 10, 2);
+          ctx.fill();
+        });
+
+        // Billboard Text
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 28px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('OUTDOOR HOARDINGS & KIOSKS', 0, -40);
+
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText('MAXIMUM HIGHWAY & METRO VISIBILITY', 0, -5);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '13px sans-serif';
+        ctx.fillText('Turnkey Building Wraps | Ghaziabad & Delhi-NCR Campaign Execution', 0, 32);
+
+        ctx.restore();
+        ctx.restore();
+      }
+    };
+
+    // Public API called by Node runner
+    window.renderProduct = function(productId) {
+      if (renderers[productId]) {
+        renderers[productId]();
+        document.getElementById('status').innerText = 'Rendered: ' + productId;
+        return canvas.toDataURL('image/webp', 0.92);
+      } else {
+        throw new Error('No renderer for ' + productId);
+      }
+    };
+  </script>
+</body>
+</html>
