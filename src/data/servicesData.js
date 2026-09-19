@@ -9,6 +9,8 @@ export const servicesData = [
   // 1. Stationery & Registers (9 Items)
   {
     id: 'bill-book',
+    image: '/images/products/bill-book.webp',
+    imageAlt: 'Duplicate and Triplicate NCR carbonless paper bill book with red sequential numbering',
     title: 'Bill Book',
     category: 'stationery',
     badge: 'Popular',
@@ -24,6 +26,8 @@ export const servicesData = [
   },
   {
     id: 'challan-book',
+    image: '/images/products/challan-book.webp',
+    imageAlt: 'Delivery challan book with transport dispatch slips and perforated copies',
     title: 'Challan Book',
     category: 'stationery',
     badge: 'Essential',
@@ -38,6 +42,8 @@ export const servicesData = [
   },
   {
     id: 'letter-head',
+    image: '/images/products/letter-head.webp',
+    imageAlt: 'Executive 100 GSM Royal Bond paper letterhead with corporate embossing and gold seal',
     title: 'Letter Head',
     category: 'stationery',
     badge: 'Corporate',
@@ -52,6 +58,8 @@ export const servicesData = [
   },
   {
     id: 'school-registers',
+    image: '/images/products/school-registers.webp',
+    imageAlt: 'Hard-bound student attendance and office ledger register with gold corner protectors',
     title: 'School Office Registers',
     category: 'stationery',
     badge: 'Bulk Supply',
@@ -66,6 +74,8 @@ export const servicesData = [
   },
   {
     id: 'school-id-cards',
+    image: '/images/products/school-id-cards.webp',
+    imageAlt: 'Thermal fused PVC identity cards with customized satin printed lanyards and holders',
     title: 'School Office ID Cards',
     category: 'stationery',
     badge: 'Security',
@@ -80,6 +90,8 @@ export const servicesData = [
   },
   {
     id: 'office-files',
+    image: '/images/products/office-files.webp',
+    imageAlt: 'Heavy-duty cardboard cobra spring files and document folders with metal mechanisms',
     title: 'Office Files',
     category: 'stationery',
     badge: 'Office',
@@ -94,6 +106,8 @@ export const servicesData = [
   },
   {
     id: 'record-registers',
+    image: '/images/products/record-registers.webp',
+    imageAlt: 'Industrial stock maintenance register with canvas buckram spine and ledger ruling',
     title: 'Record Registers',
     category: 'stationery',
     badge: 'Industrial',
@@ -108,6 +122,8 @@ export const servicesData = [
   },
   {
     id: 'envelope',
+    image: '/images/products/envelope.webp',
+    imageAlt: 'Custom printed commercial envelopes in DL 9x4 and A4 catalog sizes with peel and seal',
     title: 'Envelope',
     category: 'stationery',
     badge: 'Commercial',
@@ -122,6 +138,8 @@ export const servicesData = [
   },
   {
     id: 'other-stationery',
+    image: '/images/products/other-stationery.webp',
+    imageAlt: 'Custom office stationery set including wire-o notepads and self-inking rubber stamps',
     title: 'Other Stationery',
     category: 'stationery',
     badge: 'Custom',
@@ -138,6 +156,8 @@ export const servicesData = [
   // 2. Paper Printing & Marketing (6 Items)
   {
     id: 'leaflet-pumplet',
+    image: '/images/products/leaflet-pumplet.webp',
+    imageAlt: 'High-gloss 170 GSM promotional pamphlets and advertising flyers with vibrant CMYK print',
     title: 'Leaflet / Pumplet',
     category: 'paper',
     badge: 'Best Seller',
@@ -152,6 +172,8 @@ export const servicesData = [
   },
   {
     id: 'brochure',
+    image: '/images/products/brochure.webp',
+    imageAlt: 'Corporate tri-fold and bi-fold marketing brochures with soft-touch matte lamination',
     title: 'Brochure',
     category: 'paper',
     badge: 'High Impact',
@@ -166,6 +188,8 @@ export const servicesData = [
   },
   {
     id: 'catalogue',
+    image: '/images/products/catalogue.webp',
+    imageAlt: 'Multi-page commercial product catalog book with saddle-stitch wire and glossy cover',
     title: 'Catalogue',
     category: 'paper',
     badge: 'Multi-Page',
@@ -180,6 +204,8 @@ export const servicesData = [
   },
   {
     id: 'calenders',
+    image: '/images/products/calenders.webp',
+    imageAlt: 'Desktop tent calendars and corporate wall calendars with top wiro wire binding',
     title: 'Calenders',
     category: 'paper',
     badge: 'Seasonal',
@@ -194,6 +220,8 @@ export const servicesData = [
   },
   {
     id: 'tant-card',
+    image: '/images/products/tant-card.webp',
+    imageAlt: 'Tabletop triangular tent cards for restaurant menus and conference table standees',
     title: 'Tant Card',
     category: 'paper',
     badge: 'Hospitality',
@@ -208,6 +236,8 @@ export const servicesData = [
   },
   {
     id: 'dangler',
+    image: '/images/products/dangler.webp',
+    imageAlt: 'Die-cut promotional ceiling danglers with custom retail marketing shapes and hanging string',
     title: 'Dangler',
     category: 'paper',
     badge: 'Retail',
@@ -224,6 +254,8 @@ export const servicesData = [
   // 3. Labels & Promo Gifts (4 Items)
   {
     id: 'product-label',
+    image: '/images/products/product-label.webp',
+    imageAlt: 'Adhesive packaging roll labels and barcode stickers for bottles, jars, and cartons',
     title: 'Product Label',
     category: 'labels',
     badge: 'Packaging',
@@ -238,6 +270,8 @@ export const servicesData = [
   },
   {
     id: 'sticker',
+    image: '/images/products/sticker.webp',
+    imageAlt: 'Precision die-cut waterproof vinyl stickers and decals with crack-and-peel backing',
     title: 'Sticker',
     category: 'labels',
     badge: 'Versatile',
@@ -252,6 +286,8 @@ export const servicesData = [
   },
   {
     id: 'wall-clock-printing',
+    image: '/images/products/wall-clock-printing.webp',
+    imageAlt: 'Custom printed dial wall clocks with company logo branding for corporate gifting',
     title: 'Wall Clock Printing',
     category: 'labels',
     badge: 'Promo Gift',
@@ -266,6 +302,8 @@ export const servicesData = [
   },
   {
     id: 'wrist-watch-printing',
+    image: '/images/products/wrist-watch-printing.webp',
+    imageAlt: 'Corporate employee recognition wristwatches with custom printed logo dial and leather strap',
     title: 'Wrist Watch Printing',
     category: 'labels',
     badge: 'Premium Gift',
@@ -282,6 +320,8 @@ export const servicesData = [
   // 4. Outdoor & Signage (13 Items)
   {
     id: 'flex-board',
+    image: '/images/products/flex-board.webp',
+    imageAlt: 'Heavy-duty Star Flex outdoor sign board with welded MS iron pipe box frame mounting',
     title: 'Flex Board',
     category: 'outdoor',
     badge: 'Large Format',
@@ -296,6 +336,8 @@ export const servicesData = [
   },
   {
     id: 'back-drop',
+    image: '/images/products/back-drop.webp',
+    imageAlt: 'Non-reflective event stage backdrop with step-and-repeat sponsor logo grid and truss frame',
     title: 'Back Drop',
     category: 'outdoor',
     badge: 'Events',
@@ -310,6 +352,8 @@ export const servicesData = [
   },
   {
     id: 'glowsign-board',
+    image: '/images/products/glowsign-board.webp',
+    imageAlt: 'Illuminated 3D acrylic LED storefront letters and high-lumen backlit glow sign box',
     title: 'Glowsign Board',
     category: 'outdoor',
     badge: 'Illuminated',
@@ -324,6 +368,8 @@ export const servicesData = [
   },
   {
     id: 'dealers-board',
+    image: '/images/products/dealers-board.webp',
+    imageAlt: 'Retail brand dealership tin plates and sunpack signboards with perimeter frame',
     title: 'Dealers Board',
     category: 'outdoor',
     badge: 'Network Branding',
@@ -338,6 +384,8 @@ export const servicesData = [
   },
   {
     id: 'digital-vinyl',
+    image: '/images/products/digital-vinyl.webp',
+    imageAlt: 'High-resolution photo-grade self-adhesive digital vinyl for walls, glass doors, and wraps',
     title: 'Digital Vinyl',
     category: 'outdoor',
     badge: 'High Res',
@@ -352,6 +400,8 @@ export const servicesData = [
   },
   {
     id: 'one-way-vision',
+    image: '/images/products/one-way-vision.webp',
+    imageAlt: 'Micro-perforated one-way vision window film installed on commercial storefront glass',
     title: 'One Way Vision',
     category: 'outdoor',
     badge: 'Window Film',
@@ -366,6 +416,8 @@ export const servicesData = [
   },
   {
     id: 'sunpack',
+    image: '/images/products/sunpack.webp',
+    imageAlt: 'Corrugated fluted plastic sunpack sheets with eyelets for electric pole kiosk advertising',
     title: 'Sunpack',
     category: 'outdoor',
     badge: 'Pole Ads',
@@ -380,6 +432,8 @@ export const servicesData = [
   },
   {
     id: 'roll-up-standee',
+    image: '/images/products/roll-up-standee.webp',
+    imageAlt: 'Portable 6x3 ft retractable aluminum roll-up banner standee with carrying bag',
     title: 'Roll up Standee',
     category: 'outdoor',
     badge: 'Portable',
@@ -394,6 +448,8 @@ export const servicesData = [
   },
   {
     id: 'canopy',
+    image: '/images/products/canopy.webp',
+    imageAlt: 'Heavy-duty 3x3 meter collapsible outdoor promotional gazebo canopy tent with branding',
     title: 'Canopy',
     category: 'outdoor',
     badge: 'Promotions',
@@ -408,6 +464,8 @@ export const servicesData = [
   },
   {
     id: 'acp-sheet-cutting-board',
+    image: '/images/products/acp-sheet-cutting-board.webp',
+    imageAlt: 'Architectural CNC router cut Aluminum Composite Panel signboard with 3D acrylic letters',
     title: 'ACP Sheet Cutting Board',
     category: 'outdoor',
     badge: 'Architectural',
@@ -422,6 +480,8 @@ export const servicesData = [
   },
   {
     id: 'clip-on-board',
+    image: '/images/products/clip-on-board.webp',
+    imageAlt: 'Ultra-slim 1-inch aluminum snap-frame poster lightbox with edge-lit LED illumination',
     title: 'Clip on Board',
     category: 'outdoor',
     badge: 'Slim Lightbox',
@@ -436,6 +496,8 @@ export const servicesData = [
   },
   {
     id: 'sandwich-board',
+    image: '/images/products/sandwich-board.webp',
+    imageAlt: 'Double-sided folding A-frame sidewalk pavement sandwich board with poster inserts',
     title: 'Sandwich Board',
     category: 'outdoor',
     badge: 'Sidewalk',
@@ -450,6 +512,8 @@ export const servicesData = [
   },
   {
     id: 'outdoor-branding-advertising',
+    image: '/images/products/outdoor-branding-advertising.webp',
+    imageAlt: 'Monumental highway unipole billboard and outdoor hoarding banner advertising campaign',
     title: 'Branding & Advertising',
     category: 'outdoor',
     badge: 'Turnkey',
