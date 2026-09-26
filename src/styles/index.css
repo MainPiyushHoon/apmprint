@@ -2125,23 +2125,42 @@ textarea.form-input {
 .service-page-hero.has-hero-bg {
   position: relative;
   color: #ffffff;
-  padding: 5.5rem 0 4.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5.5rem 0 5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+}
+
+.service-page-hero.has-hero-bg .service-hero-content {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 2.75rem 2.25rem;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.55);
 }
 
 .service-page-hero.has-hero-bg .service-page-h1 {
   color: #ffffff;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
 }
 
 .service-page-hero.has-hero-bg .service-hero-subtitle {
-  color: #e2e8f0;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  color: #f1f5f9;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
 }
 
 .service-page-hero.has-hero-bg .badge {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -2152,16 +2171,16 @@ textarea.form-input {
 }
 
 .service-page-hero.has-hero-bg .btn-secondary {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.32);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .service-page-hero.has-hero-bg .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.6);
   color: #ffffff;
 }
 
@@ -2170,11 +2189,23 @@ textarea.form-input {
 }
 
 .service-page-hero.has-hero-bg .service-quick-pill {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.26);
   color: #f8fafc;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+}
+
+@media (max-width: 768px) {
+  .service-page-hero.has-hero-bg {
+    padding: 3.5rem 0 2.5rem;
+    min-height: auto;
+  }
+
+  .service-page-hero.has-hero-bg .service-hero-content {
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-md);
+  }
 }
 
 .service-hero-content {

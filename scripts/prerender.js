@@ -497,7 +497,7 @@ function prerenderClusterPages() {
         ${renderNavbar()}
         <div class="service-page-wrapper">
           ${breadcrumbsHtml}
-          <section class="service-page-hero${cluster.heroImage ? ' has-hero-bg' : ''}"${cluster.heroImage ? ` style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.90) 100%), url('${getAppUrl(cluster.heroImage)}'); background-position: center center; background-size: cover; background-repeat: no-repeat;"` : ''}>
+          <section class="service-page-hero${cluster.heroImage ? ' has-hero-bg' : ''}"${cluster.heroImage ? ` style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.32) 0%, rgba(15, 23, 42, 0.52) 100%), url('${getAppUrl(cluster.heroImage)}'); background-position: center center; background-size: cover; background-repeat: no-repeat;"` : ''}>
             <div class="container">
               <div class="service-hero-content">
                 <div class="badge"><span class="pulse-dot"></span><span>${escapeHtml(cluster.categoryBadge)}</span></div>

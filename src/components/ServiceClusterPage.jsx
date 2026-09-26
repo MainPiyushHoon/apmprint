@@ -58,7 +58,7 @@ export default function ServiceClusterPage({ cluster, onOpenServiceModal }) {
         style={
           cluster.heroImage
             ? {
-                backgroundImage: `linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.90) 100%), url('${getAppUrl(cluster.heroImage)}')`,
+                backgroundImage: `linear-gradient(180deg, rgba(15, 23, 42, 0.32) 0%, rgba(15, 23, 42, 0.52) 100%), url('${getAppUrl(cluster.heroImage)}')`,
                 backgroundPosition: 'center center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
