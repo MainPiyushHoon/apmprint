@@ -95,12 +95,14 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
   };
 
   const popularTags = [
-    'Bill Book',
-    'Flex Board',
-    '3D Glowsign Board',
-    'Letter Head',
-    'School ID Cards',
-    'Pamphlets'
+    { label: 'Bill Book', path: 'services/bill-book-printing/' },
+    { label: 'Flex Board', path: 'services/flex-board-printing/' },
+    { label: '3D Glowsign Board', path: 'services/glow-sign-board/' },
+    { label: 'Letter Head', path: 'services/letterhead-printing/' },
+    { label: 'School ID Cards', path: 'services/school-id-cards-registers/' },
+    { label: 'Pamphlets', path: 'services/pamphlet-printing/' },
+    { label: 'Stickers & Labels', path: 'services/sticker-label-printing/' },
+    { label: 'Brochures', path: 'services/brochure-catalogue-printing/' }
   ];
 
   return (
@@ -137,11 +139,10 @@ export default function FacilitySpotlight({ onSelectQuickTag }) {
             {popularTags.map((tag, idx) => (
               <a
                 key={idx}
-                href="#services"
+                href={getAppUrl(tag.path)}
                 className="hero-pill-tag"
-                onClick={() => onSelectQuickTag && onSelectQuickTag(tag)}
               >
-                {tag}
+                {tag.label}
               </a>
             ))}
           </div>

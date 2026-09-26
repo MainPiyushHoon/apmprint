@@ -774,6 +774,17 @@ function prerenderHomepage() {
                   <i class="ri-grid-fill"></i> View All 32 Services
                 </a>
               </div>
+              <div class="hero-pills">
+                <span class="pills-label">Popular Verticals:</span>
+                <a href="${getAppUrl('services/bill-book-printing/')}" class="hero-pill-tag">Bill Book</a>
+                <a href="${getAppUrl('services/flex-board-printing/')}" class="hero-pill-tag">Flex Board</a>
+                <a href="${getAppUrl('services/glow-sign-board/')}" class="hero-pill-tag">3D Glowsign Board</a>
+                <a href="${getAppUrl('services/letterhead-printing/')}" class="hero-pill-tag">Letter Head</a>
+                <a href="${getAppUrl('services/school-id-cards-registers/')}" class="hero-pill-tag">School ID Cards</a>
+                <a href="${getAppUrl('services/pamphlet-printing/')}" class="hero-pill-tag">Pamphlets</a>
+                <a href="${getAppUrl('services/sticker-label-printing/')}" class="hero-pill-tag">Stickers &amp; Labels</a>
+                <a href="${getAppUrl('services/brochure-catalogue-printing/')}" class="hero-pill-tag">Brochures</a>
+              </div>
             </div>
           </div>
         </section>
