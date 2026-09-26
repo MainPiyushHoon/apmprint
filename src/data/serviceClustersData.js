@@ -223,6 +223,7 @@ export const serviceClusters = [
     slug: 'letterhead-printing',
     url: 'https://apmprint.in/services/letterhead-printing/',
     path: '/services/letterhead-printing/',
+    heroImage: 'images/letter_head.jpeg',
     title: 'Letterhead & Corporate Stationery in Ghaziabad | APM Print',
     metaDescription: 'Executive letterhead & corporate stationery printing in Ghaziabad. 100 GSM Royal Executive Bond paper, matching envelopes & files. Call +91 95820 23022.',
     h1: 'Letterhead & Corporate Stationery in Ghaziabad',
