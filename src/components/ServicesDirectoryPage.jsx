@@ -70,7 +70,7 @@ export default function ServicesDirectoryPage({ onOpenModal, onSelectQuote }) {
               <span className="badge-dot"></span>
               <span>High-Priority Verticals</span>
             </div>
-            <h2 className="section-title">Dedicated Services</h2>
+            <h2 className="section-title">Featured Services</h2>
             <p className="section-subtitle">
               Detailed technical specifications, material selections, and order guidelines for our most in-demand printing services.
             </p>
