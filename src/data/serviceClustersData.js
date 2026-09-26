@@ -278,6 +278,7 @@ export const serviceClusters = [
     slug: 'school-id-cards-registers',
     url: 'https://apmprint.in/services/school-id-cards-registers/',
     path: '/services/school-id-cards-registers/',
+    heroImage: 'images/school_id_cards.jpeg',
     title: 'School ID Cards & Registers in Ghaziabad | APM Print',
     metaDescription: 'Custom PVC school ID cards, satin lanyards & hard-bound registers in Ghaziabad. Thermal fused 760-micron plastic cards & ledgers. Call +91 95820 23022.',
     h1: 'School ID Cards & Registers in Ghaziabad',
