@@ -334,7 +334,7 @@ function prerenderServicesDirectory() {
           <div class="container">
             <div class="section-header">
               <div class="badge"><span class="badge-dot"></span><span>High-Priority Verticals</span></div>
-              <h2 class="section-title">Dedicated Service Landing Pages</h2>
+              <h2 class="section-title">Dedicated Services</h2>
               <p class="section-subtitle">Detailed technical specifications, material selections, and order guidelines for our most in-demand services.</p>
             </div>
             <div class="featured-clusters-grid">

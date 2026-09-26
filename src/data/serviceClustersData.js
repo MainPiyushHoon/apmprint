@@ -114,6 +114,7 @@ export const serviceClusters = [
     slug: 'glow-sign-board',
     url: 'https://apmprint.in/services/glow-sign-board/',
     path: '/services/glow-sign-board/',
+    heroImage: 'images/glow_sign_board.jpeg',
     title: 'LED & Glow Sign Boards in Ghaziabad | APM Print',
     metaDescription: 'Commercial 3D acrylic LED signboards & glowsign boards in Ghaziabad. Backlit flex boxes, CNC router cut ACP sheets & Samsung LEDs. Call +91 95820 23022.',
     h1: 'LED & Glow Sign Boards in Ghaziabad',
