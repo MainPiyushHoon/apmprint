@@ -2121,6 +2121,62 @@ textarea.form-input {
   border-bottom: 1px solid var(--border-light);
 }
 
+/* Service Page Hero with Facility Photo Background */
+.service-page-hero.has-hero-bg {
+  position: relative;
+  color: #ffffff;
+  padding: 5.5rem 0 4.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.service-page-hero.has-hero-bg .service-page-h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+
+.service-page-hero.has-hero-bg .service-hero-subtitle {
+  color: #e2e8f0;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+.service-page-hero.has-hero-bg .badge {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.service-page-hero.has-hero-bg .badge .pulse-dot {
+  background: #3ffb00;
+}
+
+.service-page-hero.has-hero-bg .btn-secondary {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.service-page-hero.has-hero-bg .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+.service-page-hero.has-hero-bg .quick-tags-label {
+  color: #cbd5e1;
+}
+
+.service-page-hero.has-hero-bg .service-quick-pill {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #f8fafc;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
 .service-hero-content {
   max-width: 900px;
   margin: 0 auto;

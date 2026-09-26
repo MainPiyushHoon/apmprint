@@ -59,6 +59,7 @@ export const serviceClusters = [
     slug: 'flex-board-printing',
     url: 'https://apmprint.in/services/flex-board-printing/',
     path: '/services/flex-board-printing/',
+    heroImage: 'images/flex_hero_image.jpeg',
     title: 'Flex Board Printing in Ghaziabad | APM Print',
     metaDescription: 'High-speed flex board & banner printing in Ghaziabad. Heavy-duty Star Flex banners, MS iron pipe frames & stage backdrops. Call +91 95820 23022.',
     h1: 'Flex Board Printing in Ghaziabad',

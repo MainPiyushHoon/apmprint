@@ -53,7 +53,19 @@ export default function ServiceClusterPage({ cluster, onOpenServiceModal }) {
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Service Page Hero */}
-      <section className="service-page-hero">
+      <section
+        className={`service-page-hero ${cluster.heroImage ? 'has-hero-bg' : ''}`}
+        style={
+          cluster.heroImage
+            ? {
+                backgroundImage: `linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.90) 100%), url('${getAppUrl(cluster.heroImage)}')`,
+                backgroundPosition: 'center center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+              }
+            : undefined
+        }
+      >
         <div className="container">
           <div className="service-hero-content">
             <div className="badge">
